@@ -48,13 +48,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get logoutError => 'Wylogowanie nie powiodło się.';
 
   @override
-  String get restPasswordLink => 'Link do zmiany hasła został wysłany na Twoją skrzynkę pocztową.';
+  String get restPasswordLink =>
+      'Link do zmiany hasła został wysłany na Twoją skrzynkę pocztową.';
 
   @override
   String get resetPassword => 'Resetuj hasło';
 
   @override
-  String get forgotPasswordEmailInstruction => 'Podaj email, na który wyślemy link do resetu hasła:';
+  String get forgotPasswordEmailInstruction =>
+      'Podaj email, na który wyślemy link do resetu hasła:';
 
   @override
   String get emailRequiredError => 'Podaj email';

@@ -48,13 +48,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutError => 'Logout failed.';
 
   @override
-  String get restPasswordLink => 'Password reset link has been sent to your email.';
+  String get restPasswordLink =>
+      'Password reset link has been sent to your email.';
 
   @override
   String get resetPassword => 'Reset Password';
 
   @override
-  String get forgotPasswordEmailInstruction => 'Enter the email address where we will send the password reset link:';
+  String get forgotPasswordEmailInstruction =>
+      'Enter the email address where we will send the password reset link:';
 
   @override
   String get emailRequiredError => 'Please enter your email';
