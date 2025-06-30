@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:interns2025b_mobile/src/core/app_setup.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  final app = await AppSetup.initialize();
+  runApp(app);
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interns2025b Mobile',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-    );
-  }
-}
-
-
