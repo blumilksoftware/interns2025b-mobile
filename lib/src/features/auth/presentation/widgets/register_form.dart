@@ -36,11 +36,11 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               labelText: localizations.emailLabel,
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black54),
+              prefixIcon: Icon(Icons.email_outlined, color: Colors.black),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -52,11 +52,11 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormField(
             controller: firstNameController,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               labelText: localizations.firstNameLabel,
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.person_outline, color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black54),
+              prefixIcon: Icon(Icons.person_outline, color: Colors.black),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -68,22 +68,22 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormField(
             controller: lastNameController,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               labelText: localizations.lastNameLabel,
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.person_outline, color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black54),
+              prefixIcon: Icon(Icons.person_outline, color: Colors.black),
             ),
           ),
           const SizedBox(height: 16),
           TextFormField(
             controller: passwordController,
             obscureText: true,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               labelText: localizations.passwordLabel,
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black54),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.black),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -96,11 +96,11 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: confirmPasswordController,
             obscureText: true,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               labelText: localizations.confirmPasswordLabel,
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black54),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.black),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -140,7 +140,7 @@ class RegisterForm extends StatelessWidget {
             },
             child: Text(
               localizations.alreadyHaveAccount,
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(color: Colors.black54),
             ),
           ),
         ],
