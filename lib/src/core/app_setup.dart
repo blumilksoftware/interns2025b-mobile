@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:interns2025b_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:interns2025b_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
@@ -24,11 +25,15 @@ class AppSetup {
     final authRepository = AuthRepositoryImpl(authDataSource);
 
     final registerUseCase = RegisterUseCase(authRepository);
+    final loginUseCase = LoginUseCase(authRepository);
 
     final localizationController = LocalizationController();
     await localizationController.loadLocale();
 
-    final authController = AuthController(registerUseCase: registerUseCase);
+    final authController = AuthController(
+      registerUseCase: registerUseCase,
+      loginUseCase: loginUseCase,
+    );
     await authController.loadUser();
 
     return MultiProvider(

@@ -34,6 +34,6 @@
   "userName": "Nazwa użytkownika",
   "errorFetchingData": "Błąd podczas pobierania danych.",
   "noData": "Brak danych.",
-  "createdAt": "Utworzono: {date}"
-
+  "createdAt": "Utworzono: {date}",
+  "loginWithFacebook": "Zaloguj się przez Facebook"
 }

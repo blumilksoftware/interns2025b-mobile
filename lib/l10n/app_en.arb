@@ -34,5 +34,7 @@
   "userName": "User Name",
   "errorFetchingData": "Error while fetching data.",
   "noData": "No data.",
-  "createdAt": "Created at: {date}"
+  "createdAt": "Created at: {date}",
+  "loginWithFacebook": "Login with Facebook",
+  "forgotPassword": "Forgot password?"
 }

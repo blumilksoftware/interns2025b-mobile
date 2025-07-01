@@ -301,6 +301,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Created at: {date}'**
   String createdAt(Object date);
+
+  /// No description provided for @loginWithFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Facebook'**
+  String get loginWithFacebook;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPassword;
 }
 
 class _AppLocalizationsDelegate

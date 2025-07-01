@@ -10,7 +10,7 @@ class AuthDataSource {
 
   Future<User> login(String email, String password) async {
     final response = await httpClient.post(
-      '/api/login',
+      '/api/auth/login',
       body: {'email': email, 'password': password},
     );
 

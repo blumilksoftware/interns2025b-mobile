@@ -113,4 +113,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String createdAt(Object date) {
     return 'Utworzono: $date';
   }
+
+  @override
+  String get loginWithFacebook => 'Zaloguj się przez Facebook';
+
+  @override
+  String get forgotPassword => 'Zapomniałeś hasła?';
 }

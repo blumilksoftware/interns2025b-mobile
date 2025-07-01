@@ -5,6 +5,7 @@ import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 
 import 'package:interns2025b_mobile/src/core/constants/app_constants.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/pages/register_page.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/pages/login_page.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,10 @@ class AppInitializer extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en'), Locale('pl')],
       initialRoute: AppRoutes.register,
-      routes: {AppRoutes.register: (context) => RegisterPage()},
+      routes: {
+        AppRoutes.register: (context) => RegisterPage(),
+        AppRoutes.login: (context) => LoginPage(),
+      },
     );
   }
 }
