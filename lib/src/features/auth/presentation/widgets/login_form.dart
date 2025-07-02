@@ -23,12 +23,11 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool isPasswordVisible = false;
-  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
     final authController = Provider.of<AuthController>(context);
+    final localizations = AppLocalizations.of(context)!;
 
     return Form(
       key: widget.formKey,
