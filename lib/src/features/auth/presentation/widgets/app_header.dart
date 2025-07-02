@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/core/constants/app_constants.dart';
 import 'package:flutter/services.dart';
 
 class AppHeader extends StatelessWidget {
@@ -31,13 +30,10 @@ class AppHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              AppConstants.appName,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontStyle: FontStyle.italic,
-              ),
+            Image.asset(
+              'assets/images/app_logo.png',
+              height: 48,
+              fit: BoxFit.contain,
             ),
             const SizedBox(height: 40),
             Text(

@@ -31,3 +31,4 @@ flutter:
   generate: true
   assets:
     - .env
+    - ./assets/images/app_logo.png
