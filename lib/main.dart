@@ -14,6 +14,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Interns2025b Mobile'),
+        ),
+        body: const Center(
+          child: Text('Hello, Interns2025b!'),
+        ),
+      ),
     );
   }
 }

@@ -17,9 +17,15 @@ To run the app locally:
    flutter pub get
    ```
 
-3. Run the app:
+3. Copy the example environment file and configure it:
+```bash
+cp .env.example .env
+````
+
+4. Run the app:
    ```bash
    flutter run
    ```
 
 > Make sure you have Flutter SDK installed and configured properly. For more information, visit [flutter.dev/docs](https://flutter.dev/docs).
+> 
