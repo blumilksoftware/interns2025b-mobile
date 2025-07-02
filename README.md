@@ -20,7 +20,7 @@ To run the app locally:
 3. Copy the example environment file and configure it:
 ```bash
 cp .env.example .env
-````
+```
 
 4. Run the app:
    ```bash
