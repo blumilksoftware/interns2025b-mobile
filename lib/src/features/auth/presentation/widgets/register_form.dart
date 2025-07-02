@@ -80,7 +80,6 @@ class _RegisterFormState extends State<RegisterForm> {
           const SizedBox(height: 8),
           PasswordField(
             controller: widget.passwordController,
-            hintText: '********',
             isVisible: isPasswordVisible,
             toggleVisibility: () => setState(() {
               isPasswordVisible = !isPasswordVisible;
@@ -95,7 +94,6 @@ class _RegisterFormState extends State<RegisterForm> {
           const SizedBox(height: 8),
           PasswordField(
             controller: widget.confirmPasswordController,
-            hintText: '********',
             isVisible: isConfirmPasswordVisible,
             toggleVisibility: () => setState(() {
               isConfirmPasswordVisible = !isConfirmPasswordVisible;

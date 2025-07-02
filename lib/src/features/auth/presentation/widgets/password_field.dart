@@ -3,7 +3,6 @@ import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_
 
 class PasswordField extends StatelessWidget {
   final TextEditingController controller;
-  final String hintText;
   final bool isVisible;
   final VoidCallback toggleVisibility;
   final String? Function(String?)? validator;
@@ -11,7 +10,6 @@ class PasswordField extends StatelessWidget {
   const PasswordField({
     super.key,
     required this.controller,
-    required this.hintText,
     required this.isVisible,
     required this.toggleVisibility,
     this.validator,
@@ -21,7 +19,7 @@ class PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextField(
       controller: controller,
-      hintText: hintText,
+      hintText: "********",
       obscureText: !isVisible,
       validator: validator,
       suffixIcon: IconButton(

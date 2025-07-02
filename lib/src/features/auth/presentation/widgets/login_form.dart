@@ -52,7 +52,6 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 8),
           PasswordField(
             controller: widget.passwordController,
-            hintText: '********',
             isVisible: isPasswordVisible,
             toggleVisibility: () => setState(() {
               isPasswordVisible = !isPasswordVisible;
