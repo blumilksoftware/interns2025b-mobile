@@ -42,7 +42,7 @@ class AuthController extends ChangeNotifier {
 
       if (!context.mounted) return;
 
-      navigator.pushReplacementNamed(AppRoutes.home);
+      navigator.pushReplacementNamed(AppRoutes.login);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.loginSuccess)),
       );
