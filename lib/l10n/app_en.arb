@@ -20,7 +20,6 @@
   "emailRequiredError": "Please enter your email",
   "passwordRequiredError": "Please enter your password",
   "sendResetLinkButton": "Send reset link",
-  "loginWithGoogle": "Login with Google",
   "nameRequiredError": "Please enter your name",
   "passwordsDoNotMatch": "Passwords do not match",
   "noAccount": "Don't have an account?",

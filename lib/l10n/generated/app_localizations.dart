@@ -212,12 +212,6 @@ abstract class AppLocalizations {
   /// **'Send reset link'**
   String get sendResetLinkButton;
 
-  /// No description provided for @loginWithGoogle.
-  ///
-  /// In en, this message translates to:
-  /// **'Login with Google'**
-  String get loginWithGoogle;
-
   /// No description provided for @nameRequiredError.
   ///
   /// In en, this message translates to:

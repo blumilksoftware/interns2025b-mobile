@@ -68,9 +68,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sendResetLinkButton => 'Wyślij link resetujący';
 
   @override
-  String get loginWithGoogle => 'Login with Google';
-
-  @override
   String get nameRequiredError => 'Podaj nazwę';
 
   @override

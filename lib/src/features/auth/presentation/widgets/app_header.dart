@@ -59,7 +59,7 @@ class AppHeader extends StatelessWidget {
                       style: const TextStyle(color: Colors.white70),
                     ),
                     TextSpan(
-                      text: localizations.registerTitle,
+                      text: " ${localizations.registerTitle}",
                       style: const TextStyle(
                         color: Colors.white,
                         decoration: TextDecoration.underline,

@@ -68,9 +68,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sendResetLinkButton => 'Send reset link';
 
   @override
-  String get loginWithGoogle => 'Login with Google';
-
-  @override
   String get nameRequiredError => 'Please enter your name';
 
   @override

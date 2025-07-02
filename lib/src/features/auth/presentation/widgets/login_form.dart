@@ -85,16 +85,6 @@ class _LoginFormState extends State<LoginForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Checkbox(
-                    value: rememberMe,
-                    onChanged: (value) =>
-                        setState(() => rememberMe = value ?? false),
-                  ),
-                  Text("localizations.rememberMe"),
-                ],
-              ),
               TextButton(
                 onPressed: () {},
                 child: Text(
@@ -141,28 +131,6 @@ class _LoginFormState extends State<LoginForm> {
               style: const TextStyle(color: Colors.blue),
             ),
             onPressed: () {},
-          ),
-
-          const SizedBox(height: 24),
-          Center(
-            child: Text.rich(
-              TextSpan(
-                text: 'Rejestrując się wyrażasz zgodę na ',
-                style: const TextStyle(fontSize: 12, color: Colors.black54),
-                children: [
-                  TextSpan(
-                    text: 'Warunki świadczenia usług',
-                    style: const TextStyle(color: Color(0xFF0A8270)),
-                  ),
-                  const TextSpan(text: ' oraz '),
-                  TextSpan(
-                    text: 'Umowę o przetwarzaniu danych',
-                    style: const TextStyle(color: Color(0xFF0A8270)),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
           ),
         ],
       ),
