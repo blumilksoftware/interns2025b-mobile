@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/terms_of_use_text.dart';
 import 'package:provider/provider.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -42,14 +45,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            localizations.emailLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+          LabeledText(localizations.emailLabel),
           const SizedBox(height: 8),
           CustomTextField(
             controller: widget.emailController,
@@ -59,16 +55,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 ? localizations.emailRequiredError
                 : null,
           ),
-
           const SizedBox(height: 20),
-          Text(
-            localizations.firstNameLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+
+          LabeledText(localizations.firstNameLabel),
           const SizedBox(height: 8),
           CustomTextField(
             controller: widget.firstNameController,
@@ -77,63 +66,40 @@ class _RegisterFormState extends State<RegisterForm> {
                 ? localizations.nameRequiredError
                 : null,
           ),
-
           const SizedBox(height: 20),
-          Text(
-            localizations.lastNameLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+
+          LabeledText(localizations.lastNameLabel),
           const SizedBox(height: 8),
           CustomTextField(
             controller: widget.lastNameController,
             hintText: 'Smith',
           ),
-
           const SizedBox(height: 20),
-          Text(
-            localizations.passwordLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+
+          LabeledText(localizations.passwordLabel),
           const SizedBox(height: 8),
-          CustomTextField(
+          PasswordField(
             controller: widget.passwordController,
-            obscureText: !isPasswordVisible,
             hintText: '********',
+            isVisible: isPasswordVisible,
+            toggleVisibility: () => setState(() {
+              isPasswordVisible = !isPasswordVisible;
+            }),
             validator: (value) => value == null || value.isEmpty
                 ? localizations.passwordRequiredError
                 : null,
-            suffixIcon: IconButton(
-              icon: Icon(
-                isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                color: Colors.black54,
-              ),
-              onPressed: () =>
-                  setState(() => isPasswordVisible = !isPasswordVisible),
-            ),
           ),
-
           const SizedBox(height: 20),
-          Text(
-            localizations.confirmPasswordLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+
+          LabeledText(localizations.confirmPasswordLabel),
           const SizedBox(height: 8),
-          CustomTextField(
+          PasswordField(
             controller: widget.confirmPasswordController,
-            obscureText: !isConfirmPasswordVisible,
             hintText: '********',
+            isVisible: isConfirmPasswordVisible,
+            toggleVisibility: () => setState(() {
+              isConfirmPasswordVisible = !isConfirmPasswordVisible;
+            }),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return localizations.passwordRequiredError;
@@ -143,17 +109,6 @@ class _RegisterFormState extends State<RegisterForm> {
               }
               return null;
             },
-            suffixIcon: IconButton(
-              icon: Icon(
-                isConfirmPasswordVisible
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: Colors.black54,
-              ),
-              onPressed: () => setState(
-                () => isConfirmPasswordVisible = !isConfirmPasswordVisible,
-              ),
-            ),
           ),
 
           const SizedBox(height: 24),
@@ -176,26 +131,7 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
 
           const SizedBox(height: 24),
-          Center(
-            child: Text.rich(
-              TextSpan(
-                text: 'Rejestrując się wyrażasz zgodę na ',
-                style: const TextStyle(fontSize: 12, color: Colors.black54),
-                children: [
-                  TextSpan(
-                    text: 'Warunki świadczenia usług',
-                    style: const TextStyle(color: Color(0xFF0A8270)),
-                  ),
-                  const TextSpan(text: ' oraz '),
-                  TextSpan(
-                    text: 'Umowę o przetwarzaniu danych',
-                    style: const TextStyle(color: Color(0xFF0A8270)),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          const TermsOfUseText(),
 
           const SizedBox(height: 16),
           TextButton(

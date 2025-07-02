@@ -35,5 +35,10 @@
   "errorFetchingData": "Błąd podczas pobierania danych.",
   "noData": "Brak danych.",
   "createdAt": "Utworzono: {date}",
-  "loginWithFacebook": "Zaloguj się przez Facebook"
+  "loginWithFacebook": "Zaloguj się przez Facebook",
+  "registerSuccess": "Rejestracja przebiegła pomyślnie",
+  "termsTextPart": "Rejestrując się wyrażasz zgodę na ",
+  "termsTextTos": "Warunki świadczenia usług'",
+  "termsTextAnd": " oraz ",
+  "termsTextDpa": "Umowę o przetwarzaniu danych"
 }

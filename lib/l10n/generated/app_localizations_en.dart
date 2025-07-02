@@ -116,4 +116,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get registerSuccess => 'Registration was successful';
+
+  @override
+  String get termsTextPart => 'By registering, you agree to the ';
+
+  @override
+  String get termsTextTos => 'Terms of Service';
+
+  @override
+  String get termsTextAnd => ' and ';
+
+  @override
+  String get termsTextDpa => 'Data Processing Agreement';
 }

@@ -35,5 +35,10 @@
   "noData": "No data.",
   "createdAt": "Created at: {date}",
   "loginWithFacebook": "Login with Facebook",
-  "forgotPassword": "Forgot password?"
+  "forgotPassword": "Forgot password?",
+  "registerSuccess": "Registration was successful",
+  "termsTextPart": "By registering, you agree to the ",
+  "termsTextTos": "Terms of Service",
+  "termsTextAnd": " and ",
+  "termsTextDpa": "Data Processing Agreement"
 }

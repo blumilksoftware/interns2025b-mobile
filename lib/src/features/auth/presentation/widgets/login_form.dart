@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 import 'package:provider/provider.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
@@ -34,14 +36,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            localizations.emailLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+          LabeledText(localizations.emailLabel),
           const SizedBox(height: 8),
           CustomTextField(
             controller: widget.emailController,
@@ -51,33 +46,20 @@ class _LoginFormState extends State<LoginForm> {
                 ? localizations.emailRequiredError
                 : null,
           ),
-
           const SizedBox(height: 20),
-          Text(
-            localizations.passwordLabel,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+
+          LabeledText(localizations.passwordLabel),
           const SizedBox(height: 8),
-          CustomTextField(
+          PasswordField(
             controller: widget.passwordController,
             hintText: '********',
-            obscureText: !isPasswordVisible,
+            isVisible: isPasswordVisible,
+            toggleVisibility: () => setState(() {
+              isPasswordVisible = !isPasswordVisible;
+            }),
             validator: (value) => value == null || value.isEmpty
                 ? localizations.passwordRequiredError
                 : null,
-            suffixIcon: IconButton(
-              icon: Icon(
-                isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                color: Colors.black54,
-              ),
-              onPressed: () {
-                setState(() => isPasswordVisible = !isPasswordVisible);
-              },
-            ),
           ),
 
           const SizedBox(height: 16),

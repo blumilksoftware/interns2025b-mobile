@@ -92,7 +92,7 @@ class AuthController extends ChangeNotifier {
       Navigator.pushReplacementNamed(context, AppRoutes.login);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(localizations.loginSuccess)));
+      ).showSnackBar(SnackBar(content: Text(localizations.registerSuccess)));
     } on HttpException catch (e) {
       if (!context.mounted) return;
       _showError(context, e.message);

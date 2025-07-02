@@ -116,4 +116,19 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Zapomniałeś hasła?';
+
+  @override
+  String get registerSuccess => 'Rejestracja przebiegła pomyślnie';
+
+  @override
+  String get termsTextPart => 'Rejestrując się wyrażasz zgodę na ';
+
+  @override
+  String get termsTextTos => 'Warunki świadczenia usług\'';
+
+  @override
+  String get termsTextAnd => ' oraz ';
+
+  @override
+  String get termsTextDpa => 'Umowę o przetwarzaniu danych';
 }

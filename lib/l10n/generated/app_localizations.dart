@@ -307,6 +307,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password?'**
   String get forgotPassword;
+
+  /// No description provided for @registerSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration was successful'**
+  String get registerSuccess;
+
+  /// No description provided for @termsTextPart.
+  ///
+  /// In en, this message translates to:
+  /// **'By registering, you agree to the '**
+  String get termsTextPart;
+
+  /// No description provided for @termsTextTos.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsTextTos;
+
+  /// No description provided for @termsTextAnd.
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get termsTextAnd;
+
+  /// No description provided for @termsTextDpa.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Processing Agreement'**
+  String get termsTextDpa;
 }
 
 class _AppLocalizationsDelegate
