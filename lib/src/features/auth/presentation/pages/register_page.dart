@@ -30,7 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           AppHeader(
             title: localizations.registerTitle,
-            subtitle: localizations.alreadyHaveAccount,
+            subtitleText: localizations.alreadyHaveAccount,
+            linkText: localizations.loginTitle,
             onRegisterTap: () {
               Navigator.pushNamed(context, AppRoutes.login);
             },

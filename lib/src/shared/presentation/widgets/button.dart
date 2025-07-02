@@ -33,15 +33,21 @@ class Button extends StatelessWidget {
                   children: [
                     Icon(icon, size: 20),
                     const SizedBox(width: 8),
-                    Text(label),
+                    Text(label, style: const TextStyle(color: Colors.white)),
                   ],
                 )
-              : Text(label));
+              : Text(label, style: const TextStyle(color: Colors.white)));
 
     return SizedBox(
       width: fullWidth ? double.infinity : null,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+        ),
         child: buttonChild,
       ),
     );

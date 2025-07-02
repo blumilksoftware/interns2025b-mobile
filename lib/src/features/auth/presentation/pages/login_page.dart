@@ -26,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           AppHeader(
             title: localizations.loginTitle,
-            subtitle: localizations.noAccount,
+            subtitleText: localizations.noAccount,
+            linkText: localizations.registerTitle,
             onRegisterTap: () {
               Navigator.pushNamed(context, AppRoutes.register);
             },

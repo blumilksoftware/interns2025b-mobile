@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 class AppHeader extends StatelessWidget {
   final String title;
-  final String subtitle;
+  final String subtitleText;
+  final String linkText;
   final VoidCallback? onRegisterTap;
 
   const AppHeader({
     super.key,
     required this.title,
-    required this.subtitle,
+    required this.subtitleText,
+    required this.linkText,
     this.onRegisterTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Color(0xFF025F60),
@@ -51,11 +50,11 @@ class AppHeader extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: localizations.noAccount,
+                      text: subtitleText,
                       style: const TextStyle(color: Colors.white70),
                     ),
                     TextSpan(
-                      text: " ${localizations.registerTitle}",
+                      text: ' $linkText',
                       style: const TextStyle(
                         color: Colors.white,
                         decoration: TextDecoration.underline,

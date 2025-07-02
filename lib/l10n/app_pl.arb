@@ -9,7 +9,7 @@
   "passwordLabel": "Hasło",
   "confirmPasswordLabel": "Potwierdź hasło",
   "registerButton": "Zarejestruj się",
-  "alreadyHaveAccount": "Masz już konto? Zaloguj się.",
+  "alreadyHaveAccount": "Masz już konto?",
   "selectLanguage": "Wybierz język",
   "unknownError": "Coś poszło nie tak. Spróbuj ponownie.",
   "loginSuccess": "Zalogowano pomyślnie",

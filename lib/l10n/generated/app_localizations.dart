@@ -149,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @alreadyHaveAccount.
   ///
   /// In en, this message translates to:
-  /// **'Already have an account? Login'**
+  /// **'Already have an account?'**
   String get alreadyHaveAccount;
 
   /// No description provided for @selectLanguage.

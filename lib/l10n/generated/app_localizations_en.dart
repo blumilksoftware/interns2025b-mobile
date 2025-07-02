@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerButton => 'Register';
 
   @override
-  String get alreadyHaveAccount => 'Already have an account? Login';
+  String get alreadyHaveAccount => 'Already have an account?';
 
   @override
   String get selectLanguage => 'Select language';

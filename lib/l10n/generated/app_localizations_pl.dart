@@ -33,7 +33,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get registerButton => 'Zarejestruj się';
 
   @override
-  String get alreadyHaveAccount => 'Masz już konto? Zaloguj się.';
+  String get alreadyHaveAccount => 'Masz już konto?';
 
   @override
   String get selectLanguage => 'Wybierz język';
