@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
@@ -7,9 +8,8 @@ import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/terms_of_use_text.dart';
-import 'package:provider/provider.dart';
 
-class RegisterForm extends StatefulWidget {
+class RegisterForm extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController firstNameController;
@@ -28,16 +28,16 @@ class RegisterForm extends StatefulWidget {
   });
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  ConsumerState<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _RegisterFormState extends ConsumerState<RegisterForm> {
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    final authController = Provider.of<AuthController>(context);
+    final authController = ref.read(authControllerProvider.notifier);
     final localizations = AppLocalizations.of(context)!;
 
     return Form(
@@ -112,7 +112,7 @@ class _RegisterFormState extends State<RegisterForm> {
           const SizedBox(height: 24),
           Button(
             label: localizations.registerButton,
-            isLoading: authController.isLoading,
+            isLoading: ref.watch(authControllerProvider).isLoading,
             fullWidth: true,
             onPressed: () {
               if (widget.formKey.currentState!.validate()) {

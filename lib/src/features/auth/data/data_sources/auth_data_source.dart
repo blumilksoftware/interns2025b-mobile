@@ -43,12 +43,7 @@ class AuthDataSource {
   }
 
   Future<void> logout() async {
-    await httpClient.post('/api/logout');
-  }
-
-  Future<User> fetchUserById(int id) async {
-    final response = await httpClient.get('/api/users/$id');
-    return User.fromJson(response);
+    await httpClient.post('/api/auth/logout');
   }
 
   Future<void> forgotPassword(String email) async {

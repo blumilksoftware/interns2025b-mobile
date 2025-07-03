@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
@@ -110,3 +112,8 @@ class HttpClient {
     }
   }
 }
+
+final httpClientProvider = Provider<HttpClient>((ref) {
+  final baseUrl = dotenv.env['API_URL']!;
+  return HttpClient(baseUrl: baseUrl);
+});

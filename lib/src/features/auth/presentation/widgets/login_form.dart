@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
-import 'package:provider/provider.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 
-class LoginForm extends StatefulWidget {
+class LoginForm extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -20,15 +20,15 @@ class LoginForm extends StatefulWidget {
   });
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  ConsumerState<LoginForm> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginFormState extends ConsumerState<LoginForm> {
   bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    final authController = Provider.of<AuthController>(context);
+    final authController = ref.read(authControllerProvider.notifier);
     final localizations = AppLocalizations.of(context)!;
 
     return Form(
@@ -78,7 +78,7 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 16),
           Button(
             label: localizations.loginTitle,
-            isLoading: authController.isLoading,
+            isLoading: ref.watch(authControllerProvider).isLoading,
             fullWidth: true,
             onPressed: () {
               if (widget.formKey.currentState!.validate()) {
@@ -104,12 +104,13 @@ class _LoginFormState extends State<LoginForm> {
           ),
 
           const SizedBox(height: 16),
-          OutlinedButton.icon(
-            icon: const Icon(Icons.facebook, color: Colors.blue),
-            label: Text(
-              localizations.loginWithFacebook,
-              style: const TextStyle(color: Colors.blue),
-            ),
+          Button(
+            label: localizations.loginWithFacebook,
+            icon: Icons.facebook,
+            iconColor: Colors.blue[700],
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            fullWidth: true,
             onPressed: () {},
           ),
         ],

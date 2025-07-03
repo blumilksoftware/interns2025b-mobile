@@ -1,49 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:interns2025b_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
-import 'package:interns2025b_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
-import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
-import 'package:provider/provider.dart';
-
-import 'package:interns2025b_mobile/src/core/data/network/http_client.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/core/presentation/app_initializer.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
 
 class AppSetup {
-  static Future<Widget> initialize() async {
+  static Future<ProviderScopeApp> initialize() async {
     await dotenv.load(fileName: '.env');
-    final apiUrl = dotenv.env['API_URL'];
-
-    if (apiUrl == null || apiUrl.isEmpty) {
-      throw Exception('API_URL is not set in the .env file');
-    }
-
-    final httpClient = HttpClient(baseUrl: apiUrl);
-    final authDataSource = AuthDataSource(httpClient);
-    final authRepository = AuthRepositoryImpl(authDataSource);
-
-    final registerUseCase = RegisterUseCase(authRepository);
-    final loginUseCase = LoginUseCase(authRepository);
 
     final localizationController = LocalizationController();
     await localizationController.loadLocale();
 
-    final authController = AuthController(
-      registerUseCase: registerUseCase,
-      loginUseCase: loginUseCase,
-    );
-    await authController.loadUser();
+    final container = ProviderContainer();
+    final authController = container.read(authControllerProvider.notifier);
+    await authController.build();
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthController>.value(value: authController),
-        ChangeNotifierProvider<LocalizationController>.value(
-          value: localizationController,
+    return ProviderScopeApp(
+      overrides: [
+        localizationControllerProvider.overrideWithValue(
+          localizationController,
         ),
       ],
       child: const AppInitializer(),
     );
   }
+}
+
+class ProviderScopeApp {
+  final List<Override> overrides;
+  final Widget child;
+
+  ProviderScopeApp({required this.overrides, required this.child});
 }

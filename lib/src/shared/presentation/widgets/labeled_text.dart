@@ -11,7 +11,7 @@ class LabeledText extends StatelessWidget {
       style: const TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 14,
-        color: Colors.black,
+        color: Color(0xFF6C7278),
       ),
     );
   }

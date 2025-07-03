@@ -15,12 +15,12 @@ class TermsOfUseText extends StatelessWidget {
         children: [
           TextSpan(
             text: localizations.termsTextTos,
-            style: const TextStyle(color: Color(0xFF0A8270)),
+            style: const TextStyle(color: Color(0xFF025F60)),
           ),
           TextSpan(text: localizations.termsTextAnd),
           TextSpan(
             text: localizations.termsTextDpa,
-            style: const TextStyle(color: Color(0xFF0A8270)),
+            style: const TextStyle(color: Color(0xFF025F60)),
           ),
         ],
       ),

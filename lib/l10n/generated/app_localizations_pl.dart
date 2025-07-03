@@ -112,7 +112,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get loginWithFacebook => 'Zaloguj się przez Facebook';
+  String get loginWithFacebook => 'Zaloguj się za pomocą Facebook';
 
   @override
   String get forgotPassword => 'Zapomniałeś hasła?';

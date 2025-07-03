@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/core/app_setup.dart';
 
 void main() async {
@@ -7,5 +8,6 @@ void main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   final app = await AppSetup.initialize();
-  runApp(app);
+
+  runApp(ProviderScope(overrides: app.overrides, child: app.child));
 }
