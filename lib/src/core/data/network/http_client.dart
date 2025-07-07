@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpClient {
   final String baseUrl;
@@ -70,23 +68,22 @@ class HttpClient {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-    final headers = {
+    return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token',
       ...?custom,
     };
-
-    return headers;
   }
 
   dynamic _handleResponse(http.Response response) {
     dynamic responseBody;
+
     try {
       if (response.body.isNotEmpty) {
         responseBody = json.decode(response.body);
       }
-    } catch (e) {
+    } catch (_) {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return response.body;
       } else {
@@ -105,6 +102,7 @@ class HttpClient {
           (responseBody is Map && responseBody.containsKey('message'))
           ? responseBody['message']
           : (response.reasonPhrase ?? 'Server error');
+
       throw HttpException(
         message: errorMessage,
         statusCode: response.statusCode,
@@ -112,8 +110,3 @@ class HttpClient {
     }
   }
 }
-
-final httpClientProvider = Provider<HttpClient>((ref) {
-  final baseUrl = dotenv.env['API_URL']!;
-  return HttpClient(baseUrl: baseUrl);
-});

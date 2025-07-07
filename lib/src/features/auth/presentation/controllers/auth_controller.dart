@@ -6,10 +6,13 @@ import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/providers/login_usecase_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/providers/logout_usecase_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/providers/register_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

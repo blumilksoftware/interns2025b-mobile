@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/core/presentation/app_initializer.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/controllers/auth_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
 
