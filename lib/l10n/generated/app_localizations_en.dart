@@ -21,13 +21,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get firstNameLabel => 'Name';
 
   @override
-  String get lastNameLabel => 'Last name (Optional)';
+  String get lastNameLabel => 'Last name (optional)';
 
   @override
   String get passwordLabel => 'Password';
 
   @override
-  String get confirmPasswordLabel => 'Confirm Password';
+  String get confirmPasswordLabel => 'Confirm password';
 
   @override
   String get registerButton => 'Register';
@@ -52,7 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Password reset link has been sent to your email.';
 
   @override
-  String get resetPassword => 'Reset Password';
+  String get resetPassword => 'Reset password';
 
   @override
   String get forgotPasswordEmailInstruction =>
@@ -92,13 +92,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmLogout => 'Log out';
 
   @override
-  String get tryAgainButton => 'Try Again';
+  String get tryAgainButton => 'Try again';
 
   @override
   String get noLoggedUser => 'No logged user';
 
   @override
-  String get userName => 'User Name';
+  String get userName => 'User name';
 
   @override
   String get errorFetchingData => 'Error while fetching data.';
@@ -133,7 +133,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsTextDpa => 'Data Processing Agreement';
 
   @override
-  String get forgotPasswordTitle => 'Forgot Password';
+  String get forgotPasswordTitle => 'Forgot password';
 
   @override
   String get rememberPassword => 'Do you remember password?';

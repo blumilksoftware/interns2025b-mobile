@@ -15,13 +15,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get loginTitle => 'Zaloguj się';
 
   @override
-  String get emailLabel => 'Email';
+  String get emailLabel => 'E-mail';
 
   @override
   String get firstNameLabel => 'Nazwa';
 
   @override
-  String get lastNameLabel => 'Nazwisko (Opcjonalne)';
+  String get lastNameLabel => 'Nazwisko (opcjonalne)';
 
   @override
   String get passwordLabel => 'Hasło';
@@ -56,10 +56,10 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get forgotPasswordEmailInstruction =>
-      'Podaj email, na który wyślemy link do resetu hasła:';
+      'Podaj e-mail, na który wyślemy link do resetu hasła:';
 
   @override
-  String get emailRequiredError => 'Podaj email';
+  String get emailRequiredError => 'Podaj e-mail';
 
   @override
   String get passwordRequiredError => 'Podaj hasło';
@@ -68,7 +68,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sendResetLinkButton => 'Wyślij link resetujący';
 
   @override
-  String get nameRequiredError => 'Podaj nazwę';
+  String get nameRequiredError => 'Podaj imię';
 
   @override
   String get passwordsDoNotMatch => 'Hasła nie są takie same';
@@ -115,7 +115,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get loginWithFacebook => 'Zaloguj się za pomocą Facebook';
 
   @override
-  String get forgotPassword => 'Zapomniałeś hasła?';
+  String get forgotPassword => 'Nie pamiętasz hasła?';
 
   @override
   String get registerSuccess => 'Rejestracja przebiegła pomyślnie';
