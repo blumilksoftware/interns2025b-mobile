@@ -16,11 +16,4 @@ class AppColors {
 
   static const secondary = Color(0xFF151515);
   static const secondaryHover = Color(0xFF272525);
-
-  static const primaryGradient = LinearGradient(
-    begin: Alignment.bottomLeft,
-    end: Alignment.topRight,
-    stops: [0.0, 1.0],
-    colors: [Color(0xFF093637), Color(0xFF025F60)],
-  );
 }
