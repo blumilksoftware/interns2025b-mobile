@@ -125,7 +125,7 @@ abstract class AppLocalizations {
   /// No description provided for @lastNameLabel.
   ///
   /// In en, this message translates to:
-  /// **'Last name (Optional)'**
+  /// **'Last name (optional)'**
   String get lastNameLabel;
 
   /// No description provided for @passwordLabel.
@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @confirmPasswordLabel.
   ///
   /// In en, this message translates to:
-  /// **'Confirm Password'**
+  /// **'Confirm password'**
   String get confirmPasswordLabel;
 
   /// No description provided for @registerButton.
@@ -185,7 +185,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetPassword.
   ///
   /// In en, this message translates to:
-  /// **'Reset Password'**
+  /// **'Reset password'**
   String get resetPassword;
 
   /// No description provided for @forgotPasswordEmailInstruction.
@@ -263,7 +263,7 @@ abstract class AppLocalizations {
   /// No description provided for @tryAgainButton.
   ///
   /// In en, this message translates to:
-  /// **'Try Again'**
+  /// **'Try again'**
   String get tryAgainButton;
 
   /// No description provided for @noLoggedUser.
@@ -275,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @userName.
   ///
   /// In en, this message translates to:
-  /// **'User Name'**
+  /// **'User name'**
   String get userName;
 
   /// No description provided for @errorFetchingData.
@@ -341,7 +341,7 @@ abstract class AppLocalizations {
   /// No description provided for @forgotPasswordTitle.
   ///
   /// In en, this message translates to:
-  /// **'Forgot Password'**
+  /// **'Forgot password'**
   String get forgotPasswordTitle;
 
   /// No description provided for @rememberPassword.

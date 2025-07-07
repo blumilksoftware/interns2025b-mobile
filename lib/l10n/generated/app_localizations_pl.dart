@@ -18,7 +18,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get emailLabel => 'E-mail';
 
   @override
-  String get firstNameLabel => 'Nazwa';
+  String get firstNameLabel => 'Imię';
 
   @override
   String get lastNameLabel => 'Nazwisko (opcjonalne)';
