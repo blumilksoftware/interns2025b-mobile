@@ -44,5 +44,6 @@
   "forgotPasswordTitle": "Przypomnij hasło",
   "rememberPassword": "Pamiętasz hasło?",
   "send": "Wyślij",
-  "forgotPasswordSuccess": "Link do resetu hasła został wysłany na Twoją skrzynkę pocztową."
+  "forgotPasswordSuccess": "Link do resetu hasła został wysłany na Twoją skrzynkę pocztową.",
+  "or": "lub"
 }

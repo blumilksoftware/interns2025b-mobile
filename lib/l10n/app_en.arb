@@ -44,5 +44,6 @@
   "forgotPasswordTitle": "Forgot Password",
   "rememberPassword": "Do you remember password?",
   "send": "Send",
-  "forgotPasswordSuccess": "Password reset link has been sent to your email."
+  "forgotPasswordSuccess": "Password reset link has been sent to your email.",
+  "or": "or"
 }

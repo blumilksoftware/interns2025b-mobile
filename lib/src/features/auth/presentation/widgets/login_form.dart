@@ -97,11 +97,11 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
           const SizedBox(height: 24),
           Row(
-            children: const <Widget>[
+            children: <Widget>[
               Expanded(child: Divider()),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text("lub", style: TextStyle(color: Colors.black54)),
+                child: Text(localizations.or, style: TextStyle(color: Colors.black54)),
               ),
               Expanded(child: Divider()),
             ],
