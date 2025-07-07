@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class AppHeader extends StatelessWidget {
   final String title;
@@ -18,14 +19,14 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF025F60),
+      value: SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
         statusBarIconBrightness: Brightness.light,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 70),
         width: double.infinity,
-        decoration: const BoxDecoration(color: Color(0xFF025F60)),
+        decoration: BoxDecoration(color: AppColors.primary),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,7 +39,7 @@ class AppHeader extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.textLight,
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),
@@ -50,14 +51,18 @@ class AppHeader extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: subtitleText,
-                      style: const TextStyle(color: Colors.white70),
+                      text: '$subtitleText ',
+                      style: const TextStyle(
+                        color: AppColors.textLightSecondary,
+                      ),
                     ),
                     TextSpan(
-                      text: ' $linkText',
+                      text: linkText,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppColors.textLight,
                         decoration: TextDecoration.underline,
+                        decorationColor: AppColors.textLight,
+                        decorationThickness: 2,
                       ),
                     ),
                   ],

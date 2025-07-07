@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class LabeledText extends StatelessWidget {
   final String label;
@@ -11,7 +12,7 @@ class LabeledText extends StatelessWidget {
       style: const TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 14,
-        color: Color(0xFF6C7278),
+        color: AppColors.textDisabled,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -24,11 +25,12 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       keyboardType: keyboardType,
-      style: const TextStyle(color: Color(0xFF025F60)),
+      style: const TextStyle(color: AppColors.text),
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: const TextStyle(color: AppColors.textSecondary),
         filled: true,
-        fillColor: Colors.grey.shade100,
+        fillColor: AppColors.fieldBackground,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

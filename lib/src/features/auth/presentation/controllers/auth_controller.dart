@@ -12,7 +12,6 @@ import 'package:interns2025b_mobile/src/features/auth/domain/providers/register_
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -6,6 +6,7 @@ import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -69,7 +70,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 onPressed: () {},
                 child: Text(
                   localizations.forgotPassword,
-                  style: const TextStyle(color: Color(0xFF0A8270)),
+                  style: const TextStyle(color: AppColors.textSecondary),
                 ),
               ),
             ],
@@ -108,8 +109,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             label: localizations.loginWithFacebook,
             icon: Icons.facebook,
             iconColor: Colors.blue[700],
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
+            backgroundColor: AppColors.backgroundLight,
+            foregroundColor: AppColors.secondary,
             fullWidth: true,
             onPressed: () {},
           ),
