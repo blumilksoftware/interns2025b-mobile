@@ -101,7 +101,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               Expanded(child: Divider()),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text(localizations.or, style: TextStyle(color: Colors.black54)),
+                child: Text(
+                  localizations.or,
+                  style: TextStyle(color: Colors.black54),
+                ),
               ),
               Expanded(child: Divider()),
             ],
