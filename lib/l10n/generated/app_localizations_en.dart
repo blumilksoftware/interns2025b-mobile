@@ -131,4 +131,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsTextDpa => 'Data Processing Agreement';
+
+  @override
+  String get forgotPasswordTitle => 'Forgot Password';
+
+  @override
+  String get rememberPassword => 'Do you remember password?';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'Password reset link has been sent to your email.';
 }

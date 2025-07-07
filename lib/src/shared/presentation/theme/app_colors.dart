@@ -12,8 +12,5 @@ class AppColors {
   static const textSecondary = Color(0xFF036061);
 
   static const primary = Color(0xFF025F60);
-  static const primaryHover = Color(0xFF057475);
-
   static const secondary = Color(0xFF151515);
-  static const secondaryHover = Color(0xFF272525);
 }

@@ -28,5 +28,15 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: AppColors.primary),
     ),
+
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: AppColors.primary,
+      contentTextStyle: TextStyle(color: AppColors.textLight),
+      actionTextColor: AppColors.textLight,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+      ),
+    ),
   );
 }

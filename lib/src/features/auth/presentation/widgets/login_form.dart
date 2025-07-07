@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
@@ -67,7 +68,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.forgotPassword);
+                },
                 child: Text(
                   localizations.forgotPassword,
                   style: const TextStyle(color: AppColors.textSecondary),

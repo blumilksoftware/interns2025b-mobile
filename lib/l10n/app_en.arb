@@ -40,5 +40,9 @@
   "termsTextPart": "By registering, you agree to the ",
   "termsTextTos": "Terms of Service",
   "termsTextAnd": " and ",
-  "termsTextDpa": "Data Processing Agreement"
+  "termsTextDpa": "Data Processing Agreement",
+  "forgotPasswordTitle": "Forgot Password",
+  "rememberPassword": "Do you remember password?",
+  "send": "Send",
+  "forgotPasswordSuccess": "Password reset link has been sent to your email."
 }

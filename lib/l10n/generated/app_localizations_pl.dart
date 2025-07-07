@@ -131,4 +131,17 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get termsTextDpa => 'Umowę o przetwarzaniu danych';
+
+  @override
+  String get forgotPasswordTitle => 'Przypomnij hasło';
+
+  @override
+  String get rememberPassword => 'Pamiętasz hasło?';
+
+  @override
+  String get send => 'Wyślij';
+
+  @override
+  String get forgotPasswordSuccess =>
+      'Link do resetu hasła został wysłany na Twoją skrzynkę pocztową.';
 }

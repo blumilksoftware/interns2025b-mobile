@@ -9,9 +9,11 @@ import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/login_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/logout_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/register_usecase_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/providers/forgot_password_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +23,9 @@ class AuthController extends AsyncNotifier<User?> {
   );
   late final LoginUseCase _loginUseCase = ref.read(loginUseCaseProvider);
   late final LogoutUseCase _logoutUseCase = ref.read(logoutUseCaseProvider);
+  late final ForgotPasswordUsecase _forgotPasswordUseCase = ref.read(
+    forgotPasswordUseCaseProvider,
+  );
 
   @override
   Future<User?> build() async {
@@ -109,6 +114,29 @@ class AuthController extends AsyncNotifier<User?> {
 
       if (context.mounted) {
         navigator.pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
+      }
+    } catch (e) {
+      state = AsyncError(e, StackTrace.current);
+      if (context.mounted) {
+        _showError(context, _resolveErrorMessage(e, localizations));
+      }
+    }
+  }
+
+  Future<void> forgotPassword(BuildContext context, String email) async {
+    final localizations = AppLocalizations.of(context)!;
+    final messenger = ScaffoldMessenger.of(context);
+
+    state = const AsyncLoading();
+
+    try {
+      await _forgotPasswordUseCase(email);
+      state = AsyncData(await build());
+
+      if (context.mounted) {
+        messenger.showSnackBar(
+          SnackBar(content: Text(localizations.forgotPasswordSuccess)),
+        );
       }
     } catch (e) {
       state = AsyncError(e, StackTrace.current);

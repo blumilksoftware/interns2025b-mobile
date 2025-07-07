@@ -40,5 +40,9 @@
   "termsTextPart": "Rejestrując się wyrażasz zgodę na ",
   "termsTextTos": "Warunki świadczenia usług'",
   "termsTextAnd": " oraz ",
-  "termsTextDpa": "Umowę o przetwarzaniu danych"
+  "termsTextDpa": "Umowę o przetwarzaniu danych",
+  "forgotPasswordTitle": "Przypomnij hasło",
+  "rememberPassword": "Pamiętasz hasło?",
+  "send": "Wyślij",
+  "forgotPasswordSuccess": "Link do resetu hasła został wysłany na Twoją skrzynkę pocztową."
 }
