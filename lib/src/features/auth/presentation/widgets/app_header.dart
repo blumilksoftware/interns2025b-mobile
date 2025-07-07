@@ -26,7 +26,7 @@ class AppHeader extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 70),
         width: double.infinity,
-        decoration: BoxDecoration(color: AppColors.primary),
+        decoration: BoxDecoration(color: AppColors.background),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
