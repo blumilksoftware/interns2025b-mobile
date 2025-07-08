@@ -22,7 +22,9 @@ class ProfileController extends ChangeNotifier {
 
   Future<void> fetchUserProfile({BuildContext? context}) async {
     final messenger = context != null ? ScaffoldMessenger.of(context) : null;
-    final localizations = context != null ? AppLocalizations.of(context)! : null;
+    final localizations = context != null
+        ? AppLocalizations.of(context)!
+        : null;
 
     try {
       _user = await getProfileUseCase();
@@ -35,9 +37,7 @@ class ProfileController extends ChangeNotifier {
       }
     } on HttpException catch (e) {
       if (context != null && context.mounted) {
-        messenger?.showSnackBar(
-          SnackBar(content: Text(e.message)),
-        );
+        messenger?.showSnackBar(SnackBar(content: Text(e.message)));
       }
     } catch (_) {
       if (context != null && context.mounted) {
@@ -89,9 +89,7 @@ class ProfileController extends ChangeNotifier {
         SnackBar(content: Text(localizations.noInternetError)),
       );
     } on HttpException catch (e) {
-      messenger.showSnackBar(
-        SnackBar(content: Text(e.message)),
-      );
+      messenger.showSnackBar(SnackBar(content: Text(e.message)));
     } catch (_) {
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.profileUpdateError)),

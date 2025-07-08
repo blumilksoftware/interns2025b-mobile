@@ -22,7 +22,6 @@ class ProfileForm extends ConsumerStatefulWidget {
 }
 
 class _ProfileFormState extends ConsumerState<ProfileForm> {
-
   @override
   Widget build(BuildContext context) {
     // final profileController = ref.read(profileControllerProvider.notifier);

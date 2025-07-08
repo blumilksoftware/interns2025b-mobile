@@ -21,7 +21,7 @@ class RemoteProfileRepository implements ProfileRepository {
     if (firstName != null && firstName.isNotEmpty) {
       body['first_name'] = firstName;
     }
-      body['last_name'] = lastName;
+    body['last_name'] = lastName;
 
     if (body.isEmpty) {
       throw Exception(localizations.profileUpdateNoFields);
