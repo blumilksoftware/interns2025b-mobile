@@ -51,5 +51,7 @@
   "profileUpdateError": "Error updating profile",
   "editProfile": "Edit profile",
   "saveChanges": "Save changes",
-  "profileTitle": "Profile"
+  "profileTitle": "Profile",
+  "noInternetError": "No internet connection",
+  "genericError": "An error occurred. Please try again later."
 }

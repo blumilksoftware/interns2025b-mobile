@@ -51,5 +51,7 @@
   "profileUpdateError": "Błąd aktualizacji profilu",
   "editProfile": "Edytuj profil",
   "saveChanges": "Zapisz zmiany",
-  "profileTitle": "Profil"
+  "profileTitle": "Profil",
+  "noInternetError": "Brak połączenia z internetem",
+  "genericError": "Wystąpił błąd. Spróbuj ponownie później."
 }
