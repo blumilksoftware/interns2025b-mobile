@@ -2,10 +2,10 @@ import 'package:interns2025b_mobile/src/features/auth/data/data_sources/auth_dat
 import 'package:interns2025b_mobile/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class RemoteAuthRepository implements AuthRepository {
   final AuthDataSource dataSource;
 
-  AuthRepositoryImpl(this.dataSource);
+  RemoteAuthRepository(this.dataSource);
 
   @override
   Future<User> login(String email, String password) {
