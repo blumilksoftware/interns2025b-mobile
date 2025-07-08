@@ -29,3 +29,4 @@ app.*.map.json
 /android/app/release
 .env
 l10n_missing.json
+./lib/l10n/generated/*
