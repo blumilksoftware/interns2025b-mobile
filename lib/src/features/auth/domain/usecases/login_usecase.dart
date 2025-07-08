@@ -2,7 +2,7 @@ import 'package:interns2025b_mobile/src/features/auth/domain/repositories/auth_r
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
 class LoginUseCase {
-  final AuthRepository repository;
+  final AuthRepository _repository;
 
   LoginUseCase(this.repository);
 
