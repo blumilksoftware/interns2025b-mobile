@@ -1,27 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/core/app_setup.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final app = await AppSetup.initialize();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interns2025b Mobile',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Interns2025b Mobile'),
-        ),
-        body: const Center(
-          child: Text('Hello, Interns2025b!'),
-        ),
-      ),
-    );
-  }
+  runApp(ProviderScope(overrides: app.overrides, child: app.child));
 }
