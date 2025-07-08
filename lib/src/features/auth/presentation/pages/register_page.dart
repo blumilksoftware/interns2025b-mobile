@@ -26,7 +26,6 @@ class _RegisterPageState extends State<RegisterPage> {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
       body: Column(
         children: [
           AppHeader(

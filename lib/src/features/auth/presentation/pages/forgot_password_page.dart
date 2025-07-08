@@ -21,7 +21,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
       body: Column(
         children: [
           AppHeader(

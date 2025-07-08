@@ -22,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
       body: Column(
         children: [
           AppHeader(
