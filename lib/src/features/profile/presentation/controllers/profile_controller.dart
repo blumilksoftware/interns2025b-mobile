@@ -28,21 +28,21 @@ class ProfileController extends ChangeNotifier {
       _user = await getProfileUseCase();
       notifyListeners();
     } on NoInternetException catch (_) {
-      if (context != null && localizations != null) {
+      if (context != null && context.mounted) {
         messenger?.showSnackBar(
-          SnackBar(content: Text(localizations.noInternetError)),
+          SnackBar(content: Text(localizations!.noInternetError)),
         );
       }
     } on HttpException catch (e) {
-      if (context != null && localizations != null) {
+      if (context != null && context.mounted) {
         messenger?.showSnackBar(
           SnackBar(content: Text(e.message)),
         );
       }
     } catch (_) {
-      if (context != null && localizations != null) {
+      if (context != null && context.mounted) {
         messenger?.showSnackBar(
-          SnackBar(content: Text(localizations.genericError)),
+          SnackBar(content: Text(localizations!.genericError)),
         );
       }
     }
@@ -70,7 +70,7 @@ class ProfileController extends ChangeNotifier {
             : null,
       );
 
-      await fetchUserProfile(context: context);
+      await fetchUserProfile();
 
       if (_user != null) {
         final prefs = await SharedPreferences.getInstance();
