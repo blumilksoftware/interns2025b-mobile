@@ -23,7 +23,7 @@ class AuthController extends AsyncNotifier<User?> {
   );
   late final LoginUseCase _loginUseCase = ref.read(loginUseCaseProvider);
   late final LogoutUseCase _logoutUseCase = ref.read(logoutUseCaseProvider);
-  late final ForgotPasswordUsecase _forgotPasswordUseCase = ref.read(
+  late final ForgotPasswordUseCase _forgotPasswordUseCase = ref.read(
     forgotPasswordUseCaseProvider,
   );
 
