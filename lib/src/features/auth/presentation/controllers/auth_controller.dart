@@ -49,7 +49,7 @@ class AuthController extends AsyncNotifier<User?> {
       state = AsyncData(user);
 
       if (context.mounted) {
-        navigator.pushReplacementNamed(AppRoutes.login);
+        navigator.pushReplacementNamed(AppRoutes.profile);
         messenger.showSnackBar(
           SnackBar(content: Text(localizations.loginSuccess)),
         );

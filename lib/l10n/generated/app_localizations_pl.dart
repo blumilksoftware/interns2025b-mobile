@@ -147,4 +147,13 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get or => 'lub';
+
+  @override
+  String get profileUpdateNoFields => 'Brak pól do aktualizacji';
+
+  @override
+  String get profileUpdateSuccess => 'Profil zaktualizowany pomyślnie';
+
+  @override
+  String get profileUpdateError => 'Błąd aktualizacji profilu';
 }

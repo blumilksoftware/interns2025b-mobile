@@ -45,5 +45,8 @@
   "rememberPassword": "Pamiętasz hasło?",
   "send": "Wyślij",
   "forgotPasswordSuccess": "Link do resetu hasła został wysłany na Twoją skrzynkę pocztową.",
-  "or": "lub"
+  "or": "lub",
+  "profileUpdateNoFields": "Brak pól do aktualizacji",
+  "profileUpdateSuccess": "Profil zaktualizowany pomyślnie",
+  "profileUpdateError": "Błąd aktualizacji profilu"
 }

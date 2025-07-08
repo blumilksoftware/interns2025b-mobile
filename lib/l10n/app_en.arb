@@ -45,5 +45,8 @@
   "rememberPassword": "Do you remember password?",
   "send": "Send",
   "forgotPasswordSuccess": "Password reset link has been sent to your email.",
-  "or": "or"
+  "or": "or",
+  "profileUpdateNoFields": "No fields to update",
+  "profileUpdateSuccess": "Profile updated successfully",
+  "profileUpdateError": "Error updating profile"
 }

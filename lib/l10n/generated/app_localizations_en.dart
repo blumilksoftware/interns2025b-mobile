@@ -147,4 +147,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get or => 'or';
+
+  @override
+  String get profileUpdateNoFields => 'No fields to update';
+
+  @override
+  String get profileUpdateSuccess => 'Profile updated successfully';
+
+  @override
+  String get profileUpdateError => 'Error updating profile';
 }
