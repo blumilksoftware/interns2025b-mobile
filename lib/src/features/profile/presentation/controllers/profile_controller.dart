@@ -1,10 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends ChangeNotifier {
   final UpdateProfileUseCase updateProfileUseCase;

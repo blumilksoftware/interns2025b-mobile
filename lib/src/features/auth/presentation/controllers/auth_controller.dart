@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
@@ -6,14 +7,14 @@ import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/providers/forgot_password_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/login_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/logout_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/register_usecase_provider.dart';
-import 'package:interns2025b_mobile/src/features/auth/domain/providers/forgot_password_usecase_provider.dart';
+import 'package:interns2025b_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
-import 'package:interns2025b_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/src/core/data/network/http_client.dart';
-import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
-import 'package:interns2025b_mobile/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/core/data/network/http_client.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/repositories/profile_repository.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
-class ProfileRepositoryImpl implements ProfileRepository {
+class RemoteProfileRepository implements ProfileRepository {
   final HttpClient httpClient;
 
-  ProfileRepositoryImpl(this.httpClient);
+  RemoteProfileRepository(this.httpClient);
 
   @override
   Future<void> updateProfile({
