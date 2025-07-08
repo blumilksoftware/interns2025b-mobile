@@ -48,5 +48,8 @@
   "or": "or",
   "profileUpdateNoFields": "No fields to update",
   "profileUpdateSuccess": "Profile updated successfully",
-  "profileUpdateError": "Error updating profile"
+  "profileUpdateError": "Error updating profile",
+  "editProfile": "Edit profile",
+  "saveChanges": "Save changes",
+  "profileTitle": "Profile"
 }

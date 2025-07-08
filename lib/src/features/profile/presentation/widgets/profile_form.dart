@@ -44,6 +44,14 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
                 : null,
           ),
           const SizedBox(height: 20),
+
+          LabeledText(localizations.lastNameLabel),
+          const SizedBox(height: 8),
+          CustomTextField(
+            controller: widget.lastNameController,
+            keyboardType: TextInputType.name,
+            hintText: localizations.lastNameLabel,
+          ),
         ],
       ),
     );

@@ -48,5 +48,8 @@
   "or": "lub",
   "profileUpdateNoFields": "Brak pól do aktualizacji",
   "profileUpdateSuccess": "Profil zaktualizowany pomyślnie",
-  "profileUpdateError": "Błąd aktualizacji profilu"
+  "profileUpdateError": "Błąd aktualizacji profilu",
+  "editProfile": "Edytuj profil",
+  "saveChanges": "Zapisz zmiany",
+  "profileTitle": "Profil"
 }
