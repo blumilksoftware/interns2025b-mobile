@@ -35,4 +35,9 @@ class RemoteProfileRepository implements ProfileRepository {
     final response = await httpClient.get('/api/profile');
     return User.fromJson(response['data']);
   }
+
+  @override
+  Future<void> deleteUserRequest() async {
+    await httpClient.post('/api/profile/delete-request');
+  }
 }

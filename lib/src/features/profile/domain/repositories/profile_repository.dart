@@ -9,4 +9,5 @@ abstract class ProfileRepository {
   });
 
   Future<User> getProfile();
+  Future<void> deleteUserRequest();
 }

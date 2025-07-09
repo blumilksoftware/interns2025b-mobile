@@ -53,5 +53,8 @@
   "saveChanges": "Zapisz zmiany",
   "profileTitle": "Profil",
   "noInternetError": "Brak połączenia z internetem",
-  "genericError": "Wystąpił błąd. Spróbuj ponownie później."
+  "genericError": "Wystąpił błąd. Spróbuj ponownie później.",
+  "profileDeleteRequestSuccess": "Żądanie usunięcia profilu zostało wysłane na Twoją skrzynkę pocztową.",
+  "profileDeleteRequestError": "Błąd podczas wysyłania żądania usunięcia profilu.",
+  "profileDeleteRequestButtonLabel": "Usuń konto"
 }

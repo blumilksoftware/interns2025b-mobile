@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/logout_button.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/delete_user_request_button.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_form.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 
@@ -59,6 +60,8 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
               }
             },
           ),
+          const SizedBox(height: 40),
+          const DeleteUserRequestButton(),
           const SizedBox(height: 24),
         ],
         const LogoutButton(),

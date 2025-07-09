@@ -10,4 +10,8 @@ class ProfileDataSource {
     final response = await httpClient.get('/api/profile');
     return User.fromJson(response['data']);
   }
+
+  Future<void> deleteUserRequest() async {
+    await httpClient.post('/api/profile/delete-request');
+  }
 }

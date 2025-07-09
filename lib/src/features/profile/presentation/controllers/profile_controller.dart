@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/usecases/delete_user_request_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
@@ -15,12 +16,17 @@ class ProfileController extends ChangeNotifier {
   final Ref ref;
   final UpdateProfileUseCase updateProfileUseCase;
   final GetProfileUseCase getProfileUseCase;
+  final DeleteUserRequestUseCase deleteUserRequestUseCase;
 
   ProfileController(
     this.ref,
     this.updateProfileUseCase,
     this.getProfileUseCase,
+    this.deleteUserRequestUseCase,
   );
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   bool _isEditing = false;
   bool get isEditing => _isEditing;
@@ -104,5 +110,36 @@ class ProfileController extends ChangeNotifier {
         SnackBar(content: Text(localizations.profileUpdateError)),
       );
     }
+  }
+
+  Future<void> deleteUser({required BuildContext context}) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final localizations = AppLocalizations.of(context)!;
+
+    _setLoading(true);
+
+    try {
+      await deleteUserRequestUseCase();
+      messenger.showSnackBar(
+        SnackBar(content: Text(localizations.profileDeleteRequestSuccess)),
+      );
+    } on NoInternetException {
+      messenger.showSnackBar(
+        SnackBar(content: Text(localizations.noInternetError)),
+      );
+    } on HttpException catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    } catch (_) {
+      messenger.showSnackBar(
+        SnackBar(content: Text(localizations.profileDeleteRequestError)),
+      );
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  void _setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
   }
 }

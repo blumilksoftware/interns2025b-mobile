@@ -53,5 +53,8 @@
   "saveChanges": "Save changes",
   "profileTitle": "Profile",
   "noInternetError": "No internet connection",
-  "genericError": "An error occurred. Please try again later."
+  "genericError": "An error occurred. Please try again later.",
+  "profileDeleteRequestSuccess": "Profile deletion request has been sent to your email.",
+  "profileDeleteRequestError": "Error sending profile deletion request.",
+  "profileDeleteRequestButtonLabel": "Delete account"
 }
