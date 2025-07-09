@@ -20,9 +20,9 @@ class ProfileInfoContent extends ConsumerWidget {
         const SizedBox(height: 24),
         Text(
           '${user.firstName} ${user.lastName}',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 24),
         Button(

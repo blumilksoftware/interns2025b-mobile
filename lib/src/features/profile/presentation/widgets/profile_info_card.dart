@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/avatar_widget.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_edit_section.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_info_content.dart';
 
 class ProfileInfoCard extends ConsumerWidget {
@@ -25,7 +26,18 @@ class ProfileInfoCard extends ConsumerWidget {
               ),
             ],
           ),
-          child: const ProfileInfoContent(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const ProfileInfoContent(),
+              const SizedBox(height: 24),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                child: ProfileEditSection(),
+              ),
+            ],
+          ),
         ),
         Positioned(
           top: -50,
