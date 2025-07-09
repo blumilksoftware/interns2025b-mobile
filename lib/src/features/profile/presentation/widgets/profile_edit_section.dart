@@ -25,6 +25,7 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final controller = ref.read(profileControllerProvider.notifier);
       await controller.fetchUserProfile();
+      if (!mounted) return;
       final user = ref.read(profileControllerProvider).user;
       firstNameController.text = user?.firstName ?? '';
       lastNameController.text = user?.lastName ?? '';
