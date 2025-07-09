@@ -9,11 +9,17 @@ class ProfileInfoCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final topPadding = MediaQuery.of(context).padding.top;
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
           width: double.infinity,
+          constraints: BoxConstraints(
+            minHeight: screenHeight - topPadding - 100,
+          ),
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 24),
           decoration: const BoxDecoration(
             color: Colors.white,
