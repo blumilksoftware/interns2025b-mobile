@@ -1,24 +1,31 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
-import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
-import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends ChangeNotifier {
+  final Ref ref;
   final UpdateProfileUseCase updateProfileUseCase;
   final GetProfileUseCase getProfileUseCase;
 
-  ProfileController(this.updateProfileUseCase, this.getProfileUseCase);
+  ProfileController(
+    this.ref,
+    this.updateProfileUseCase,
+    this.getProfileUseCase,
+  );
 
   bool _isEditing = false;
   bool get isEditing => _isEditing;
 
-  User? _user;
-  User? get user => _user;
+  User? get user => ref.read(profileUserProvider);
 
   Future<void> fetchUserProfile({BuildContext? context}) async {
     final messenger = context != null ? ScaffoldMessenger.of(context) : null;
@@ -27,7 +34,8 @@ class ProfileController extends ChangeNotifier {
         : null;
 
     try {
-      _user = await getProfileUseCase();
+      final fetchUser = await getProfileUseCase();
+      ref.read(profileUserProvider.notifier).state = fetchUser;
       notifyListeners();
     } on NoInternetException catch (_) {
       if (context != null && context.mounted) {
@@ -72,9 +80,10 @@ class ProfileController extends ChangeNotifier {
 
       await fetchUserProfile();
 
-      if (_user != null) {
+      final updatedUser = ref.read(profileUserProvider);
+      if (updatedUser != null) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('user', jsonEncode(_user!.toJson()));
+        await prefs.setString('user', jsonEncode(updatedUser.toJson()));
       }
 
       if (context.mounted) {

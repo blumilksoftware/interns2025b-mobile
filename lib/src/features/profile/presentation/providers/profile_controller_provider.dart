@@ -8,5 +8,5 @@ final profileControllerProvider = ChangeNotifierProvider<ProfileController>((
 ) {
   final getProfileUseCase = ref.watch(getProfileUseCaseProvider);
   final updateProfileUseCase = ref.watch(updateProfileUseCaseProvider);
-  return ProfileController(updateProfileUseCase, getProfileUseCase);
+  return ProfileController(ref, updateProfileUseCase, getProfileUseCase);
 });

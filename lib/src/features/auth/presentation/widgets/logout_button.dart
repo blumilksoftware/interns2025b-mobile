@@ -19,7 +19,6 @@ class LogoutButton extends ConsumerWidget {
       icon: Icons.logout,
       isLoading: isLoading,
       fullWidth: true,
-      backgroundColor: AppColors.primary,
       foregroundColor: AppColors.textLight,
       onPressed: () async {
         await authController.logout(context);
