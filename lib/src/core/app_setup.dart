@@ -18,10 +18,13 @@ class AppSetup {
     final authController = container.read(authControllerProvider.notifier);
     await authController.build();
 
-    final profileController = container.read(profileControllerProvider.notifier);
+    final profileController = container.read(
+      profileControllerProvider.notifier,
+    );
     await profileController.fetchUserProfile();
 
     return ProviderScopeApp(
+      container: container,
       overrides: [
         localizationControllerProvider.overrideWithValue(
           localizationController,
@@ -33,8 +36,13 @@ class AppSetup {
 }
 
 class ProviderScopeApp {
+  final ProviderContainer container;
   final List<Override> overrides;
   final Widget child;
 
-  ProviderScopeApp({required this.overrides, required this.child});
+  ProviderScopeApp({
+    required this.container,
+    required this.overrides,
+    required this.child,
+  });
 }

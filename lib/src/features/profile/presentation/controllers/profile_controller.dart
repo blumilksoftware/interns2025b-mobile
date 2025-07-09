@@ -31,6 +31,9 @@ class ProfileController extends ChangeNotifier {
   bool _isEditing = false;
   bool get isEditing => _isEditing;
 
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
+
   User? get user => ref.read(profileUserProvider);
 
   Future<void> fetchUserProfile({BuildContext? context}) async {
@@ -38,27 +41,40 @@ class ProfileController extends ChangeNotifier {
     final localizations = context != null
         ? AppLocalizations.of(context)!
         : null;
+    final prefs = await SharedPreferences.getInstance();
 
     try {
+      final userJson = prefs.getString('user');
+      if (userJson != null) {
+        final user = User.fromJson(jsonDecode(userJson));
+        ref.read(profileUserProvider.notifier).state = user;
+        notifyListeners();
+      }
+
       final fetchUser = await getProfileUseCase();
       ref.read(profileUserProvider.notifier).state = fetchUser;
+
+      await prefs.setString('user', jsonEncode(fetchUser.toJson()));
       notifyListeners();
-    } on NoInternetException catch (_) {
-      if (context != null && context.mounted) {
-        messenger?.showSnackBar(
-          SnackBar(content: Text(localizations!.noInternetError)),
-        );
-      }
     } on HttpException catch (e) {
-      if (context != null && context.mounted) {
+      if (e.statusCode == 401 || e.statusCode == 404) {
+        await prefs.clear();
+        ref.read(profileUserProvider.notifier).state = null;
+        if (context != null && context.mounted) {
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil('/login', (route) => false);
+        }
+      } else {
         messenger?.showSnackBar(SnackBar(content: Text(e.message)));
       }
     } catch (_) {
-      if (context != null && context.mounted) {
-        messenger?.showSnackBar(
-          SnackBar(content: Text(localizations!.genericError)),
-        );
-      }
+      messenger?.showSnackBar(
+        SnackBar(content: Text(localizations?.genericError ?? 'Error')),
+      );
+    } finally {
+      _isInitialized = true;
+      notifyListeners();
     }
   }
 

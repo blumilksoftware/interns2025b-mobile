@@ -61,10 +61,11 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
               }
             },
           ),
-          const SizedBox(height: 40),
-          const DeleteUserRequestButton(),
-          const SizedBox(height: 24),
+          const SizedBox(height: 30),
         ],
+
+        const DeleteUserRequestButton(),
+        const SizedBox(height: 30),
         const LogoutButton(),
       ],
     );
