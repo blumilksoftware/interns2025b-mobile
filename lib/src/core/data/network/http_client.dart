@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/core/exceptions/unauthorized_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpClient {
@@ -98,6 +99,12 @@ class HttpClient {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return responseBody;
+    } else if ([401, 403, 404].contains(response.statusCode)) {
+      final message =
+          (responseBody is Map && responseBody.containsKey('message'))
+          ? responseBody['message']
+          : 'Unauthorized';
+      throw UnauthorizedException(message);
     } else {
       final errorMessage =
           (responseBody is Map && responseBody.containsKey('message'))

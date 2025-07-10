@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/core/exceptions/unauthorized_exception.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/delete_user_request_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
@@ -37,10 +38,6 @@ class ProfileController extends ChangeNotifier {
   User? get user => ref.read(profileUserProvider);
 
   Future<void> fetchUserProfile({BuildContext? context}) async {
-    final messenger = context != null ? ScaffoldMessenger.of(context) : null;
-    final localizations = context != null
-        ? AppLocalizations.of(context)!
-        : null;
     final prefs = await SharedPreferences.getInstance();
 
     try {
@@ -53,25 +50,20 @@ class ProfileController extends ChangeNotifier {
 
       final fetchUser = await getProfileUseCase();
       ref.read(profileUserProvider.notifier).state = fetchUser;
-
       await prefs.setString('user', jsonEncode(fetchUser.toJson()));
       notifyListeners();
-    } on HttpException catch (e) {
-      if (e.statusCode == 401 || e.statusCode == 404) {
-        await prefs.clear();
-        ref.read(profileUserProvider.notifier).state = null;
-        if (context != null && context.mounted) {
-          Navigator.of(
-            context,
-          ).pushNamedAndRemoveUntil('/login', (route) => false);
-        }
-      } else {
-        messenger?.showSnackBar(SnackBar(content: Text(e.message)));
+    } on UnauthorizedException {
+      if (context != null && context.mounted) {
+        await _handleUnauthorized(context);
       }
     } catch (_) {
-      messenger?.showSnackBar(
-        SnackBar(content: Text(localizations?.genericError ?? 'Error')),
-      );
+      if (context != null && context.mounted) {
+        final messenger = ScaffoldMessenger.of(context);
+        final localizations = AppLocalizations.of(context)!;
+        messenger.showSnackBar(
+          SnackBar(content: Text(localizations.genericError)),
+        );
+      }
     } finally {
       _isInitialized = true;
       notifyListeners();
@@ -88,9 +80,6 @@ class ProfileController extends ChangeNotifier {
     String? firstName,
     String? lastName,
   }) async {
-    final messenger = ScaffoldMessenger.of(context);
-    final localizations = AppLocalizations.of(context)!;
-
     try {
       await updateProfileUseCase(
         context: context,
@@ -108,20 +97,34 @@ class ProfileController extends ChangeNotifier {
         await prefs.setString('user', jsonEncode(updatedUser.toJson()));
       }
 
-      if (context.mounted) {
-        messenger.showSnackBar(
-          SnackBar(content: Text(localizations.profileUpdateSuccess)),
-        );
-      }
+      if (!context.mounted) return;
+
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
+
+      messenger.showSnackBar(
+        SnackBar(content: Text(localizations.profileUpdateSuccess)),
+      );
 
       toggleEdit();
+    } on UnauthorizedException {
+      if (!context.mounted) return;
+      await _handleUnauthorized(context);
     } on NoInternetException {
+      if (!context.mounted) return;
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.noInternetError)),
       );
     } on HttpException catch (e) {
+      if (!context.mounted) return;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(SnackBar(content: Text(e.message)));
     } catch (_) {
+      if (!context.mounted) return;
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.profileUpdateError)),
       );
@@ -129,23 +132,35 @@ class ProfileController extends ChangeNotifier {
   }
 
   Future<void> deleteUser({required BuildContext context}) async {
-    final messenger = ScaffoldMessenger.of(context);
-    final localizations = AppLocalizations.of(context)!;
-
     _setLoading(true);
 
     try {
       await deleteUserRequestUseCase();
+
+      if (!context.mounted) return;
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.profileDeleteRequestSuccess)),
       );
+    } on UnauthorizedException {
+      if (!context.mounted) return;
+      await _handleUnauthorized(context);
     } on NoInternetException {
+      if (!context.mounted) return;
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.noInternetError)),
       );
     } on HttpException catch (e) {
+      if (!context.mounted) return;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(SnackBar(content: Text(e.message)));
     } catch (_) {
+      if (!context.mounted) return;
+      final localizations = AppLocalizations.of(context)!;
+      final messenger = ScaffoldMessenger.of(context);
       messenger.showSnackBar(
         SnackBar(content: Text(localizations.profileDeleteRequestError)),
       );
@@ -157,5 +172,14 @@ class ProfileController extends ChangeNotifier {
   void _setLoading(bool value) {
     _isLoading = value;
     notifyListeners();
+  }
+
+  Future<void> _handleUnauthorized(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    ref.read(profileUserProvider.notifier).state = null;
+    if (!context.mounted) return;
+
+    Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
   }
 }
