@@ -6,6 +6,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/core/exceptions/unauthorized_exception.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/forgot_password_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/providers/login_usecase_provider.dart';
@@ -116,6 +117,9 @@ class AuthController extends AsyncNotifier<User?> {
       if (context.mounted) {
         navigator.pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
       }
+    } on UnauthorizedException {
+      if (!context.mounted) return;
+      await _handleUnauthorized(context);
     } catch (e) {
       state = AsyncError(e, StackTrace.current);
       if (context.mounted) {
@@ -164,6 +168,17 @@ class AuthController extends AsyncNotifier<User?> {
     if (e is HttpException) return e.message;
     if (e is AuthException) return e.message;
     if (e is NoInternetException) return e.message;
+    if (e is UnauthorizedException) return e.message;
     return localizations.unknownError;
+  }
+
+  Future<void> _handleUnauthorized(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+
+    if (!context.mounted) return;
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
   }
 }

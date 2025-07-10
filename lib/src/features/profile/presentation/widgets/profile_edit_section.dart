@@ -50,6 +50,8 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
               lastNameController: lastNameController,
             ),
             const SizedBox(height: 16),
+
+            // Save button
             Button(
               label: localizations.saveChanges,
               fullWidth: true,
@@ -63,7 +65,26 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
                 }
               },
             ),
+
+            const SizedBox(height: 8),
+            Button(
+              label: localizations.cancel,
+              fullWidth: true,
+              isOutlined: true,
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              onPressed: notifier.toggleEdit,
+            ),
           ] else ...[
+            Button(
+              label: localizations.editProfile,
+              icon: Icons.edit,
+              fullWidth: true,
+              onPressed: notifier.toggleEdit,
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+            ),
+            const SizedBox(height: 16),
             const LogoutButton(),
             const Spacer(),
             const DeleteUserRequestButton(),
