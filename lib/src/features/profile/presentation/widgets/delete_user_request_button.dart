@@ -20,8 +20,32 @@ class DeleteUserRequestButton extends ConsumerWidget {
       fullWidth: true,
       backgroundColor: Colors.red,
       foregroundColor: Colors.white,
-      onPressed: () async {
-        await profileController.deleteUser(context: context);
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(localizations.profileDeleteRequestButtonLabel),
+            content: Text(localizations.profileDeleteRequestDialogContent),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(localizations.cancel),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  await profileController.deleteUser(context: context);
+                },
+                child: Text(
+                  localizations.confirm,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }

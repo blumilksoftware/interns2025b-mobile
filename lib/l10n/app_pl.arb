@@ -56,5 +56,7 @@
   "genericError": "Wystąpił błąd. Spróbuj ponownie później.",
   "profileDeleteRequestSuccess": "Żądanie usunięcia profilu zostało wysłane na Twoją skrzynkę pocztową.",
   "profileDeleteRequestError": "Błąd podczas wysyłania żądania usunięcia profilu.",
-  "profileDeleteRequestButtonLabel": "Usuń konto"
+  "profileDeleteRequestButtonLabel": "Usuń konto",
+  "profileDeleteRequestDialogContent": "Czy na pewno chcesz usunąć swoje konto? Link do usunięcia konta zostanie wysłany na Twoją skrzynkę pocztową",
+  "confirm": "Potwierdź"
 }
