@@ -9,6 +9,7 @@ class Button extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final Color? iconColor;
+  final bool isOutlined;
 
   const Button({
     super.key,
@@ -20,6 +21,7 @@ class Button extends StatelessWidget {
     this.backgroundColor = Colors.black,
     this.foregroundColor = Colors.white,
     this.iconColor,
+    this.isOutlined = false,
   });
 
   @override
@@ -45,21 +47,40 @@ class Button extends StatelessWidget {
                 )
               : Text(label, style: TextStyle(color: foregroundColor)));
 
+    final style = isOutlined
+        ? OutlinedButton.styleFrom(
+            foregroundColor: foregroundColor,
+            side: BorderSide(color: foregroundColor),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          )
+        : ElevatedButton.styleFrom(
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            side: backgroundColor == Colors.white
+                ? const BorderSide(color: Colors.black)
+                : null,
+          );
+
     return SizedBox(
       width: fullWidth ? double.infinity : null,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          side: backgroundColor == Colors.white
-              ? const BorderSide(color: Colors.black)
-              : null,
-        ),
-        child: buttonChild,
-      ),
+      child: isOutlined
+          ? OutlinedButton(
+              onPressed: isLoading ? null : onPressed,
+              style: style,
+              child: buttonChild,
+            )
+          : ElevatedButton(
+              onPressed: isLoading ? null : onPressed,
+              style: style,
+              child: buttonChild,
+            ),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData get light => ThemeData(
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: AppColors.backgroundLight,
     primaryColor: AppColors.primary,
     colorScheme: const ColorScheme.light().copyWith(
       primary: AppColors.primary,
