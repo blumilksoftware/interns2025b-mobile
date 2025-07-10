@@ -32,6 +32,9 @@ class ProfileInfoContent extends ConsumerWidget {
           icon: controller.isEditing ? Icons.close : Icons.edit,
           fullWidth: true,
           onPressed: notifier.toggleEdit,
+          isOutlined: controller.isEditing,
+          backgroundColor: controller.isEditing ? Colors.white : Colors.black,
+          foregroundColor: controller.isEditing ? Colors.black : Colors.white,
         ),
       ],
     );

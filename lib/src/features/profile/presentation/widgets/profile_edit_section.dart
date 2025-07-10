@@ -38,36 +38,39 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
     final notifier = ref.read(profileControllerProvider.notifier);
     final localizations = AppLocalizations.of(context)!;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (controller.isEditing) ...[
-          ProfileForm(
-            formKey: formKey,
-            firstNameController: firstNameController,
-            lastNameController: lastNameController,
-          ),
-          const SizedBox(height: 16),
-          Button(
-            label: localizations.saveChanges,
-            fullWidth: true,
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                notifier.updateProfile(
-                  context: context,
-                  firstName: firstNameController.text,
-                  lastName: lastNameController.text,
-                );
-              }
-            },
-          ),
-          const SizedBox(height: 30),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (controller.isEditing) ...[
+            ProfileForm(
+              formKey: formKey,
+              firstNameController: firstNameController,
+              lastNameController: lastNameController,
+            ),
+            const SizedBox(height: 16),
+            Button(
+              label: localizations.saveChanges,
+              fullWidth: true,
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  notifier.updateProfile(
+                    context: context,
+                    firstName: firstNameController.text,
+                    lastName: lastNameController.text,
+                  );
+                }
+              },
+            ),
+          ] else ...[
+            const LogoutButton(),
+            const Spacer(),
+            const DeleteUserRequestButton(),
+            const SizedBox(height: 20),
+          ],
         ],
-
-        const DeleteUserRequestButton(),
-        const SizedBox(height: 30),
-        const LogoutButton(),
-      ],
+      ),
     );
   }
 }
