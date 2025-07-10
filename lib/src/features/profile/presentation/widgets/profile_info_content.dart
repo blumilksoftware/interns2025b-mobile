@@ -19,7 +19,9 @@ class ProfileInfoContent extends ConsumerWidget {
       children: [
         const SizedBox(height: 24),
         Text(
-          '${user.firstName} ${user.lastName}',
+          user.lastName?.trim().isNotEmpty == true
+              ? '${user.firstName} ${user.lastName}'
+              : user.firstName,
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),

@@ -45,13 +45,11 @@ class ProfileController extends ChangeNotifier {
       if (userJson != null) {
         final user = User.fromJson(jsonDecode(userJson));
         ref.read(profileUserProvider.notifier).state = user;
-        notifyListeners();
       }
 
       final fetchUser = await getProfileUseCase();
       ref.read(profileUserProvider.notifier).state = fetchUser;
       await prefs.setString('user', jsonEncode(fetchUser.toJson()));
-      notifyListeners();
     } on UnauthorizedException {
       if (context != null && context.mounted) {
         await _handleUnauthorized(context);
