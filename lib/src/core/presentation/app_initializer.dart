@@ -11,6 +11,7 @@ import 'package:interns2025b_mobile/src/features/auth/presentation/pages/registe
 import 'package:interns2025b_mobile/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_loader_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_theme.dart';
 
 class AppInitializer extends ConsumerWidget {
@@ -18,13 +19,14 @@ class AppInitializer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localizationController = ref.watch(localizationControllerProvider);
+    final _ = ref.watch(localizationLoaderProvider);
+    final locale = ref.watch(localizationControllerProvider).locale;
     final user = ref.watch(profileUserProvider);
 
     return MaterialApp(
       title: AppConstants.appName,
       theme: AppTheme.light,
-      locale: localizationController.locale,
+      locale: locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
