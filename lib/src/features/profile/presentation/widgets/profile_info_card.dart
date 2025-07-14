@@ -18,7 +18,7 @@ class ProfileInfoCard extends ConsumerWidget {
         Container(
           width: double.infinity,
           constraints: BoxConstraints(
-            minHeight: screenHeight - topPadding - 100,
+            minHeight: screenHeight - topPadding - 170,
           ),
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 24),
           decoration: const BoxDecoration(

@@ -38,6 +38,8 @@ class AppInitializer extends ConsumerWidget {
         AppRoutes.login: (context) => const LoginPage(),
         AppRoutes.forgotPassword: (context) => const ForgotPasswordPage(),
         AppRoutes.profile: (context) => const ProfilePage(),
+        AppRoutes.addEvent: (context) => Placeholder(),
+        AppRoutes.home: (context) => Placeholder(),
       },
     );
   }
