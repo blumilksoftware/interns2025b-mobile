@@ -1,43 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/core/data/network/http_client.dart';
+import 'package:interns2025b_mobile/src/features/profile/data/data_sources/profile_data_source.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
 class RemoteProfileRepository implements ProfileRepository {
-  final HttpClient httpClient;
+  final ProfileDataSource dataSource;
 
-  RemoteProfileRepository(this.httpClient);
+  RemoteProfileRepository(this.dataSource);
 
   @override
   Future<void> updateProfile({
     required BuildContext context,
     String? firstName,
     String? lastName,
-  }) async {
-    final localizations = AppLocalizations.of(context)!;
-
-    final body = <String, dynamic>{};
-    if (firstName != null && firstName.isNotEmpty) {
-      body['first_name'] = firstName;
-    }
-    body['last_name'] = lastName;
-
-    if (body.isEmpty) {
-      throw Exception(localizations.profileUpdateNoFields);
-    }
-
-    await httpClient.put('/api/profile', body: body);
-  }
+  }) =>
+      dataSource.updateProfile(
+        context: context,
+        firstName: firstName,
+        lastName: lastName,
+      );
 
   @override
-  Future<User> getProfile() async {
-    final response = await httpClient.get('/api/profile');
-    return User.fromJson(response['data']);
-  }
+  Future<User> getProfile() => dataSource.getProfile();
 
   @override
-  Future<void> deleteUserRequest() async {
-    await httpClient.post('/api/profile/delete-request');
-  }
+  Future<void> deleteUserRequest() => dataSource.deleteUserRequest();
 }
+
