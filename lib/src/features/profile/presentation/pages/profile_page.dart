@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_info_card.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -28,6 +29,7 @@ class ProfilePage extends ConsumerWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const NavigationBarWidget(),
     );
   }
 }
