@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/core/presentation/app_initializer.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/localization_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
 
@@ -17,7 +18,13 @@ class AppSetup {
     final authController = container.read(authControllerProvider.notifier);
     await authController.build();
 
+    final profileController = container.read(
+      profileControllerProvider.notifier,
+    );
+    await profileController.fetchUserProfile();
+
     return ProviderScopeApp(
+      container: container,
       overrides: [
         localizationControllerProvider.overrideWithValue(
           localizationController,
@@ -29,8 +36,13 @@ class AppSetup {
 }
 
 class ProviderScopeApp {
+  final ProviderContainer container;
   final List<Override> overrides;
   final Widget child;
 
-  ProviderScopeApp({required this.overrides, required this.child});
+  ProviderScopeApp({
+    required this.container,
+    required this.overrides,
+    required this.child,
+  });
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:interns2025b_mobile/src/core/data/network/http_client.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

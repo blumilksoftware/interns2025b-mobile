@@ -9,5 +9,10 @@ void main() async {
 
   final app = await AppSetup.initialize();
 
-  runApp(ProviderScope(overrides: app.overrides, child: app.child));
+  runApp(
+    UncontrolledProviderScope(
+      container: app.container,
+      child: ProviderScope(overrides: app.overrides, child: app.child),
+    ),
+  );
 }

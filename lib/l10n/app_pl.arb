@@ -45,5 +45,18 @@
   "rememberPassword": "Pamiętasz hasło?",
   "send": "Wyślij",
   "forgotPasswordSuccess": "Link do resetu hasła został wysłany na Twoją skrzynkę pocztową.",
-  "or": "lub"
+  "or": "lub",
+  "profileUpdateNoFields": "Brak pól do aktualizacji",
+  "profileUpdateSuccess": "Profil zaktualizowany pomyślnie",
+  "profileUpdateError": "Błąd aktualizacji profilu",
+  "editProfile": "Edytuj profil",
+  "saveChanges": "Zapisz zmiany",
+  "profileTitle": "Profil",
+  "noInternetError": "Brak połączenia z internetem",
+  "genericError": "Wystąpił błąd. Spróbuj ponownie później.",
+  "profileDeleteRequestSuccess": "Żądanie usunięcia profilu zostało wysłane na Twoją skrzynkę pocztową.",
+  "profileDeleteRequestError": "Błąd podczas wysyłania żądania usunięcia profilu.",
+  "profileDeleteRequestButtonLabel": "Usuń konto",
+  "profileDeleteRequestDialogContent": "Czy na pewno chcesz usunąć swoje konto? Link do usunięcia konta zostanie wysłany na Twoją skrzynkę pocztową",
+  "confirm": "Potwierdź"
 }
