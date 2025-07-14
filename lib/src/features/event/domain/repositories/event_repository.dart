@@ -1,0 +1,5 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
+
+abstract class EventRepository {
+  Future<List<Event>> getEvents();
+}
