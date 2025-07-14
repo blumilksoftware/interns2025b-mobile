@@ -22,7 +22,7 @@ extension NavbarPagesExtension on NavbarPages {
       case NavbarPages.addEvent:
         return Icons.add;
       case NavbarPages.profile:
-        return Icons.person;
+        return Icons.person_outline_rounded;
     }
   }
 

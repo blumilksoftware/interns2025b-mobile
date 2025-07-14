@@ -6,6 +6,20 @@ class NavbarController extends Notifier<NavbarPages> {
   @override
   NavbarPages build() => NavbarPages.home;
 
+  void syncWithCurrentRoute(BuildContext context) {
+    final routeName = ModalRoute.of(context)?.settings.name;
+    if (routeName == null) return;
+
+    final currentPage = NavbarPages.values.firstWhere(
+      (p) => p.routeName == routeName,
+      orElse: () => NavbarPages.home,
+    );
+
+    if (state != currentPage) {
+      state = currentPage;
+    }
+  }
+
   void navigateTo(NavbarPages page, BuildContext context) {
     if (state == page) return;
 

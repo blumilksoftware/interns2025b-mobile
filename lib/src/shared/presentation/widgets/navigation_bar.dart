@@ -3,12 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/navbar_pages.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/navbar_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/navbar_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
-class NavigationBarWidget extends ConsumerWidget {
+class NavigationBarWidget extends ConsumerStatefulWidget {
   const NavigationBarWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<NavigationBarWidget> createState() =>
+      _NavigationBarWidgetState();
+}
+
+class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(navbarControllerProvider.notifier).syncWithCurrentRoute(context);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedPage = ref.watch(navbarControllerProvider);
     final controller = ref.read(navbarControllerProvider.notifier);
 
@@ -45,7 +60,7 @@ class NavigationBarWidget extends ConsumerWidget {
       onPressed: onTap,
       icon: Icon(
         page.icon,
-        color: isSelected ? Colors.green : Colors.white,
+        color: isSelected ? AppColors.primary : Colors.white,
         size: 28,
       ),
     );
@@ -61,7 +76,7 @@ class NavigationBarWidget extends ConsumerWidget {
         width: 48,
         height: 48,
         decoration: const BoxDecoration(
-          color: Colors.green,
+          color: AppColors.primary,
           shape: BoxShape.circle,
         ),
         child: const Icon(Icons.add, color: Colors.white),
