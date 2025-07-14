@@ -7,6 +7,7 @@ import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/passw
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/language_switch_button.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/terms_of_use_text.dart';
 
 class RegisterForm extends ConsumerStatefulWidget {
@@ -139,6 +140,14 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
             child: Text(
               localizations.alreadyHaveAccount,
               style: const TextStyle(color: Colors.black54),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: SizedBox(
+              width: double.infinity,
+              child: const LanguageSwitchButton(),
             ),
           ),
         ],
