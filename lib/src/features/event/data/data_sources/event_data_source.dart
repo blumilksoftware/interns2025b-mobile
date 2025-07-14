@@ -9,6 +9,8 @@ class EventDataSource {
   Future<List<Event>> getEvents() async {
     final response = await httpClient.get('/api/events');
     final List<dynamic> eventsJson = response['data'];
-    return eventsJson.map((json) => Event.fromJson(json)).toList();
+    return eventsJson
+        .map((json) => Event.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
 }
