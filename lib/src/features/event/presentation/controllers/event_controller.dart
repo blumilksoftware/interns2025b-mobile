@@ -19,14 +19,43 @@ class EventsController extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  Future<void> loadEvents() async {
+  bool _hasMore = true;
+  bool get hasMore => _hasMore;
+
+  int _currentPage = 1;
+  final int _limit = 10;
+
+  Future<void> loadEvents({bool refresh = false}) async {
+    if (_isLoading) return;
+
+    if (refresh) {
+      _events.clear();
+      _currentPage = 1;
+      _hasMore = true;
+      notifyListeners();
+    }
+
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
     try {
-      final result = await getEventsUseCase.call();
-      _events = result;
+      final result = await getEventsUseCase.call(
+        page: _currentPage,
+        limit: _limit,
+      );
+
+      if (refresh) {
+        _events = result;
+      } else {
+        _events.addAll(result);
+      }
+
+      if (result.length < _limit) {
+        _hasMore = false;
+      } else {
+        _currentPage++;
+      }
     } on NoInternetException catch (e) {
       _errorMessage = e.message;
     } on HttpException catch (e) {

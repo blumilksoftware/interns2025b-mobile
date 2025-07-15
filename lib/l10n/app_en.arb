@@ -60,5 +60,7 @@
   "profileDeleteRequestDialogContent": "Are you sure you want to delete your account? The account deletion link will be sent to your email.",
   "confirm": "Confirm",
   "list": "List",
-  "map": "Map"
+  "map": "Map",
+  "paid": "Paid",
+  "free": "Free"
 }

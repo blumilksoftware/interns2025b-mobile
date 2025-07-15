@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_view_mode_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/events_list.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/toggle_view_mode_switch.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 
@@ -22,7 +23,7 @@ class EventPage extends StatelessWidget {
                 builder: (context, ref, _) {
                   final mode = ref.watch(eventViewModeProvider);
                   if (mode == EventViewMode.list) {
-                    return const Center(child: Text('Widok listy (TODO)'));
+                    return EventsList();
                   } else {
                     return const Center(child: Text('Widok mapy (TODO)'));
                   }

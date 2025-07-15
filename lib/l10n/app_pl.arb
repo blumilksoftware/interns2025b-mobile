@@ -60,5 +60,7 @@
   "profileDeleteRequestDialogContent": "Czy na pewno chcesz usunąć swoje konto? Link do usunięcia konta zostanie wysłany na Twoją skrzynkę pocztową",
   "confirm": "Potwierdź",
   "list": "Lista",
-  "map": "Mapa"
+  "map": "Mapa",
+  "paid": "Płatny",
+  "free": "Bezpłatny"
 }

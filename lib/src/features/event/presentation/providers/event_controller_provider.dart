@@ -6,5 +6,5 @@ final eventsControllerProvider = ChangeNotifierProvider<EventsController>((
   ref,
 ) {
   final getEventsUseCase = ref.watch(getEventsUseCaseProvider);
-  return EventsController(getEventsUseCase: getEventsUseCase);
+  return EventsController(getEventsUseCase: getEventsUseCase)..loadEvents();
 });
