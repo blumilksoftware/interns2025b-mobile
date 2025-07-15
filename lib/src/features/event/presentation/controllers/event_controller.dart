@@ -10,8 +10,26 @@ class EventsController extends ChangeNotifier {
 
   EventsController({required this.getEventsUseCase});
 
-  List<Event> _events = [];
+  final List<Event> _events = [];
   List<Event> get events => _events;
+
+  final Set<int> _shownEventIds = {};
+
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+
+  List<Event> get filteredEvents {
+    if (_events.isEmpty) return [];
+
+    if (_searchQuery.isEmpty) return _events;
+
+    final lowerQuery = _searchQuery.toLowerCase();
+
+    return _events.where((event) {
+      final words = event.title.toLowerCase().split(RegExp(r'\s+'));
+      return words.any((word) => word.startsWith(lowerQuery));
+    }).toList();
+  }
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -30,6 +48,7 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _events.clear();
+      _shownEventIds.clear();
       _currentPage = 1;
       _hasMore = true;
       notifyListeners();
@@ -45,13 +64,14 @@ class EventsController extends ChangeNotifier {
         limit: _limit,
       );
 
-      if (refresh) {
-        _events = result;
-      } else {
-        _events.addAll(result);
-      }
+      final newEvents = result
+          .where((e) => !_shownEventIds.contains(e.id))
+          .toList();
 
-      if (result.length < _limit) {
+      _events.addAll(newEvents);
+      _shownEventIds.addAll(newEvents.map((e) => e.id));
+
+      if (newEvents.length < _limit) {
         _hasMore = false;
       } else {
         _currentPage++;
@@ -68,5 +88,10 @@ class EventsController extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void updateSearchQuery(String query) {
+    _searchQuery = query;
+    notifyListeners();
   }
 }

@@ -63,5 +63,9 @@
   "map": "Map",
   "paid": "Paid",
   "free": "Free",
-  "searchEvents": "Explore events"
+  "searchEvents": "Explore events",
+  "eventSearchBarHint": "Search",
+  "noEventsFound": "No events found.",
+  "noMoreEventsFound": "No more events found."
+
 }

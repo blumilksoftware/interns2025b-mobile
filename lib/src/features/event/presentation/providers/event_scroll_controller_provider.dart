@@ -7,20 +7,22 @@ final eventScrollControllerProvider = Provider.autoDispose<ScrollController>((
 ) {
   final controller = ScrollController();
   final eventsController = ref.read(eventsControllerProvider.notifier);
-  final state = ref.read(eventsControllerProvider);
 
-  controller.addListener(() {
-    if (controller.position.pixels >=
-            controller.position.maxScrollExtent - 200 &&
-        state.hasMore &&
-        !state.isLoading) {
-      eventsController.loadEvents();
-    }
-  });
+  void loadMore() {
+    try {
+      final state = ref.read(eventsControllerProvider);
+      if (controller.position.pixels >=
+              controller.position.maxScrollExtent - 200 &&
+          state.hasMore &&
+          !state.isLoading) {
+        eventsController.loadEvents();
+      }
+    } catch (_) {}
+  }
 
-  ref.onDispose(() {
-    controller.dispose();
-  });
+  controller.addListener(loadMore);
+
+  ref.onDispose(controller.dispose);
 
   return controller;
 });

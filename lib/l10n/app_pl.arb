@@ -63,5 +63,8 @@
   "map": "Mapa",
   "paid": "Płatny",
   "free": "Bezpłatny",
-  "searchEvents": "Przeglądaj wydarzenia"
+  "searchEvents": "Przeglądaj wydarzenia",
+  "eventSearchBarHint": "Szukaj",
+  "noEventsFound": "Nie znaleziono wydarzeń.",
+  "noMoreEventsFound": "Nie znaleziono więcej wydarzeń."
 }

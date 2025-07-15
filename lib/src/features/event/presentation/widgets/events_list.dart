@@ -25,34 +25,49 @@ class EventsList extends ConsumerWidget {
       return Center(child: Text(controller.errorMessage!));
     }
 
+    final eventsToShow = controller.filteredEvents;
+
     return RefreshIndicator(
       onRefresh: () => notifier.loadEvents(refresh: true),
-      child: ListView.builder(
+      child: ListView(
         controller: scrollController,
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        itemCount: controller.events.length + (controller.hasMore ? 1 : 0) + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: LabeledText(
-                localizations.searchEvents,
-                isBold: true,
-                fontSize: 22,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: LabeledText(
+              localizations.searchEvents,
+              isBold: true,
+              fontSize: 22,
+            ),
+          ),
+          if (eventsToShow.isEmpty)
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Text(
+                localizations.noEventsFound,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            );
-          }
-
-          final actualIndex = index - 1;
-
-          if (actualIndex < controller.events.length) {
-            final event = controller.events[actualIndex];
-            return EventCard(event: event);
-          } else {
-            return const EventListLoader();
-          }
-        },
+            )
+          else ...[
+            ...eventsToShow.map((event) => EventCard(event: event)).toList(),
+            if (controller.hasMore)
+              const EventListLoader()
+            else
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: Text(
+                  localizations.noMoreEventsFound,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                ),
+              ),
+          ],
+        ],
       ),
     );
   }
