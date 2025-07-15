@@ -19,13 +19,13 @@ class AppInitializer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localizationController = ref.watch(localizationControllerProvider);
+    final locale = ref.watch(localizationControllerProvider).locale;
     final user = ref.watch(profileUserProvider);
 
     return MaterialApp(
       title: AppConstants.appName,
       theme: AppTheme.light,
-      locale: localizationController.locale,
+      locale: locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

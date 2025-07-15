@@ -6,6 +6,7 @@ import 'package:interns2025b_mobile/src/features/profile/presentation/providers/
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/delete_user_request_button.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_form.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/language_switch_button.dart';
 
 class ProfileEditSection extends ConsumerStatefulWidget {
   const ProfileEditSection({super.key});
@@ -86,9 +87,10 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
             ),
             const SizedBox(height: 16),
             const LogoutButton(),
+            const SizedBox(height: 16),
+            const LanguageSwitchButton(),
             const Spacer(),
             const DeleteUserRequestButton(),
-            const SizedBox(height: 20),
           ],
         ],
       ),
