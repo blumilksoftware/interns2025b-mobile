@@ -58,5 +58,7 @@
   "profileDeleteRequestError": "Błąd podczas wysyłania żądania usunięcia profilu.",
   "profileDeleteRequestButtonLabel": "Usuń konto",
   "profileDeleteRequestDialogContent": "Czy na pewno chcesz usunąć swoje konto? Link do usunięcia konta zostanie wysłany na Twoją skrzynkę pocztową",
-  "confirm": "Potwierdź"
+  "confirm": "Potwierdź",
+  "list": "Lista",
+  "map": "Mapa"
 }

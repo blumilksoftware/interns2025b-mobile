@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_view_mode_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/toggle_view_mode_switch.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 
-class EventPage extends StatefulWidget {
+class EventPage extends StatelessWidget {
   const EventPage({super.key});
 
   @override
-  State<EventPage> createState() => _EventPageState();
-}
-
-class _EventPageState extends State<EventPage> {
-
-  @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
     return Scaffold(
-      body: Column(
-        children: [
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 32.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            const ToggleViewModeSwitch(),
+            const SizedBox(height: 16),
+            Expanded(
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final mode = ref.watch(eventViewModeProvider);
+                  if (mode == EventViewMode.list) {
+                    return const Center(child: Text('Widok listy (TODO)'));
+                  } else {
+                    return const Center(child: Text('Widok mapy (TODO)'));
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: const NavigationBarWidget(),
     );
