@@ -13,12 +13,12 @@ class EventImage extends StatelessWidget {
     return Image.network(
       imageUrl!,
       width: double.infinity,
-      height: 180,
+      height: 129,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
         return Container(
           width: double.infinity,
-          height: 180,
+          height: 129,
           color: Colors.grey[300],
           child: const Icon(
             Icons.image_not_supported,
