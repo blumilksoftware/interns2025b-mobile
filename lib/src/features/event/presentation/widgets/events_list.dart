@@ -52,7 +52,7 @@ class EventsList extends ConsumerWidget {
               ),
             )
           else ...[
-            ...eventsToShow.map((event) => EventCard(event: event)).toList(),
+            ...eventsToShow.map((event) => EventCard(event: event)),
             if (controller.hasMore)
               const EventListLoader()
             else
