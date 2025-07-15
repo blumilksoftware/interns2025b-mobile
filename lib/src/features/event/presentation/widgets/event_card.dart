@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:intl/intl.dart';
 
-import 'event_image.dart'; // tam gdzie zapiszesz EventImage
-import 'event_price_tag.dart'; // tam gdzie zapiszesz EventPriceTag
 
 class EventCard extends StatelessWidget {
   final Event event;
