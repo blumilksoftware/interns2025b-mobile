@@ -3,6 +3,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/app_header.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/login_form.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/language_switch_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,6 +40,13 @@ class _LoginPageState extends State<LoginPage> {
                 emailController: emailController,
                 passwordController: passwordController,
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            child: SizedBox(
+              width: double.infinity,
+              child: LanguageSwitchButton(),
             ),
           ),
         ],
