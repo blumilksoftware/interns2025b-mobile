@@ -8,8 +8,7 @@ class LanguageSwitchButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(localizationControllerProvider);
-    final notifier = ref.read(localizationControllerProvider);
-
+   
     final currentLang = controller.locale.languageCode;
     final isPolish = currentLang == 'pl';
     final label = isPolish ? 'PL' : 'EN';
@@ -17,7 +16,7 @@ class LanguageSwitchButton extends ConsumerWidget {
     return OutlinedButton.icon(
       onPressed: () {
         final newLang = isPolish ? 'en' : 'pl';
-        notifier.setLocale(newLang);
+        controller.setLocale(newLang);
       },
       icon: const Icon(Icons.language, color: Colors.black),
       label: Text(label, style: const TextStyle(color: Colors.black)),
