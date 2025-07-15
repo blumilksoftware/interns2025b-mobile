@@ -34,9 +34,9 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildIconButton(
-            page: NavbarPages.home,
+            page: NavbarPages.events,
             selectedPage: selectedPage,
-            onTap: () => controller.navigateTo(NavbarPages.home, context),
+            onTap: () => controller.navigateTo(NavbarPages.events, context),
           ),
           _buildCenterAddButton(context, controller),
           _buildIconButton(
