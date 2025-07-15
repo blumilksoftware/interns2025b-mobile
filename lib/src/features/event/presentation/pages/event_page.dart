@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_view_mode_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/events_list.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/toggle_view_mode_switch.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 
 class EventPage extends StatelessWidget {
@@ -19,17 +18,6 @@ class EventPage extends StatelessWidget {
             const SizedBox(height: 16),
             const ToggleViewModeSwitch(),
             const SizedBox(height: 16),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: LabeledText(
-                  "Przeglądaj wydarzenia",
-                  isBold: true,
-                  fontSize: 22,
-                ),
-              ),
-            ),
             Expanded(
               child: Consumer(
                 builder: (context, ref, _) {

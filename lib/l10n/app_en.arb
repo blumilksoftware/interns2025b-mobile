@@ -62,5 +62,6 @@
   "list": "List",
   "map": "Map",
   "paid": "Paid",
-  "free": "Free"
+  "free": "Free",
+  "searchEvents": "Explore events"
 }

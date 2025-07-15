@@ -62,5 +62,6 @@
   "list": "Lista",
   "map": "Mapa",
   "paid": "Płatny",
-  "free": "Bezpłatny"
+  "free": "Bezpłatny",
+  "searchEvents": "Przeglądaj wydarzenia"
 }
