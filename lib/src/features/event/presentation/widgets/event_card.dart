@@ -20,9 +20,7 @@ class EventCard extends StatelessWidget {
         ? DateFormat('d MMMM yyyy – HH:mm', locale).format(event.start!)
         : '';
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 280),
-      child: Card(
+    return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.only(bottom: 12),
@@ -85,7 +83,6 @@ class EventCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }
