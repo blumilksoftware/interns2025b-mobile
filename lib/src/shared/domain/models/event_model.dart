@@ -1,6 +1,17 @@
 import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
+enum EventStatus { draft, published, ongoing, ended, canceled }
+
+extension EventStatusX on EventStatus {
+  static EventStatus fromString(String? value) {
+    return EventStatus.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => throw ArgumentError('Unknown event status: $value'),
+    );
+  }
+}
+
 class Event {
   final int id;
   final String title;
@@ -13,7 +24,7 @@ class Event {
   final double? longitude;
   final bool isPaid;
   final double? price;
-  final String status;
+  final EventStatus status;
   final String? imageUrl;
   final String? ageCategory;
   final String ownerType;
@@ -63,18 +74,26 @@ class Event {
       end: json['end'] != null ? DateTime.tryParse(json['end']) : null,
       location: json['location'],
       address: json['address'],
-      latitude: json['latitude'] != null ? (json['latitude'] as num).toDouble() : null,
-      longitude: json['longitude'] != null ? (json['longitude'] as num).toDouble() : null,
+      latitude: json['latitude'] != null
+          ? (json['latitude'] as num).toDouble()
+          : null,
+      longitude: json['longitude'] != null
+          ? (json['longitude'] as num).toDouble()
+          : null,
       isPaid: json['is_paid'],
       price: json['price'] != null ? (json['price'] as num).toDouble() : null,
-      status: json['status'],
+      status: EventStatusX.fromString(json['status']),
       imageUrl: json['image_url'],
       ageCategory: json['age_category'],
       ownerType: ownerType,
       ownerId: json['owner_id'],
       owner: parsedOwner,
-      createdAt: json['created_at'] != null ? DateTime.tryParse(json['created_at']) : null,
-      updatedAt: json['updated_at'] != null ? DateTime.tryParse(json['updated_at']) : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
     );
   }
 }

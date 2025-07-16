@@ -11,25 +11,10 @@ class EventsController extends ChangeNotifier {
   EventsController({required this.getEventsUseCase});
 
   final List<Event> _events = [];
-  List<Event> get events => _events;
-
   final Set<int> _shownEventIds = {};
 
-  String _searchQuery = '';
-  String get searchQuery => _searchQuery;
-
-  List<Event> get filteredEvents {
-    if (_events.isEmpty) return [];
-
-    if (_searchQuery.isEmpty) return _events;
-
-    final lowerQuery = _searchQuery.toLowerCase();
-
-    return _events.where((event) {
-      final words = event.title.toLowerCase().split(RegExp(r'\s+'));
-      return words.any((word) => word.startsWith(lowerQuery));
-    }).toList();
-  }
+  int _currentPage = 1;
+  final int _limit = 10;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -40,17 +25,35 @@ class EventsController extends ChangeNotifier {
   bool _hasMore = true;
   bool get hasMore => _hasMore;
 
-  int _currentPage = 1;
-  final int _limit = 10;
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+
+  List<Event> get events => _events;
+
+  List<Event> get filteredEvents {
+    if (_events.isEmpty) return [];
+
+    const allowedStatuses = {EventStatus.published, EventStatus.ongoing};
+
+    final byStatus = _events.where((e) => allowedStatuses.contains(e.status));
+
+    if (_searchQuery.isEmpty) {
+      return byStatus.toList();
+    }
+
+    final lowerQuery = _searchQuery.toLowerCase();
+
+    return byStatus.where((e) {
+      final words = e.title.toLowerCase().split(RegExp(r'\s+'));
+      return words.any((word) => word.startsWith(lowerQuery));
+    }).toList();
+  }
 
   Future<void> loadEvents({bool refresh = false}) async {
     if (_isLoading) return;
 
     if (refresh) {
-      _events.clear();
-      _shownEventIds.clear();
-      _currentPage = 1;
-      _hasMore = true;
+      _reset();
       notifyListeners();
     }
 
@@ -64,9 +67,7 @@ class EventsController extends ChangeNotifier {
         limit: _limit,
       );
 
-      final newEvents = result
-          .where((e) => !_shownEventIds.contains(e.id))
-          .toList();
+      final newEvents = result.where((e) => !_shownEventIds.contains(e.id));
 
       _events.addAll(newEvents);
       _shownEventIds.addAll(newEvents.map((e) => e.id));
@@ -93,5 +94,12 @@ class EventsController extends ChangeNotifier {
   void updateSearchQuery(String query) {
     _searchQuery = query;
     notifyListeners();
+  }
+
+  void _reset() {
+    _events.clear();
+    _shownEventIds.clear();
+    _currentPage = 1;
+    _hasMore = true;
   }
 }
