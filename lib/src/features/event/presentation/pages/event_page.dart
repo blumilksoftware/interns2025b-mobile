@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_search_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_view_mode_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_map_view.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_serach_bar.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/events_list.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/toggle_view_mode_switch.dart';
@@ -35,7 +36,7 @@ class EventPage extends ConsumerWidget {
                   if (mode == EventViewMode.list) {
                     return EventsList();
                   } else {
-                    return const Center(child: Text('Widok mapy (TODO)'));
+                    return const EventMapView();
                   }
                 },
               ),
