@@ -29,45 +29,50 @@ class EventsList extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () => notifier.loadEvents(refresh: true),
-      child: ListView(
+      child: ListView.builder(
         controller: scrollController,
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: LabeledText(
-              localizations.searchEvents,
-              isBold: true,
-              fontSize: 22,
-            ),
-          ),
-          if (eventsToShow.isEmpty)
-            Padding(
+        itemCount: eventsToShow.isEmpty ? 2 : eventsToShow.length + (controller.hasMore ? 2 : 1),
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: LabeledText(
+                localizations.searchEvents,
+                isBold: true,
+                fontSize: 22,
+              ),
+            );
+          }
+          if (eventsToShow.isEmpty) {
+            return Padding(
               padding: const EdgeInsets.all(24),
               child: Text(
                 localizations.noEventsFound,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-            )
-          else ...[
-            ...eventsToShow.map((event) => EventCard(event: event)),
-            if (controller.hasMore)
-              const EventListLoader()
-            else
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: Text(
-                  localizations.noMoreEventsFound,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall?.copyWith(color: Colors.grey),
-                ),
-              ),
-          ],
-        ],
+            );
+          }
+          final adjustedIndex = index - 1;
+          if (adjustedIndex < eventsToShow.length) {
+            return EventCard(event: eventsToShow[adjustedIndex]);
+          }
+          if (controller.hasMore) {
+            return const EventListLoader();
+          }
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Text(
+              localizations.noMoreEventsFound,
+              textAlign: TextAlign.center,
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+            ),
+          );
+        },
       ),
     );
   }
