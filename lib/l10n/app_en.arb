@@ -66,6 +66,8 @@
   "searchEvents": "Explore events",
   "eventSearchBarHint": "Search",
   "noEventsFound": "No events found.",
-  "noMoreEventsFound": "No more events found."
-
+  "noMoreEventsFound": "No more events found.",
+  "navbarEvents": "Events",
+  "navbarAdd": "Add",
+  "navbarProfile": "Profile"
 }

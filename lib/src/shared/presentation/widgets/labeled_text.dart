@@ -5,11 +5,14 @@ class LabeledText extends StatelessWidget {
   final String label;
   final double? fontSize;
   final bool isBold;
+  final Color? color;
+
   const LabeledText(
     this.label, {
     super.key,
     this.fontSize,
     this.isBold = false,
+    this.color,
   });
 
   @override
@@ -19,7 +22,7 @@ class LabeledText extends StatelessWidget {
       style: TextStyle(
         fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
         fontSize: fontSize ?? 14,
-        color: AppColors.textDisabled,
+        color: color ?? AppColors.textDisabled,
       ),
     );
   }

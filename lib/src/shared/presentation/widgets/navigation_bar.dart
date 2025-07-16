@@ -4,6 +4,7 @@ import 'package:interns2025b_mobile/src/shared/domain/models/navbar_pages.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/controllers/navbar_controller.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/navbar_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 
 class NavigationBarWidget extends ConsumerStatefulWidget {
   const NavigationBarWidget({super.key});
@@ -56,12 +57,24 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
   }) {
     final isSelected = page == selectedPage;
 
-    return IconButton(
-      onPressed: onTap,
-      icon: Icon(
-        page.icon,
-        color: isSelected ? AppColors.primary : Colors.white,
-        size: 28,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            page.icon,
+            color: isSelected ? AppColors.primary : Colors.white,
+            size: 28,
+          ),
+          const SizedBox(height: 4),
+          LabeledText(
+            page.localizedLabel(context),
+            isBold: isSelected,
+            fontSize: 12,
+            color: isSelected ? AppColors.primary : Colors.white,
+          ),
+        ],
       ),
     );
   }
