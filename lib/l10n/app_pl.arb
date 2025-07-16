@@ -58,5 +58,16 @@
   "profileDeleteRequestError": "Błąd podczas wysyłania żądania usunięcia profilu.",
   "profileDeleteRequestButtonLabel": "Usuń konto",
   "profileDeleteRequestDialogContent": "Czy na pewno chcesz usunąć swoje konto? Link do usunięcia konta zostanie wysłany na Twoją skrzynkę pocztową",
-  "confirm": "Potwierdź"
+  "confirm": "Potwierdź",
+  "list": "Lista",
+  "map": "Mapa",
+  "paid": "Płatny",
+  "free": "Bezpłatny",
+  "searchEvents": "Przeglądaj wydarzenia",
+  "eventSearchBarHint": "Szukaj",
+  "noEventsFound": "Nie znaleziono wydarzeń.",
+  "noMoreEventsFound": "Nie znaleziono więcej wydarzeń.",
+  "navbarEvents": "Wydarzenia",
+  "navbarAdd": "Dodaj",
+  "navbarProfile": "Profil"
 }
