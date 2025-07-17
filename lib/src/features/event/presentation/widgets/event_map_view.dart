@@ -3,6 +3,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_cluster_marker.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/pin_map_title_layer.dart';
 import 'package:latlong2/latlong.dart';
 
 class EventMapView extends ConsumerStatefulWidget {
@@ -15,7 +18,7 @@ class EventMapView extends ConsumerStatefulWidget {
 class _EventMapViewState extends ConsumerState<EventMapView> {
   final MapController _mapController = MapController();
 
-  final LatLngBounds legnicaBounds = LatLngBounds(
+  static final LatLngBounds legnicaBounds = LatLngBounds(
     LatLng(51.14, 16.06),
     LatLng(51.28, 16.26),
   );
@@ -26,21 +29,7 @@ class _EventMapViewState extends ConsumerState<EventMapView> {
 
     final markers = events
         .where((e) => e.latitude != null && e.longitude != null)
-        .map((e) => Marker(
-      key: ValueKey(e.id),
-      point: LatLng(e.latitude!, e.longitude!),
-      width: 40,
-      height: 40,
-      alignment: Alignment.center,
-      child: Tooltip(
-        message: e.title,
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.red,
-          size: 36,
-        ),
-      ),
-    ))
+        .map((e) => EventMarker(event: e))
         .toList();
 
     return FlutterMap(
@@ -54,33 +43,17 @@ class _EventMapViewState extends ConsumerState<EventMapView> {
         interactionOptions: const InteractionOptions(
           flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
         ),
-        initialRotation: 0,
       ),
       children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.interns2025b_mobile',
-        ),
+        const PinMapTitleLayer(),
         MarkerClusterLayerWidget(
           options: MarkerClusterLayerOptions(
             markers: markers,
-            maxClusterRadius: 40,
+            maxClusterRadius: 200,
             size: const Size(40, 40),
-            builder: (context, cluster) {
-              return Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  cluster.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              );
-            },
+            builder: (context, cluster) =>
+                EventClusterMarker(count: cluster.length),
           ),
-
         ),
       ],
     );
