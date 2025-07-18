@@ -25,7 +25,7 @@ class EventMap extends StatelessWidget {
         initialCenter: LatLng(51.21006, 16.1619),
         initialZoom: 13,
         minZoom: 10,
-        maxZoom: 21,
+        maxZoom: 18,
         cameraConstraint: CameraConstraint.contain(
           bounds: LatLngBounds(LatLng(51.14, 16.06), LatLng(51.28, 16.26)),
         ),

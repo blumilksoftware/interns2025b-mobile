@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
@@ -33,23 +34,11 @@ class EventBottomCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
+            EventImage(
+              imageUrl: event.imageUrl,
+              width: 80,
+              height: 80,
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                event.imageUrl ?? '',
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => Container(
-                  width: 80,
-                  height: 80,
-                  color: AppColors.grey.withValues(alpha: 0.2),
-                  child: const Icon(
-                    Icons.image_not_supported,
-                    color: AppColors.grey,
-                  ),
-                ),
-              ),
             ),
             const SizedBox(width: 12),
 
