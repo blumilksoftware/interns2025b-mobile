@@ -5,7 +5,8 @@ import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dar
 import 'package:latlong2/latlong.dart';
 
 class EventMarker extends Marker {
-  EventMarker({required Event event})
+  final Event event;
+  EventMarker({required this.event})
     : super(
         key: ValueKey(event.id),
         point: LatLng(event.latitude!, event.longitude!),

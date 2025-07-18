@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_cluster_marker.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_popup.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/pin_map_title_layer.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -17,6 +18,7 @@ class EventMapView extends ConsumerStatefulWidget {
 
 class _EventMapViewState extends ConsumerState<EventMapView> {
   final MapController _mapController = MapController();
+  final PopupController _popupController = PopupController();
 
   static final LatLngBounds legnicaBounds = LatLngBounds(
     LatLng(51.14, 16.06),
@@ -32,30 +34,45 @@ class _EventMapViewState extends ConsumerState<EventMapView> {
         .map((e) => EventMarker(event: e))
         .toList();
 
-    return FlutterMap(
-      mapController: _mapController,
-      options: MapOptions(
-        initialCenter: LatLng(51.21006, 16.1619),
-        initialZoom: 13,
-        minZoom: 10,
-        maxZoom: 21,
-        cameraConstraint: CameraConstraint.contain(bounds: legnicaBounds),
-        interactionOptions: const InteractionOptions(
-          flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-        ),
-      ),
-      children: [
-        const PinMapTitleLayer(),
-        MarkerClusterLayerWidget(
-          options: MarkerClusterLayerOptions(
-            markers: markers,
-            maxClusterRadius: 150,
-            size: const Size(40, 40),
-            builder: (context, cluster) =>
-                EventClusterMarker(count: cluster.length),
+    return PopupScope(
+      popupController: _popupController,
+      child: FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+          initialCenter: LatLng(51.21006, 16.1619),
+          initialZoom: 13,
+          minZoom: 10,
+          maxZoom: 21,
+          cameraConstraint: CameraConstraint.contain(bounds: legnicaBounds),
+          interactionOptions: const InteractionOptions(
+            flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
           ),
+          onTap: (_, _) {
+            _popupController.hideAllPopups();
+          }
         ),
-      ],
+        children: [
+          const PinMapTitleLayer(),
+          MarkerClusterLayerWidget(
+            options: MarkerClusterLayerOptions(
+              maxClusterRadius: 150,
+              size: const Size(40, 40),
+              markers: markers,
+              builder: (context, clusterMarkers) =>
+                  EventClusterMarker(count: clusterMarkers.length),
+              popupOptions: PopupOptions(
+                popupController: _popupController,
+                popupBuilder: (context, marker) {
+                  if (marker is! EventMarker) return const SizedBox();
+                  final event = marker.event;
+                  return EventPopup(event: event);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+
 }
