@@ -19,7 +19,7 @@ class EventClusterMarker extends StatelessWidget {
       child: Text(
         count.toString(),
         style: const TextStyle(
-          color: Colors.white,
+          color: AppColors.backgroundLight,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

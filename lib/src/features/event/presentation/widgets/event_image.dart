@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class EventImage extends StatelessWidget {
   final String? imageUrl;
@@ -19,11 +20,11 @@ class EventImage extends StatelessWidget {
         return Container(
           width: double.infinity,
           height: 129,
-          color: Colors.grey[300],
+          color: AppColors.lightGrey,
           child: const Icon(
             Icons.image_not_supported,
             size: 64,
-            color: Colors.grey,
+            color: AppColors.grey,
           ),
         );
       },
