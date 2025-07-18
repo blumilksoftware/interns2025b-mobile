@@ -8,6 +8,7 @@ import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/pages/login_page.dart';
 import 'package:interns2025b_mobile/src/features/auth/presentation/pages/register_page.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/pages/event_page.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
@@ -39,7 +40,7 @@ class AppInitializer extends ConsumerWidget {
         AppRoutes.forgotPassword: (context) => const ForgotPasswordPage(),
         AppRoutes.profile: (context) => const ProfilePage(),
         AppRoutes.addEvent: (context) => Placeholder(),
-        AppRoutes.home: (context) => Placeholder(),
+        AppRoutes.events: (context) => EventPage(),
       },
     );
   }

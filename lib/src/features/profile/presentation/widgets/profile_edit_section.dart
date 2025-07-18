@@ -52,7 +52,6 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
             ),
             const SizedBox(height: 16),
 
-            // Save button
             Button(
               label: localizations.saveChanges,
               fullWidth: true,

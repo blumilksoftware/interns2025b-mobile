@@ -58,6 +58,16 @@
   "profileDeleteRequestError": "Error sending profile deletion request.",
   "profileDeleteRequestButtonLabel": "Delete account",
   "profileDeleteRequestDialogContent": "Are you sure you want to delete your account? The account deletion link will be sent to your email.",
-  "confirm": "Confirm"
-
+  "confirm": "Confirm",
+  "list": "List",
+  "map": "Map",
+  "paid": "Paid",
+  "free": "Free",
+  "searchEvents": "Explore events",
+  "eventSearchBarHint": "Search",
+  "noEventsFound": "No events found.",
+  "noMoreEventsFound": "No more events found.",
+  "navbarEvents": "Events",
+  "navbarAdd": "Add",
+  "navbarProfile": "Profile"
 }
