@@ -49,7 +49,7 @@ class _EventMapViewState extends ConsumerState<EventMapView> {
         MarkerClusterLayerWidget(
           options: MarkerClusterLayerOptions(
             markers: markers,
-            maxClusterRadius: 200,
+            maxClusterRadius: 150,
             size: const Size(40, 40),
             builder: (context, cluster) =>
                 EventClusterMarker(count: cluster.length),
