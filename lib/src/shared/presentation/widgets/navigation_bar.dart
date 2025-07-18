@@ -57,24 +57,27 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
   }) {
     final isSelected = page == selectedPage;
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            page.icon,
-            color: isSelected ? AppColors.primary : Colors.white,
-            size: 28,
-          ),
-          const SizedBox(height: 4),
-          LabeledText(
-            page.localizedLabel(context),
-            isBold: isSelected,
-            fontSize: 12,
-            color: isSelected ? AppColors.primary : Colors.white,
-          ),
-        ],
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              page.icon,
+              color: isSelected ? AppColors.primary : Colors.white,
+              size: 28,
+            ),
+            const SizedBox(height: 4),
+            LabeledText(
+              page.localizedLabel(context),
+              isBold: isSelected,
+              fontSize: 12,
+              color: isSelected ? AppColors.primary : Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }
