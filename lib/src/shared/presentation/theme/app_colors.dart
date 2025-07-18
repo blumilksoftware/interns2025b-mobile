@@ -20,6 +20,7 @@ class AppColors {
   static const secondary = Color(0xFF151515);
   static const black = Color(0xFF000000);
   static const shadeGrey = Color(0xFF757575);
+  static final shadeGrey700 = Color(0xFF616161);
   static const lightGrey = Color(0xFFE0E0E0);
   static const grey = Color(0xFF9E9E9E);
 

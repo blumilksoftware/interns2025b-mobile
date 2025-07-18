@@ -6,19 +6,23 @@ import 'package:latlong2/latlong.dart';
 
 class EventMarker extends Marker {
   final Event event;
-  EventMarker({required this.event})
+
+  EventMarker({required this.event, required VoidCallback onTap})
     : super(
         key: ValueKey(event.id),
         point: LatLng(event.latitude!, event.longitude!),
         width: 40,
         height: 40,
         alignment: Alignment.center,
-        child: Tooltip(
-          message: event.title,
-          child: const Icon(
-            Icons.location_on,
-            color: AppColors.primary,
-            size: 36,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Tooltip(
+            message: event.title,
+            child: const Icon(
+              Icons.location_on,
+              color: AppColors.primary,
+              size: 36,
+            ),
           ),
         ),
       );

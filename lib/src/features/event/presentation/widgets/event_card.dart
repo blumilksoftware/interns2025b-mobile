@@ -41,9 +41,9 @@ class EventCard extends StatelessWidget {
                   children: [
                     Text(
                       dateText,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.shadeGrey700,
+                      ),
                     ),
                     EventPriceTag(
                       isPaid: event.isPaid,
@@ -75,7 +75,7 @@ class EventCard extends StatelessWidget {
                       child: Text(
                         event.ageCategory!,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.shadeGrey,
+                          color: AppColors.shadeGrey700,
                         ),
                       ),
                     ),

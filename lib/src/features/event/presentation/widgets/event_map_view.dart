@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_cluster_marker.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_bottom_card.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_map.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_popup.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/pin_map_title_layer.dart';
-import 'package:latlong2/latlong.dart';
 
 class EventMapView extends ConsumerStatefulWidget {
   const EventMapView({super.key});
@@ -18,61 +15,40 @@ class EventMapView extends ConsumerStatefulWidget {
 
 class _EventMapViewState extends ConsumerState<EventMapView> {
   final MapController _mapController = MapController();
-  final PopupController _popupController = PopupController();
-
-  static final LatLngBounds legnicaBounds = LatLngBounds(
-    LatLng(51.14, 16.06),
-    LatLng(51.28, 16.26),
-  );
 
   @override
   Widget build(BuildContext context) {
-    final events = ref.watch(eventsControllerProvider).filteredEvents;
+    final controller = ref.read(eventsControllerProvider.notifier);
+    final state = ref.watch(eventsControllerProvider);
+
+    final events = state.filteredEvents;
+    final selectedEvent = state.selectedEvent;
 
     final markers = events
         .where((e) => e.latitude != null && e.longitude != null)
-        .map((e) => EventMarker(event: e))
+        .map(
+          (e) => EventMarker(event: e, onTap: () => controller.selectEvent(e)),
+        )
         .toList();
 
-    return PopupScope(
-      popupController: _popupController,
-      child: FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-          initialCenter: LatLng(51.21006, 16.1619),
-          initialZoom: 13,
-          minZoom: 10,
-          maxZoom: 21,
-          cameraConstraint: CameraConstraint.contain(bounds: legnicaBounds),
-          interactionOptions: const InteractionOptions(
-            flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-          ),
-          onTap: (_, _) {
-            _popupController.hideAllPopups();
-          }
+    return Stack(
+      children: [
+        EventMap(
+          mapController: _mapController,
+          markers: markers,
+          onMapTap: (_, _) => controller.selectEvent(null),
         ),
-        children: [
-          const PinMapTitleLayer(),
-          MarkerClusterLayerWidget(
-            options: MarkerClusterLayerOptions(
-              maxClusterRadius: 150,
-              size: const Size(40, 40),
-              markers: markers,
-              builder: (context, clusterMarkers) =>
-                  EventClusterMarker(count: clusterMarkers.length),
-              popupOptions: PopupOptions(
-                popupController: _popupController,
-                popupBuilder: (context, marker) {
-                  if (marker is! EventMarker) return const SizedBox();
-                  final event = marker.event;
-                  return EventPopup(event: event);
-                },
-              ),
+        if (selectedEvent != null)
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 10,
+            child: EventBottomCard(
+              event: selectedEvent,
+              onClose: () => controller.selectEvent(null),
             ),
           ),
-        ],
-      ),
+      ],
     );
   }
-
 }
