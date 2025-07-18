@@ -69,5 +69,6 @@
   "noMoreEventsFound": "No more events found.",
   "navbarEvents": "Events",
   "navbarAdd": "Add",
-  "navbarProfile": "Profile"
+  "navbarProfile": "Profile",
+  "seeDetails": "See details"
 }

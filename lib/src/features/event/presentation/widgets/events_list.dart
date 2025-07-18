@@ -5,6 +5,7 @@ import 'package:interns2025b_mobile/src/features/event/presentation/providers/ev
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_scroll_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_card.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_list_loader.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 
 class EventsList extends ConsumerWidget {
@@ -69,7 +70,7 @@ class EventsList extends ConsumerWidget {
               textAlign: TextAlign.center,
               style: Theme.of(
                 context,
-              ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+              ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
             ),
           );
         },

@@ -18,13 +18,13 @@ class EventPriceTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
-        color: isPaid ? const Color(0x330A84FF) : Colors.green.shade100,
+        color: isPaid ? AppColors.blueLabelBackground : AppColors.greenLightLabelBackground,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         isPaid ? paidText : freeText,
         style: TextStyle(
-          color: isPaid ? const Color(0xFF0A84FF) : AppColors.text,
+          color: isPaid ? AppColors.blueLabelText : AppColors.text,
           fontWeight: FontWeight.w600,
           fontSize: 12,
         ),

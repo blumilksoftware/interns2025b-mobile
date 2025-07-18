@@ -3,6 +3,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class EventCard extends StatelessWidget {
@@ -30,7 +31,7 @@ class EventCard extends StatelessWidget {
           EventImage(imageUrl: event.imageUrl),
 
           Container(
-            color: Colors.white,
+            color: AppColors.backgroundLight,
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,9 +41,9 @@ class EventCard extends StatelessWidget {
                   children: [
                     Text(
                       dateText,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.shadeGrey700,
+                      ),
                     ),
                     EventPriceTag(
                       isPaid: event.isPaid,
@@ -64,7 +65,7 @@ class EventCard extends StatelessWidget {
                     event.location!,
                     style: Theme.of(
                       context,
-                    ).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                    ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
                   ),
                 if (event.ageCategory != null)
                   GestureDetector(
@@ -74,7 +75,7 @@ class EventCard extends StatelessWidget {
                       child: Text(
                         event.ageCategory!,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
+                          color: AppColors.shadeGrey700,
                         ),
                       ),
                     ),

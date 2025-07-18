@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class EventSearchBar extends StatelessWidget {
   final String? hintText;
@@ -32,14 +33,14 @@ class EventSearchBar extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0x29687182)),
+            borderSide: const BorderSide(color: AppColors.borderEnable),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF687182), width: 2),
+            borderSide: const BorderSide(color: AppColors.borderFocus, width: 2),
           ),
           filled: true,
-          fillColor: Colors.grey.shade100,
+          fillColor: AppColors.borderFill,
           contentPadding: const EdgeInsets.symmetric(
             vertical: 12,
             horizontal: 16,

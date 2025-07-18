@@ -19,6 +19,9 @@ class EventsController extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  Event? _selectedEvent;
+  Event? get selectedEvent => _selectedEvent;
+
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
@@ -93,6 +96,11 @@ class EventsController extends ChangeNotifier {
 
   void updateSearchQuery(String query) {
     _searchQuery = query;
+    notifyListeners();
+  }
+
+  void selectEvent(Event? event) {
+    _selectedEvent = event;
     notifyListeners();
   }
 

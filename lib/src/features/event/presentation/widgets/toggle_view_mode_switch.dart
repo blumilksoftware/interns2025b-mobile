@@ -26,7 +26,7 @@ class ToggleViewModeSwitch extends ConsumerWidget {
       cornerRadius: 9.0,
       radiusStyle: true,
       activeBgColor: const [AppColors.primary],
-      activeFgColor: Colors.white,
+      activeFgColor: AppColors.backgroundLight,
       inactiveBgColor: AppColors.inactiveBackground,
       inactiveFgColor: AppColors.primary,
     );
