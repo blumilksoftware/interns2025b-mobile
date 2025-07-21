@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_data_time_row.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_info_tile.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_localization_map.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
+import 'package:intl/intl.dart';
 
 class EventDetailsBody extends StatelessWidget {
   final Event event;
@@ -16,6 +17,7 @@ class EventDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).toLanguageTag();
 
     return CustomScrollView(
       slivers: [
@@ -52,26 +54,22 @@ class EventDetailsBody extends StatelessWidget {
                     color: AppColors.black,
                   ),
                 ),
-                EventDateTimeRow(date: event.start),
 
-                Row(
-                  children: [
-                    if (event.address != null)
-                      const Icon(
-                        Icons.location_on_outlined,
-                        size: 20,
-                        color: AppColors.grey,
-                      ),
-                    const SizedBox(width: 8),
-                    Text(
-                      event.address!,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
+                if (event.start != null)
+                  EventInfoTile(
+                    icon: Icons.calendar_today_outlined,
+                    title: DateFormat('d MMMM yyyy', locale).format(event.start!),
+                    subtitle: DateFormat('EEEE, HH:mm', locale)
+                        .format(event.start!)
+                        .replaceFirstMapped(RegExp(r'^\w'), (m) => m.group(0)!.toUpperCase()),
+                  ),
+
+                if (event.address != null)
+                  EventInfoTile(
+                    icon: Icons.location_on_outlined,
+                    title: event.address!,
+                  ),
 
                 EventLocationMap(event: event),
                 const SizedBox(height: 16),
