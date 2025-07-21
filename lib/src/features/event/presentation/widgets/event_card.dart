@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_data_time_row.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
@@ -15,11 +16,6 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context).toLanguageTag();
-
-    final dateText = event.start != null
-        ? DateFormat('d MMMM yyyy – HH:mm', locale).format(event.start!)
-        : '';
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -39,12 +35,7 @@ class EventCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      dateText,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.shadeGrey700,
-                      ),
-                    ),
+                    EventDateTimeRow(date: event.start),
                     EventPriceTag(
                       isPaid: event.isPaid,
                       paidText: localizations.paid,
