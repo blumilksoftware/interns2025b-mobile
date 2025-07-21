@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_by_id_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_details_body.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 
 class EventDetails extends ConsumerWidget {
   const EventDetails({super.key});

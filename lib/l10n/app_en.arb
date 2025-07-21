@@ -70,5 +70,7 @@
   "navbarEvents": "Events",
   "navbarAdd": "Add",
   "navbarProfile": "Profile",
-  "seeDetails": "See details"
+  "seeDetails": "See details",
+  "information": "Information",
+  "noInformation": "No information available."
 }

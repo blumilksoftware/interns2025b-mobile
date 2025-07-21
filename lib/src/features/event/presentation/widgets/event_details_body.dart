@@ -6,7 +6,6 @@ import 'package:interns2025b_mobile/src/features/event/presentation/widgets/even
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
-import 'package:intl/intl.dart';
 
 class EventDetailsBody extends StatelessWidget {
   final Event event;
@@ -72,17 +71,17 @@ class EventDetailsBody extends StatelessWidget {
                 const SizedBox(height: 8),
                 if (event.ageCategory != null)
                   Text(
-                    "${event.ageCategory!}",
+                    event.ageCategory!,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.shadeGrey700),
                   ),
                 const SizedBox(height: 8),
                 const SizedBox(height: 16),
-                LabeledText("Informacje dodatkowe", fontSize: 18),
+                LabeledText(localizations.information, fontSize: 18),
                 const SizedBox(height: 8),
                 if (event.description != null && event.description!.isNotEmpty)
                   Text(event.description!),
                 if (event.description == null || event.description!.isEmpty)
-                  const Text("Brak opisu wydarzenia."),
+                  Text(localizations.noInformation),
               ],
             ),
           ),

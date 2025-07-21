@@ -5,7 +5,6 @@ import 'package:interns2025b_mobile/src/features/event/presentation/widgets/even
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:intl/intl.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
