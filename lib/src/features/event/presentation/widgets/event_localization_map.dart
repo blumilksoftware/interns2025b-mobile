@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_location_map_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/zoom_controls.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/pin_map_title_layer.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/zoom_controls.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
-import 'package:latlong2/latlong.dart';
 
 class EventLocationMap extends ConsumerWidget {
   final Event event;

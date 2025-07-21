@@ -42,6 +42,7 @@ class EventDetailsBody extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 8),
                 Text(
                   event.title,
@@ -52,6 +53,7 @@ class EventDetailsBody extends StatelessWidget {
                   ),
                 ),
                 EventDateTimeRow(date: event.start),
+
                 Row(
                   children: [
                     if (event.address != null)
@@ -69,25 +71,26 @@ class EventDetailsBody extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 8),
-                if (event.ageCategory != null)
-                  Text(
-                    event.ageCategory!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.shadeGrey700,
-                    ),
-                  ),
-                const SizedBox(height: 6),
                 const SizedBox(height: 16),
-                LabeledText(localizations.information, fontSize: 18),
+
+                EventLocationMap(event: event),
+                const SizedBox(height: 16),
+
+                LabeledText(
+                  localizations.information,
+                  fontSize: 20,
+                  isBold: true,
+                ),
                 const SizedBox(height: 8),
                 if (event.description != null && event.description!.isNotEmpty)
-                  Text(event.description!),
+                  Text(
+                    event.description!,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
+                  ),
                 if (event.description == null || event.description!.isEmpty)
                   Text(localizations.noInformation),
-                const SizedBox(height: 16),
-                EventLocationMap(event: event),
               ],
             ),
           ),
