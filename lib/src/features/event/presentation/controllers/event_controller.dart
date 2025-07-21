@@ -65,11 +65,11 @@ class EventsController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await getEventsUseCase.call(
-        page: _currentPage,
-      );
+      final result = await getEventsUseCase.call(page: _currentPage);
 
-      final newEvents = result.where((e) => !_shownEventIds.contains(e.id)).toList();
+      final newEvents = result
+          .where((e) => !_shownEventIds.contains(e.id))
+          .toList();
 
       _events.addAll(newEvents);
       _shownEventIds.addAll(newEvents.map((e) => e.id));

@@ -16,11 +16,17 @@ class EventDateTimeRow extends StatelessWidget {
 
     return Row(
       children: [
-        const Icon(Icons.calendar_today_outlined, size: 20, color: AppColors.grey),
+        const Icon(
+          Icons.calendar_today_outlined,
+          size: 20,
+          color: AppColors.grey,
+        ),
         const SizedBox(width: 8),
         Text(
           dateText,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
         ),
       ],
     );
