@@ -15,4 +15,11 @@ class EventDataSource {
         .map((json) => Event.fromJson(json as Map<String, dynamic>))
         .toList();
   }
+
+  Future<Event> getEventById(int id) async {
+    final response = await httpClient.get(
+      '/api/events/$id',
+    );
+    return Event.fromJson(response['data'] as Map<String, dynamic>);
+  }
 }
