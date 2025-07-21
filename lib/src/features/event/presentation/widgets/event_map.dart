@@ -3,7 +3,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_map_provider.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_shared_map_notifier_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_cluster_marker.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/pin_map_title_layer.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/zoom_controls.dart';

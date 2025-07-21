@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_map_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_bottom_card.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_map.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
-import 'package:riverpod/riverpod.dart';
 
 class EventMapView extends ConsumerStatefulWidget {
   const EventMapView({super.key});
