@@ -67,15 +67,14 @@ class EventsController extends ChangeNotifier {
     try {
       final result = await getEventsUseCase.call(
         page: _currentPage,
-        limit: _limit,
       );
 
-      final newEvents = result.where((e) => !_shownEventIds.contains(e.id));
+      final newEvents = result.where((e) => !_shownEventIds.contains(e.id)).toList();
 
       _events.addAll(newEvents);
       _shownEventIds.addAll(newEvents.map((e) => e.id));
 
-      if (newEvents.length < _limit) {
+      if (result.length < _limit) {
         _hasMore = false;
       } else {
         _currentPage++;

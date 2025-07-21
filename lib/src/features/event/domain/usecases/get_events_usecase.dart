@@ -6,7 +6,7 @@ class GetEventsUseCase {
 
   GetEventsUseCase(this.repository);
 
-  Future<List<Event>> call({int page = 1, int limit = 10}) {
-    return repository.getEvents(page: page, limitPerPage: limit);
+  Future<List<Event>> call({int page = 1}) {
+    return repository.getEvents(page: page);
   }
 }

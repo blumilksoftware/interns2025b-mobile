@@ -6,9 +6,9 @@ class EventDataSource {
 
   EventDataSource(this.httpClient);
 
-  Future<List<Event>> getEvents({int page = 1, int limitPerPage = 10}) async {
+  Future<List<Event>> getEvents({int page = 1}) async {
     final response = await httpClient.get(
-      '/api/events?page=$page&limit=$limitPerPage',
+      '/api/events?page=$page',
     );
     final List<dynamic> eventsJson = response['data'];
     return eventsJson
