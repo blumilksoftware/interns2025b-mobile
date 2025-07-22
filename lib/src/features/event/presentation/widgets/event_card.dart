@@ -8,9 +8,8 @@ import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dar
 
 class EventCard extends StatelessWidget {
   final Event event;
-  final VoidCallback? onAgeRestrictionTap;
 
-  const EventCard({super.key, required this.event, this.onAgeRestrictionTap});
+  const EventCard({super.key, required this.event,});
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +56,14 @@ class EventCard extends StatelessWidget {
                       context,
                     ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
                   ),
+
                 if (event.ageCategory != null)
-                  GestureDetector(
-                    onTap: onAgeRestrictionTap,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        event.ageCategory!,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.shadeGrey700,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Text(
+                      event.ageCategory!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.shadeGrey700,
                       ),
                     ),
                   ),

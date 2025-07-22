@@ -109,4 +109,37 @@ class EventsController extends ChangeNotifier {
     _currentPage = 1;
     _hasMore = true;
   }
+
+  Future<void> loadAllEvents() async {
+    if (_isLoading) return;
+
+    _reset();
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      while (_hasMore) {
+        final result = await getEventsUseCase.call(page: _currentPage);
+        final newEvents = result
+            .where((e) => !_shownEventIds.contains(e.id))
+            .toList();
+
+        _events.addAll(newEvents);
+        _shownEventIds.addAll(newEvents.map((e) => e.id));
+
+        if (result.length < _limit) {
+          _hasMore = false;
+        } else {
+          _currentPage++;
+        }
+      }
+    } catch (e) {
+      _errorMessage = '$e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
 }
