@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class LanguageSwitchButton extends ConsumerWidget {
   const LanguageSwitchButton({super.key});
