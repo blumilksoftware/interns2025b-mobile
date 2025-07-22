@@ -32,18 +32,30 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
       height: 70,
       color: Colors.black,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildIconButton(
-            page: NavbarPages.events,
-            selectedPage: selectedPage,
-            onTap: () => controller.navigateTo(NavbarPages.events, context),
+          Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: _buildIconButton(
+                page: NavbarPages.events,
+                selectedPage: selectedPage,
+                onTap: () => controller.navigateTo(NavbarPages.events, context),
+              ),
+            ),
           ),
-          _buildCenterAddButton(context, controller),
-          _buildIconButton(
-            page: NavbarPages.profile,
-            selectedPage: selectedPage,
-            onTap: () => controller.navigateTo(NavbarPages.profile, context),
+          SizedBox(
+            width: 70,
+            child: Center(child: _buildCenterAddButton(context, controller)),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: _buildIconButton(
+                page: NavbarPages.profile,
+                selectedPage: selectedPage,
+                onTap: () => controller.navigateTo(NavbarPages.profile, context),
+              ),
+            ),
           ),
         ],
       ),
@@ -66,7 +78,7 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
           children: [
             Icon(
               page.icon,
-              color: isSelected ? AppColors.primary : Colors.white,
+              color: isSelected ? AppColors.primary : AppColors.backgroundLight,
               size: 28,
             ),
             const SizedBox(height: 4),
@@ -74,7 +86,7 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
               page.localizedLabel(context),
               isBold: isSelected,
               fontSize: 12,
-              color: isSelected ? AppColors.primary : Colors.white,
+              color: isSelected ? AppColors.primary : AppColors.backgroundLight,
             ),
           ],
         ),
@@ -95,7 +107,7 @@ class _NavigationBarWidgetState extends ConsumerState<NavigationBarWidget> {
           color: AppColors.primary,
           shape: BoxShape.circle,
         ),
-        child: const Icon(Icons.add, color: Colors.white),
+        child: Icon(Icons.add, color: AppColors.backgroundLight),
       ),
     );
   }

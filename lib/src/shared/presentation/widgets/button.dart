@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class Button extends StatelessWidget {
   final String label;
@@ -62,9 +63,9 @@ class Button extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            side: backgroundColor == Colors.white
-                ? const BorderSide(color: Colors.black)
+            padding: EdgeInsets.symmetric(vertical: 16),
+            side: backgroundColor == AppColors.backgroundLight
+                ? BorderSide(color: AppColors.black)
                 : null,
           );
 

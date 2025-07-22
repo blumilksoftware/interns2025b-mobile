@@ -27,4 +27,5 @@ class AppColors {
   static const borderFocus = Color(0xFF687182);
   static const borderEnable = Color(0x29687182);
   static const borderFill = Color(0xFFF5F5F5);
+  static const red = Color(0xFFF44336);
 }
