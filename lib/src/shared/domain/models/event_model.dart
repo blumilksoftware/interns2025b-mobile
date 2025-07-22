@@ -56,14 +56,18 @@ class Event {
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    final ownerType = json['owner_type'];
+    final ownerType = (json['owner_type'] as String?) ?? '';
     final ownerJson = json['owner'];
 
     dynamic parsedOwner;
-    if (ownerType == 'user' && ownerJson != null) {
-      parsedOwner = User.fromJson(ownerJson);
-    } else if (ownerType == 'organization' && ownerJson != null) {
-      parsedOwner = Organization.fromJson(ownerJson);
+    if (ownerJson != null) {
+      final ownerTypeLower = ownerType.toLowerCase();
+
+      if (ownerTypeLower.contains('user')) {
+        parsedOwner = User.fromJson(ownerJson);
+      } else if (ownerTypeLower.contains('organization')) {
+        parsedOwner = Organization.fromJson(ownerJson);
+      }
     }
 
     return Event(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_author_tile.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_info_tile.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_localization_map.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
@@ -34,18 +34,6 @@ class EventDetailsBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    EventPriceTag(
-                      isPaid: event.isPaid,
-                      paidText: localizations.paid,
-                      freeText: localizations.free,
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 8),
                 Text(
                   event.title,
                   style: TextStyle(
@@ -70,6 +58,9 @@ class EventDetailsBody extends StatelessWidget {
                     icon: Icons.location_on_outlined,
                     title: event.address!,
                   ),
+
+                if (event.owner != null)
+                  EventAuthorTile(owner: event.owner),
 
                 EventLocationMap(event: event),
                 const SizedBox(height: 16),

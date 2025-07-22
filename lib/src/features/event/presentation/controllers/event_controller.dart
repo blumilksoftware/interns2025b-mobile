@@ -140,5 +140,4 @@ class EventsController extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }
