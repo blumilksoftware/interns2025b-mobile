@@ -57,7 +57,6 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _reset();
-      notifyListeners();
     }
 
     _isLoading = true;
