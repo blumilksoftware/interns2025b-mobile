@@ -23,7 +23,7 @@ class EventLocationMap extends ConsumerWidget {
     final mapController = mapState.mapController;
 
     return SizedBox(
-      height: 200,
+      height: 300,
       child: Stack(
         children: [
           FlutterMap(
