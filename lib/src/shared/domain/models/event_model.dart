@@ -90,4 +90,24 @@ class Event {
           : null,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'start': start?.toIso8601String(),
+      'end': end?.toIso8601String(),
+      'location': location,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'is_paid': isPaid,
+      'price': price,
+      'status': status.name,
+      'image_url': imageUrl,
+      'age_category': ageCategory,
+      'owner_type': ownerType,
+      'owner_id': ownerId,
+    };
+  }
 }

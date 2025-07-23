@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
+  final CreateEventUseCase createEventUseCase;
 
-  EventsController({required this.getEventsUseCase});
+  EventsController({
+    required this.getEventsUseCase,
+    required this.createEventUseCase,
+  });
 
   final List<Event> _events = [];
   final Set<int> _shownEventIds = {};
@@ -25,6 +30,12 @@ class EventsController extends ChangeNotifier {
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
+
+  bool _isCreating = false;
+  bool get isCreating => _isCreating;
+
+  String? _creationError;
+  String? get creationError => _creationError;
 
   bool _hasMore = true;
   bool get hasMore => _hasMore;
@@ -138,6 +149,27 @@ class EventsController extends ChangeNotifier {
       _errorMessage = '$e';
     } finally {
       _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> createEvent(Event event) async {
+    _isCreating = true;
+    _creationError = null;
+    notifyListeners();
+
+    try {
+      await createEventUseCase(event);
+    } on NoInternetException catch (e) {
+      _creationError = e.message;
+    } on HttpException catch (e) {
+      _creationError = 'Server error: ${e.message} (code ${e.statusCode})';
+    } on AuthException catch (e) {
+      _creationError = 'Authorization error: ${e.message}';
+    } catch (e) {
+      _creationError = 'Unexpected error: $e';
+    } finally {
+      _isCreating = false;
       notifyListeners();
     }
   }

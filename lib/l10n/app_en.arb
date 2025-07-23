@@ -104,5 +104,6 @@
   "statusPublished": "Published",
   "statusOngoing": "Ongoing",
   "statusEnded": "Ended",
-  "statusCanceled": "Canceled"
+  "statusCanceled": "Canceled",
+  "eventCreatedSuccess": "Event created successfully"
 }

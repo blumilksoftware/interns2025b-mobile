@@ -104,5 +104,6 @@
   "statusPublished": "Opublikowane",
   "statusOngoing": "Trwające",
   "statusEnded": "Zakończone",
-  "statusCanceled": "Anulowane"
+  "statusCanceled": "Anulowane",
+  "eventCreatedSuccess": "Wydarzenie zostało utworzone pomyślnie"
 }

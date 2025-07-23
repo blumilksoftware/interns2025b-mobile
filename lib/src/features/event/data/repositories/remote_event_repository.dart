@@ -16,4 +16,9 @@ class RemoteEventRepository implements EventRepository {
   Future<Event> getEventById(int id) {
     return dataSource.getEventById(id);
   }
+
+  @override
+  Future<void> createEvent(Event event) {
+    return dataSource.createEvent(event);
+  }
 }

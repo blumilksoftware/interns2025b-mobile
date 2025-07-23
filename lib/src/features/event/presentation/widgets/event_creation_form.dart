@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/age_category_dropdown.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/coordinates_section.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/date_picker_field.dart';
@@ -10,6 +12,7 @@ import 'package:interns2025b_mobile/src/features/event/presentation/widgets/even
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/submit_button_section.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/title_field.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
 class EventCreationForm extends ConsumerStatefulWidget {
@@ -51,9 +54,12 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
   AgeCategory? _selectedAgeCategory;
   DateTime? _startDate;
   DateTime? _endDate;
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Form(
       key: widget.formKey,
       child: Column(
@@ -92,9 +98,50 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
             },
           ),
           SubmitButtonSection(
-            onPressed: () {
-              if (widget.formKey.currentState!.validate()) {
-                // handle submit
+            isLoading: _isLoading,
+            onPressed: () async {
+              if (!widget.formKey.currentState!.validate()) return;
+
+              final controller = ref.read(eventsControllerProvider);
+
+              setState(() => _isLoading = true);
+
+              final event = Event(
+                id: 0,
+                title: widget.title.text,
+                description: widget.description.text,
+                start: _startDate,
+                end: _endDate,
+                location: widget.location.text,
+                address: widget.address?.text,
+                latitude: double.tryParse(widget.latitude?.text ?? ''),
+                longitude: double.tryParse(widget.longitude?.text ?? ''),
+                isPaid: false,
+                price: null,
+                status: _selectedStatus ?? EventStatus.draft,
+                imageUrl: widget.imageUrl.text,
+                ageCategory: _selectedAgeCategory?.name,
+                ownerType: 'user',
+                ownerId: 1,
+              );
+
+              await controller.createEvent(event);
+
+              setState(() => _isLoading = false);
+
+              if (controller.creationError == null) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(localizations.eventCreatedSuccess)),
+                  );
+                  Navigator.of(context).pop();
+                }
+              } else {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(controller.creationError!)),
+                  );
+                }
               }
             },
           ),
