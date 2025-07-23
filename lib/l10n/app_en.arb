@@ -82,6 +82,7 @@
   "startDateHint": "Select event start date",
   "endDateLabel": "End date",
   "endDateHint": "Select event end date",
+  "endDateError": "End date must be later than start date",
   "locationLabel": "Location",
   "locationHint": "Enter event location",
   "addressLabel": "Address",
@@ -91,7 +92,17 @@
   "imageUrlLabel": "Image URL",
   "imageUrlHint": "Enter event image URL",
   "statusLabel": "Status",
+  "statusHint": "Select event status",
   "ageCategoryLabel": "Age category",
   "ageCategoryHint": "Select event age category",
-  "createEventButton": "Create event"
+  "createEventButton": "Create event",
+  "ageEveryone": "Everyone",
+  "ageAdults": "Adults",
+  "ageTeens": "Teens",
+  "ageKids": "Kids",
+  "statusDraft": "Draft",
+  "statusPublished": "Published",
+  "statusOngoing": "Ongoing",
+  "statusEnded": "Ended",
+  "statusCanceled": "Canceled"
 }

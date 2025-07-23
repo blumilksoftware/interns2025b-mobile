@@ -26,11 +26,22 @@ class DatePickerField extends StatefulWidget {
 }
 
 class _DatePickerFieldState extends State<DatePickerField> {
+  DateTime? _startDate;
+  DateTime? _endDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _startDate = widget.startDate;
+    _endDate = widget.endDate;
+  }
+
   Future<void> _pickDateTime({
     required DateTime initialDate,
     required DateTime firstDate,
     required void Function(DateTime) onPicked,
     required TextEditingController controller,
+    required bool isStart,
   }) async {
     final pickedDate = await showDatePicker(
       context: context,
@@ -42,8 +53,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
       },
     );
 
-    if (!mounted) return;
-    if (pickedDate == null) return;
+    if (!mounted || pickedDate == null) return;
 
     final pickedTime = await showDialog<TimeOfDay>(
       context: context,
@@ -56,21 +66,16 @@ class _DatePickerFieldState extends State<DatePickerField> {
           data: mediaQuery,
           child: Theme(
             data: Theme.of(dialogContext),
-            child: Builder(
-              builder: (innerContext) {
-                return TimePickerDialog(
-                  initialTime: TimeOfDay.fromDateTime(initialDate),
-                  initialEntryMode: TimePickerEntryMode.inputOnly,
-                );
-              },
+            child: TimePickerDialog(
+              initialTime: TimeOfDay.fromDateTime(initialDate),
+              initialEntryMode: TimePickerEntryMode.inputOnly,
             ),
           ),
         );
       },
     );
 
-    if (!mounted) return;
-    if (pickedTime == null) return;
+    if (!mounted || pickedTime == null) return;
 
     final fullDateTime = DateTime(
       pickedDate.year,
@@ -82,6 +87,18 @@ class _DatePickerFieldState extends State<DatePickerField> {
 
     controller.text = _formatDateTime(fullDateTime);
     onPicked(fullDateTime);
+
+    setState(() {
+      if (isStart) {
+        _startDate = fullDateTime;
+        if (_endDate != null && _endDate!.isBefore(_startDate!)) {
+          _endDate = null;
+          widget.endController.clear();
+        }
+      } else {
+        _endDate = fullDateTime;
+      }
+    });
   }
 
   String _formatDateTime(DateTime dateTime) {
@@ -103,10 +120,11 @@ class _DatePickerFieldState extends State<DatePickerField> {
         const SizedBox(height: 8),
         GestureDetector(
           onTap: () => _pickDateTime(
-            initialDate: widget.startDate ?? DateTime.now(),
+            initialDate: _startDate ?? DateTime.now(),
             firstDate: DateTime.now(),
             onPicked: widget.onStartPicked,
             controller: widget.startController,
+            isStart: true,
           ),
           child: AbsorbPointer(
             child: CustomTextField(
@@ -114,8 +132,8 @@ class _DatePickerFieldState extends State<DatePickerField> {
               hintText: localizations.startDateHint,
               readOnly: true,
               validator: (_) {
-                if (widget.startDate == null) {
-                  return 'Wybierz datę rozpoczęcia';
+                if (_startDate == null) {
+                  return localizations.startDateHint;
                 }
                 return null;
               },
@@ -127,10 +145,11 @@ class _DatePickerFieldState extends State<DatePickerField> {
         const SizedBox(height: 8),
         GestureDetector(
           onTap: () => _pickDateTime(
-            initialDate: widget.endDate ?? widget.startDate ?? DateTime.now(),
-            firstDate: widget.startDate ?? DateTime.now(),
+            initialDate: _endDate ?? _startDate ?? DateTime.now(),
+            firstDate: _startDate ?? DateTime.now(),
             onPicked: widget.onEndPicked,
             controller: widget.endController,
+            isStart: false,
           ),
           child: AbsorbPointer(
             child: CustomTextField(
@@ -138,12 +157,11 @@ class _DatePickerFieldState extends State<DatePickerField> {
               hintText: localizations.endDateHint,
               readOnly: true,
               validator: (_) {
-                if (widget.endDate == null) {
-                  return 'Wybierz datę zakończenia';
+                if (_endDate == null) {
+                  return localizations.endDateHint;
                 }
-                if (widget.startDate != null &&
-                    widget.endDate!.isBefore(widget.startDate!)) {
-                  return 'Data zakończenia nie może być przed rozpoczęciem';
+                if (_startDate != null && _endDate!.isBefore(_startDate!)) {
+                  return localizations.endDateError;
                 }
                 return null;
               },

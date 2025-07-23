@@ -27,12 +27,12 @@ class AgeCategoryDropdown extends StatelessWidget {
           items: AgeCategory.values.map((category) {
             return DropdownMenuItem(
               value: category,
-              child: Text(category.label),
+              child: Text(category.label(context)),
             );
           }).toList(),
           onChanged: onChanged,
           validator: (value) =>
-              value == null ? 'Wybierz kategorię wiekową' : null,
+              value == null ? localizations.ageCategoryHint : null,
         ),
       ],
     );

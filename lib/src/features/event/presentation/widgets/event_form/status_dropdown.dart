@@ -25,10 +25,13 @@ class StatusDropdown extends StatelessWidget {
         DropdownButtonFormField<EventStatus>(
           value: selected,
           items: [EventStatus.draft, EventStatus.published].map((status) {
-            return DropdownMenuItem(value: status, child: Text(status.label));
+            return DropdownMenuItem(
+              value: status,
+              child: Text(status.label(context)),
+            );
           }).toList(),
           onChanged: onChanged,
-          validator: (value) => value == null ? 'Wybierz status' : null,
+          validator: (value) => value == null ? localizations.statusHint : null,
         ),
         const SizedBox(height: 20),
       ],
