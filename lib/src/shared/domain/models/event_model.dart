@@ -1,4 +1,6 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/owner_type.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
 enum EventStatus { draft, published, ongoing, ended, canceled }
@@ -27,9 +29,9 @@ class Event {
   final EventStatus status;
   final String? imageUrl;
   final String? ageCategory;
-  final String ownerType;
+  final OwnerType ownerType;
   final int ownerId;
-  final dynamic owner;
+  final EventOwner? owner;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -48,25 +50,27 @@ class Event {
     required this.status,
     this.imageUrl,
     this.ageCategory,
-    required this.ownerType,
     required this.ownerId,
+    required this.ownerType,
     this.owner,
     this.createdAt,
     this.updatedAt,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    final ownerType = (json['owner_type'] as String?) ?? '';
+    final rawOwnerType = json['owner_type'] as String?;
+    final ownerType = OwnerTypeX.fromRaw(rawOwnerType);
     final ownerJson = json['owner'];
 
-    dynamic parsedOwner;
+    EventOwner? parsedOwner;
     if (ownerJson != null) {
-      final ownerTypeLower = ownerType.toLowerCase();
-
-      if (ownerTypeLower.contains('user')) {
-        parsedOwner = User.fromJson(ownerJson);
-      } else if (ownerTypeLower.contains('organization')) {
-        parsedOwner = Organization.fromJson(ownerJson);
+      switch (ownerType) {
+        case OwnerType.user:
+          parsedOwner = User.fromJson(ownerJson);
+          break;
+        case OwnerType.organization:
+          parsedOwner = Organization.fromJson(ownerJson);
+          break;
       }
     }
 

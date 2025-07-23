@@ -1,4 +1,6 @@
-class User {
+import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
+
+class User implements EventOwner {
   final int id;
   final String firstName;
   final String? lastName;
@@ -6,6 +8,7 @@ class User {
   final DateTime? emailVerifiedAt;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  @override
   final String? avatarUrl;
 
   User({
@@ -50,4 +53,8 @@ class User {
       'updated_at': updatedAt?.toIso8601String(),
     };
   }
+
+  @override
+  String get displayName =>
+      [firstName, lastName].where((e) => e != null).join(' ');
 }
