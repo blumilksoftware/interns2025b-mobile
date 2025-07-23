@@ -6,6 +6,7 @@ class User {
   final DateTime? emailVerifiedAt;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final String? avatarUrl;
 
   User({
     required this.id,
@@ -15,6 +16,7 @@ class User {
     this.emailVerifiedAt,
     required this.createdAt,
     required this.updatedAt,
+    this.avatarUrl,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class User {
       id: json['id'],
       firstName: json['first_name'],
       lastName: json['last_name'],
+      avatarUrl: json['avatar_url'],
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'] != null
           ? DateTime.tryParse(json['email_verified_at'])
@@ -40,6 +43,7 @@ class User {
       'id': id,
       'first_name': firstName,
       'last_name': lastName,
+      'avatar_url': avatarUrl,
       'email': email,
       'email_verified_at': emailVerifiedAt?.toIso8601String(),
       'created_at': createdAt?.toIso8601String(),

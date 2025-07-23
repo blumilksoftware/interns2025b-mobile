@@ -1,16 +1,6 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
-
-enum EventStatus { draft, published, ongoing, ended, canceled }
-
-extension EventStatusX on EventStatus {
-  static EventStatus fromString(String? value) {
-    return EventStatus.values.firstWhere(
-      (e) => e.name == value,
-      orElse: () => throw ArgumentError('Unknown event status: $value'),
-    );
-  }
-}
 
 class Event {
   final int id;
@@ -56,14 +46,18 @@ class Event {
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    final ownerType = json['owner_type'];
+    final ownerType = (json['owner_type'] as String?) ?? '';
     final ownerJson = json['owner'];
 
     dynamic parsedOwner;
-    if (ownerType == 'user' && ownerJson != null) {
-      parsedOwner = User.fromJson(ownerJson);
-    } else if (ownerType == 'organization' && ownerJson != null) {
-      parsedOwner = Organization.fromJson(ownerJson);
+    if (ownerJson != null) {
+      final ownerTypeLower = ownerType.toLowerCase();
+
+      if (ownerTypeLower.contains('user')) {
+        parsedOwner = User.fromJson(ownerJson);
+      } else if (ownerTypeLower.contains('organization')) {
+        parsedOwner = Organization.fromJson(ownerJson);
+      }
     }
 
     return Event(
@@ -95,5 +89,25 @@ class Event {
           ? DateTime.tryParse(json['updated_at'])
           : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'start': start?.toIso8601String(),
+      'end': end?.toIso8601String(),
+      'location': location,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'is_paid': isPaid,
+      'price': price,
+      'status': status.name,
+      'image_url': imageUrl,
+      'age_category': ageCategory,
+      'owner_type': ownerType,
+      'owner_id': ownerId,
+    };
   }
 }

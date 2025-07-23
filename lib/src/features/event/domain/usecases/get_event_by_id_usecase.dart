@@ -1,12 +1,12 @@
 import 'package:interns2025b_mobile/src/features/event/domain/repositories/event_repository.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 
-class GetEventsUseCase {
+class GetEventByIdUseCase {
   final EventRepository repository;
 
-  GetEventsUseCase(this.repository);
+  GetEventByIdUseCase(this.repository);
 
-  Future<List<Event>> call({int page = 1}) {
-    return repository.getEvents(page: page);
+  Future<Event> call(int id) {
+    return repository.getEventById(id);
   }
 }

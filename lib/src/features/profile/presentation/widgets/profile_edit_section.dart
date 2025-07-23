@@ -5,6 +5,7 @@ import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/logou
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/delete_user_request_button.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_form.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/language_switch_button.dart';
 
@@ -71,8 +72,8 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
               label: localizations.cancel,
               fullWidth: true,
               isOutlined: true,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
+              backgroundColor: AppColors.backgroundLight,
+              foregroundColor: AppColors.black,
               onPressed: notifier.toggleEdit,
             ),
           ] else ...[
@@ -81,8 +82,8 @@ class _ProfileEditSectionState extends ConsumerState<ProfileEditSection> {
               icon: Icons.edit,
               fullWidth: true,
               onPressed: notifier.toggleEdit,
-              backgroundColor: Colors.black,
-              foregroundColor: Colors.white,
+              backgroundColor: AppColors.black,
+              foregroundColor: AppColors.backgroundLight,
             ),
             const SizedBox(height: 16),
             const LogoutButton(),

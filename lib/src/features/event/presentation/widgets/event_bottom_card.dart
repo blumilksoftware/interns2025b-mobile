@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
@@ -97,7 +98,13 @@ class EventBottomCard extends StatelessWidget {
                         freeText: localizations.free,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.eventDetails,
+                            arguments: event.id,
+                          );
+                        },
                         child: Text(localizations.seeDetails),
                       ),
                     ],

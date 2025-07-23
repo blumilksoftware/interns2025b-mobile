@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
+  final CreateEventUseCase createEventUseCase;
 
-  EventsController({required this.getEventsUseCase});
+  EventsController({
+    required this.getEventsUseCase,
+    required this.createEventUseCase,
+  });
 
   final List<Event> _events = [];
   final Set<int> _shownEventIds = {};
@@ -24,6 +30,12 @@ class EventsController extends ChangeNotifier {
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
+
+  bool _isCreating = false;
+  bool get isCreating => _isCreating;
+
+  String? _creationError;
+  String? get creationError => _creationError;
 
   bool _hasMore = true;
   bool get hasMore => _hasMore;
@@ -57,7 +69,6 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _reset();
-      notifyListeners();
     }
 
     _isLoading = true;
@@ -65,17 +76,16 @@ class EventsController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await getEventsUseCase.call(
-        page: _currentPage,
-        limit: _limit,
-      );
+      final result = await getEventsUseCase.call(page: _currentPage);
 
-      final newEvents = result.where((e) => !_shownEventIds.contains(e.id));
+      final newEvents = result
+          .where((e) => !_shownEventIds.contains(e.id))
+          .toList();
 
       _events.addAll(newEvents);
       _shownEventIds.addAll(newEvents.map((e) => e.id));
 
-      if (newEvents.length < _limit) {
+      if (result.length < _limit) {
         _hasMore = false;
       } else {
         _currentPage++;
@@ -109,5 +119,58 @@ class EventsController extends ChangeNotifier {
     _shownEventIds.clear();
     _currentPage = 1;
     _hasMore = true;
+  }
+
+  Future<void> loadAllEvents() async {
+    if (_isLoading) return;
+
+    _reset();
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      while (_hasMore) {
+        final result = await getEventsUseCase.call(page: _currentPage);
+        final newEvents = result
+            .where((e) => !_shownEventIds.contains(e.id))
+            .toList();
+
+        _events.addAll(newEvents);
+        _shownEventIds.addAll(newEvents.map((e) => e.id));
+
+        if (result.length < _limit) {
+          _hasMore = false;
+        } else {
+          _currentPage++;
+        }
+      }
+    } catch (e) {
+      _errorMessage = '$e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> createEvent(Event event) async {
+    _isCreating = true;
+    _creationError = null;
+    notifyListeners();
+
+    try {
+      await createEventUseCase(event);
+    } on NoInternetException catch (e) {
+      _creationError = e.message;
+    } on HttpException catch (e) {
+      _creationError = 'Server error: ${e.message} (code ${e.statusCode})';
+    } on AuthException catch (e) {
+      _creationError = 'Authorization error: ${e.message}';
+    } catch (e) {
+      _creationError = 'Unexpected error: $e';
+    } finally {
+      _isCreating = false;
+      notifyListeners();
+    }
   }
 }

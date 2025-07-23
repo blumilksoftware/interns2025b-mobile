@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/providers/localization_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class LanguageSwitchButton extends ConsumerWidget {
   const LanguageSwitchButton({super.key});
@@ -18,13 +19,13 @@ class LanguageSwitchButton extends ConsumerWidget {
         final newLang = isPolish ? 'en' : 'pl';
         controller.setLocale(newLang);
       },
-      icon: const Icon(Icons.language, color: Colors.black),
-      label: Text(label, style: const TextStyle(color: Colors.black)),
+      icon: Icon(Icons.language, color: AppColors.black),
+      label: Text(label, style:  TextStyle(color: AppColors.black)),
       style: OutlinedButton.styleFrom(
-        side: const BorderSide(color: Colors.black, width: 1.5),
+        side: const BorderSide(color: AppColors.black, width: 1.5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        foregroundColor: Colors.black,
+        foregroundColor: AppColors.black,
       ).copyWith(overlayColor: WidgetStateProperty.all(Colors.black12)),
     );
   }

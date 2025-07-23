@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_map_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_bottom_card.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_map.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_marker.dart';
@@ -14,13 +14,25 @@ class EventMapView extends ConsumerStatefulWidget {
 }
 
 class _EventMapViewState extends ConsumerState<EventMapView> {
-  final MapController _mapController = MapController();
+  bool _initialized = false;
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _initialized = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(eventsControllerProvider.notifier).loadAllEvents();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final controller = ref.read(eventsControllerProvider.notifier);
     final state = ref.watch(eventsControllerProvider);
-
+    final mapController = ref.watch(eventMapProvider).mapController;
     final events = state.filteredEvents;
     final selectedEvent = state.selectedEvent;
 
@@ -34,7 +46,7 @@ class _EventMapViewState extends ConsumerState<EventMapView> {
     return Stack(
       children: [
         EventMap(
-          mapController: _mapController,
+          mapController: mapController,
           markers: markers,
           onMapTap: (_, _) => controller.selectEvent(null),
         ),

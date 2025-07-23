@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_data_time_row.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
-import 'package:intl/intl.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
-  final VoidCallback? onAgeRestrictionTap;
 
-  const EventCard({super.key, required this.event, this.onAgeRestrictionTap});
+  const EventCard({super.key, required this.event,});
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context).toLanguageTag();
-
-    final dateText = event.start != null
-        ? DateFormat('d MMMM yyyy – HH:mm', locale).format(event.start!)
-        : '';
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -39,12 +33,7 @@ class EventCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      dateText,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.shadeGrey700,
-                      ),
-                    ),
+                    EventDateTimeRow(date: event.start),
                     EventPriceTag(
                       isPaid: event.isPaid,
                       paidText: localizations.paid,
@@ -67,16 +56,14 @@ class EventCard extends StatelessWidget {
                       context,
                     ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
                   ),
+
                 if (event.ageCategory != null)
-                  GestureDetector(
-                    onTap: onAgeRestrictionTap,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        event.ageCategory!,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.shadeGrey700,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Text(
+                      event.ageCategory!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.shadeGrey700,
                       ),
                     ),
                   ),

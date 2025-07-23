@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/avatar_widget.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_edit_section.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_info_content.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class ProfileInfoCard extends ConsumerWidget {
   const ProfileInfoCard({super.key});
@@ -21,8 +23,8 @@ class ProfileInfoCard extends ConsumerWidget {
             minHeight: screenHeight - topPadding - 170,
           ),
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 24),
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: AppColors.backgroundLight,
             borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
             boxShadow: [
               BoxShadow(
@@ -48,7 +50,12 @@ class ProfileInfoCard extends ConsumerWidget {
         Positioned(
           top: -50,
           left: (MediaQuery.of(context).size.width - 100) / 2,
-          child: const AvatarWidget(),
+          child: Consumer(
+            builder: (context, ref, _) {
+              final user = ref.watch(profileControllerProvider).user;
+              return AvatarWidget(avatarUrl: user?.avatarUrl);
+            },
+          ),
         ),
       ],
     );
