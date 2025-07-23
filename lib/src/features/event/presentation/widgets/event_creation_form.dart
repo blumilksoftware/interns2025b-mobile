@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/providers/auth_controller_provider.dart';
-import 'package:interns2025b_mobile/src/features/auth/presentation/widgets/password_field.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/custom_text_field.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/language_switch_button.dart';
-import 'package:interns2025b_mobile/src/shared/presentation/widgets/terms_of_use_text.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/age_category_dropdown.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/coordinates_section.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/date_picker_field.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/descritpion_field.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/image_url_field.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/location_section.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/status_dropdown.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/submit_button_section.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/title_field.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
 class EventCreationForm extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -45,94 +47,56 @@ class EventCreationForm extends ConsumerStatefulWidget {
 }
 
 class _EventCreationFormState extends ConsumerState<EventCreationForm> {
+  EventStatus? _selectedStatus;
+  AgeCategory? _selectedAgeCategory;
+  DateTime? _startDate;
+  DateTime? _endDate;
 
   @override
   Widget build(BuildContext context) {
-    final authController = ref.read(authControllerProvider.notifier);
-    final localizations = AppLocalizations.of(context)!;
-
     return Form(
       key: widget.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          LabeledText(localizations.emailLabel),
-          const SizedBox(height: 8),
-          CustomTextField(
-            controller: widget.title,
-            keyboardType: TextInputType.emailAddress,
-            hintText: 'example@gmail.com',
-            validator: (value) => value == null || value.isEmpty
-                ? localizations.emailRequiredError
-                : null,
+          TitleField(controller: widget.title),
+          DescriptionField(controller: widget.description),
+          DatePickerField(
+            startController: widget.startTime,
+            endController: widget.endTime,
+            onStartPicked: (date) => setState(() => _startDate = date),
+            onEndPicked: (date) => setState(() => _endDate = date),
+            startDate: _startDate,
+            endDate: _endDate,
           ),
-          const SizedBox(height: 20),
-
-          LabeledText(localizations.firstNameLabel),
-          const SizedBox(height: 8),
-          CustomTextField(
-            controller: widget.description,
-            hintText: 'John',
-            validator: (value) => value == null || value.isEmpty
-                ? localizations.nameRequiredError
-                : null,
+          LocationSection(location: widget.location, address: widget.address!),
+          CoordinatesSection(
+            latitude: widget.latitude!,
+            longitude: widget.longitude!,
           ),
-          const SizedBox(height: 20),
-
-          LabeledText(localizations.lastNameLabel),
-          const SizedBox(height: 8),
-          CustomTextField(
-            controller: widget.startTime,
-            hintText: 'Smith',
-          ),
-          const SizedBox(height: 20),
-
-          const SizedBox(height: 24),
-          Button(
-            label: localizations.registerButton,
-            isLoading: ref.watch(authControllerProvider).isLoading,
-            fullWidth: true,
-            onPressed: () {
-              if (widget.formKey.currentState!.validate()) {
-                authController.register(
-                  context,
-                  widget.title.text,
-                  widget.description.text,
-                  widget.startTime.text,
-                  widget.endTime.text,
-                  widget.location.text,
-                  widget.address?.text,
-                  widget.latitude?.text,
-                  widget.longitude?.text,
-                  widget.imageUrl.text,
-                  widget.status.text,
-                  widget.ageCategory.text,
-
-                );
+          ImageUrlField(controller: widget.imageUrl),
+          StatusDropdown(
+            selected: _selectedStatus,
+            onChanged: (status) {
+              setState(() => _selectedStatus = status);
+              if (status != null) {
+                widget.status.text = status.name;
               }
             },
           ),
-
-          const SizedBox(height: 24),
-          const TermsOfUseText(),
-
-          const SizedBox(height: 16),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.login);
+          AgeCategoryDropdown(
+            selected: _selectedAgeCategory,
+            onChanged: (category) {
+              setState(() => _selectedAgeCategory = category);
+              widget.ageCategory.text = category?.name ?? '';
             },
-            child: Text(
-              localizations.alreadyHaveAccount,
-              style: const TextStyle(color: Colors.black54),
-            ),
           ),
-          const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: SizedBox(
-              width: double.infinity,
-              child: const LanguageSwitchButton(),
-            ),
+          SubmitButtonSection(
+            onPressed: () {
+              if (widget.formKey.currentState!.validate()) {
+                // handle submit
+              }
+            },
           ),
         ],
       ),

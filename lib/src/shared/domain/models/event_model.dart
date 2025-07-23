@@ -1,16 +1,6 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
-
-enum EventStatus { draft, published, ongoing, ended, canceled }
-
-extension EventStatusX on EventStatus {
-  static EventStatus fromString(String? value) {
-    return EventStatus.values.firstWhere(
-      (e) => e.name == value,
-      orElse: () => throw ArgumentError('Unknown event status: $value'),
-    );
-  }
-}
 
 class Event {
   final int id;

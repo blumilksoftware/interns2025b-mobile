@@ -4,6 +4,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
