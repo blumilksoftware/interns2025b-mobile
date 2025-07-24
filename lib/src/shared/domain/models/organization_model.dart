@@ -1,9 +1,12 @@
-class Organization {
+import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
+
+class Organization implements EventOwner {
   final int id;
   final String name;
   final String? groupUrl;
-  final String? avatarUrl;
   final OwnerPreview? owner;
+  @override
+  final String? avatarUrl;
 
   Organization({
     required this.id,
@@ -19,9 +22,13 @@ class Organization {
       name: json['name'],
       groupUrl: json['group_url'],
       avatarUrl: json['avatar_url'],
-      owner: json['owner'] != null ? OwnerPreview.fromJson(json['owner']) : null,
+      owner: json['owner'] != null
+          ? OwnerPreview.fromJson(json['owner'])
+          : null,
     );
   }
+  @override
+  String get displayName => name;
 }
 
 class OwnerPreview {

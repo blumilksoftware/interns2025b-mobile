@@ -57,7 +57,6 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _reset();
-      notifyListeners();
     }
 
     _isLoading = true;
@@ -65,17 +64,16 @@ class EventsController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await getEventsUseCase.call(
-        page: _currentPage,
-        limit: _limit,
-      );
+      final result = await getEventsUseCase.call(page: _currentPage);
 
-      final newEvents = result.where((e) => !_shownEventIds.contains(e.id));
+      final newEvents = result
+          .where((e) => !_shownEventIds.contains(e.id))
+          .toList();
 
       _events.addAll(newEvents);
       _shownEventIds.addAll(newEvents.map((e) => e.id));
 
-      if (newEvents.length < _limit) {
+      if (result.length < _limit) {
         _hasMore = false;
       } else {
         _currentPage++;
@@ -109,5 +107,37 @@ class EventsController extends ChangeNotifier {
     _shownEventIds.clear();
     _currentPage = 1;
     _hasMore = true;
+  }
+
+  Future<void> loadAllEvents() async {
+    if (_isLoading) return;
+
+    _reset();
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      while (_hasMore) {
+        final result = await getEventsUseCase.call(page: _currentPage);
+        final newEvents = result
+            .where((e) => !_shownEventIds.contains(e.id))
+            .toList();
+
+        _events.addAll(newEvents);
+        _shownEventIds.addAll(newEvents.map((e) => e.id));
+
+        if (result.length < _limit) {
+          _hasMore = false;
+        } else {
+          _currentPage++;
+        }
+      }
+    } catch (e) {
+      _errorMessage = '$e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }

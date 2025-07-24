@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
 
 class DeleteUserRequestButton extends ConsumerWidget {
@@ -18,8 +19,8 @@ class DeleteUserRequestButton extends ConsumerWidget {
       icon: Icons.delete_forever,
       isLoading: isLoading,
       fullWidth: true,
-      backgroundColor: Colors.red,
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.red,
+      foregroundColor: AppColors.backgroundLight,
       onPressed: () {
         showDialog(
           context: context,
