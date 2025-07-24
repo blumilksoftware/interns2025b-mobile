@@ -121,7 +121,7 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 status: _selectedStatus ?? EventStatus.draft,
                 imageUrl: widget.imageUrl.text,
                 ageCategory: _selectedAgeCategory?.name,
-                ownerType: 'usr',
+                ownerType: 'user',
                 ownerId: 1,
               );
 
