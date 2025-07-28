@@ -99,8 +99,8 @@ class Event {
     return {
       'title': title,
       'description': description,
-      'start_time': start?.toIso8601String(),
-      'end_time': end?.toIso8601String(),
+      'start': _formatDate(start),
+      'end': _formatDate(end),
       'location': location,
       'address': address,
       'latitude': latitude,
@@ -113,5 +113,15 @@ class Event {
       'owner_type': ownerType.name,
       'owner_id': ownerId,
     };
+  }
+
+  String? _formatDate(DateTime? dateTime) {
+    if (dateTime == null) return null;
+    return '${dateTime.year.toString().padLeft(4, '0')}-'
+        '${dateTime.month.toString().padLeft(2, '0')}-'
+        '${dateTime.day.toString().padLeft(2, '0')} '
+        '${dateTime.hour.toString().padLeft(2, '0')}:'
+        '${dateTime.minute.toString().padLeft(2, '0')}:'
+        '${dateTime.second.toString().padLeft(2, '0')}';
   }
 }
