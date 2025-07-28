@@ -30,7 +30,7 @@ class ProfileInfoContent extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StatTile(label: 'Wydarzeia', value: user.eventsCount),
+            StatTile(label: 'Wydarzenia', value: user.eventsCount),
             const SizedBox(width: 16),
             StatTile(label: 'Obserwujący', value: user.followersCount),
             const SizedBox(width: 16),
