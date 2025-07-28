@@ -10,6 +10,9 @@ class User implements EventOwner {
   final DateTime? updatedAt;
   @override
   final String? avatarUrl;
+  final int eventsCount;
+  final int followersCount;
+  final int followingCount;
 
   User({
     required this.id,
@@ -20,6 +23,9 @@ class User implements EventOwner {
     required this.createdAt,
     required this.updatedAt,
     this.avatarUrl,
+    required this.eventsCount,
+    required this.followersCount,
+    required this.followingCount,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -38,6 +44,9 @@ class User implements EventOwner {
       updatedAt: json['updated_at'] != null
           ? DateTime.tryParse(json['updated_at'])
           : null,
+      eventsCount: json['events_count'] ?? 0,
+      followersCount: json['followers_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
     );
   }
 
