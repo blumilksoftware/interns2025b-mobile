@@ -19,15 +19,15 @@ class IsPaidCheckbox extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 20),
         LabeledText(localizations.isPaidLabel),
-        const SizedBox(height: 8),
         CheckboxListTile(
           value: value,
           onChanged: onChanged,
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 8),
       ],
     );
   }

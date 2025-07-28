@@ -106,5 +106,6 @@
   "statusEnded": "Ended",
   "statusCanceled": "Canceled",
   "eventCreatedSuccess": "Event created successfully",
-  "isPaidLabel": "Is the event paid?"
+  "isPaidLabel": "Is the event paid?",
+  "selectPointonMapLabel": "Select location on map"
 }

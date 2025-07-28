@@ -106,5 +106,6 @@
   "statusEnded": "Zakończone",
   "statusCanceled": "Anulowane",
   "eventCreatedSuccess": "Wydarzenie zostało utworzone pomyślnie",
-  "isPaidLabel": "Czy wydarzenie jest płatne?"
+  "isPaidLabel": "Czy wydarzenie jest płatne?",
+  "selectPointonMapLabel": "Wybierz lokalizacje na mapie"
 }

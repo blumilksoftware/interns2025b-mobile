@@ -4,7 +4,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/age_category_dropdown.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/coordinates_section.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/coorinates_map_picker.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/date_picker_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/descritpion_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/image_url_field.dart';
@@ -70,7 +70,7 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
             endDate: controller.endDate,
           ),
           LocationSection(location: widget.location, address: widget.address!),
-          CoordinatesSection(
+          CoordinatesMapPicker(
             latitude: widget.latitude!,
             longitude: widget.longitude!,
           ),
