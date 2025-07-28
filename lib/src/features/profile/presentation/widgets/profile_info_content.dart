@@ -13,7 +13,7 @@ class ProfileInfoContent extends ConsumerWidget {
     if (user == null) return const SizedBox();
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 24),
         Text(
@@ -28,8 +28,9 @@ class ProfileInfoContent extends ConsumerWidget {
         const SizedBox(height: 24),
 
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StatTile(label: 'Wydarzenia', value: user.eventsCount),
+            StatTile(label: 'Wydarzeia', value: user.eventsCount),
             const SizedBox(width: 16),
             StatTile(label: 'Obserwujący', value: user.followersCount),
             const SizedBox(width: 16),
