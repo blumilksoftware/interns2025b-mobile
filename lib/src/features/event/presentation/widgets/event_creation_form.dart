@@ -76,24 +76,25 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
           ),
           IsPaidCheckbox(
             value: controller.isPaid,
-            onChanged: (bool? val) => controller.updateFormData(paid: val ?? false),
+            onChanged: (bool? val) =>
+                controller.updateFormData(paid: val ?? false),
           ),
           ImageUrlField(controller: widget.imageUrl),
           StatusDropdown(
             selected: controller.selectedStatus,
-              onChanged: (status) {
-                if (status != null) {
-                  controller.updateFormData(status: status);
-                  widget.status.text = status.name;
-                }
+            onChanged: (status) {
+              if (status != null) {
+                controller.updateFormData(status: status);
+                widget.status.text = status.name;
               }
+            },
           ),
           AgeCategoryDropdown(
             selected: controller.selectedAgeCategory,
-              onChanged: (category) {
-                controller.updateFormData(ageCategory: category);
-                widget.ageCategory.text = category?.name ?? '';
-              }
+            onChanged: (category) {
+              controller.updateFormData(ageCategory: category);
+              widget.ageCategory.text = category?.name ?? '';
+            },
           ),
           SubmitButtonSection(
             isLoading: controller.isCreating,
@@ -127,6 +128,9 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 scaffoldMessenger.showSnackBar(
                   SnackBar(content: Text(successMsg)),
                 );
+                controller.clearFormData();
+                widget.status.clear();
+                widget.ageCategory.clear();
                 navigator.pushReplacementNamed(AppRoutes.events);
               } else {
                 scaffoldMessenger.showSnackBar(
