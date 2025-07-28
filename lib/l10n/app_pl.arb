@@ -105,5 +105,6 @@
   "statusOngoing": "Trwające",
   "statusEnded": "Zakończone",
   "statusCanceled": "Anulowane",
-  "eventCreatedSuccess": "Wydarzenie zostało utworzone pomyślnie"
+  "eventCreatedSuccess": "Wydarzenie zostało utworzone pomyślnie",
+  "isPaidLabel": "Czy wydarzenie jest płatne?"
 }

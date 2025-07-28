@@ -4,6 +4,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 
@@ -42,6 +43,70 @@ class EventsController extends ChangeNotifier {
 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
+
+
+  EventStatus? selectedStatus;
+  AgeCategory? selectedAgeCategory;
+  DateTime? startDate;
+  DateTime? endDate;
+  bool isPaid = false;
+
+
+  void updateStartDate(DateTime date) {
+    startDate = date;
+    notifyListeners();
+  }
+
+  void updateEndDate(DateTime date) {
+    endDate = date;
+    notifyListeners();
+  }
+
+  void updateIsPaid(bool value) {
+    isPaid = value;
+    notifyListeners();
+  }
+
+  void updateStatus(EventStatus status) {
+    selectedStatus = status;
+    notifyListeners();
+  }
+
+  void updateAgeCategory(AgeCategory? category) {
+    selectedAgeCategory = category;
+    notifyListeners();
+  }
+
+  Event buildEvent({
+    required String title,
+    required String description,
+    required String location,
+    required String? address,
+    required String? latitude,
+    required String? longitude,
+    required String imageUrl,
+  }) {
+    return Event(
+      id: 0,
+      title: title,
+      description: description,
+      start: startDate,
+      end: endDate,
+      location: location,
+      address: address,
+      latitude: double.tryParse(latitude ?? ''),
+      longitude: double.tryParse(longitude ?? ''),
+      isPaid: isPaid,
+      price: null,
+      status: selectedStatus ?? EventStatus.draft,
+      imageUrl: imageUrl,
+      ageCategory: selectedAgeCategory?.name,
+      ownerType: 'user',
+      ownerId: 1,
+    );
+  }
+
+  // --- Eventy (reszta metody z Twojego kodu) ---
 
   List<Event> get events => _events;
 

@@ -95,8 +95,8 @@ class Event {
     return {
       'title': title,
       'description': description,
-      'start': start?.toIso8601String(),
-      'end': end?.toIso8601String(),
+      'start_time': start?.toIso8601String(),
+      'end_time': end?.toIso8601String(),
       'location': location,
       'address': address,
       'latitude': latitude,

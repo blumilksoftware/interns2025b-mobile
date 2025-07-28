@@ -105,5 +105,6 @@
   "statusOngoing": "Ongoing",
   "statusEnded": "Ended",
   "statusCanceled": "Canceled",
-  "eventCreatedSuccess": "Event created successfully"
+  "eventCreatedSuccess": "Event created successfully",
+  "isPaidLabel": "Is the event paid?"
 }
