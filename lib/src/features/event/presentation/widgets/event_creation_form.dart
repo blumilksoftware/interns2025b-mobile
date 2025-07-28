@@ -8,7 +8,7 @@ import 'package:interns2025b_mobile/src/features/event/presentation/widgets/even
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/date_picker_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/descritpion_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/image_url_field.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/is_paid_checkbox.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/is_paid_switch.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/location_section.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/status_dropdown.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/submit_button_section.dart';
@@ -74,7 +74,7 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
             latitude: widget.latitude!,
             longitude: widget.longitude!,
           ),
-          IsPaidCheckbox(
+          IsPaidSwitch(
             value: controller.isPaid,
             onChanged: (bool? val) =>
                 controller.updateFormData(paid: val ?? false),

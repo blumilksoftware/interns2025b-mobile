@@ -3,7 +3,7 @@ import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dar
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String hintText;
+  final String? hintText;
   final bool obscureText;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.hintText,
+    this.hintText,
     this.obscureText = false,
     this.suffixIcon,
     this.validator,
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly,
       style: const TextStyle(color: AppColors.text),
       decoration: InputDecoration(
-        hintText: hintText,
+        hintText: hintText?.isNotEmpty == true ? hintText : null,
         hintStyle: const TextStyle(color: AppColors.textSecondary),
         filled: true,
         fillColor: AppColors.fieldBackground,

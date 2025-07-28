@@ -129,7 +129,6 @@ class _DatePickerFieldState extends State<DatePickerField> {
           child: AbsorbPointer(
             child: CustomTextField(
               controller: widget.startController,
-              hintText: localizations.startDateHint,
               readOnly: true,
               validator: (_) {
                 if (_startDate == null) {
@@ -154,7 +153,6 @@ class _DatePickerFieldState extends State<DatePickerField> {
           child: AbsorbPointer(
             child: CustomTextField(
               controller: widget.endController,
-              hintText: localizations.endDateHint,
               readOnly: true,
               validator: (_) {
                 if (_endDate == null) {

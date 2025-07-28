@@ -19,7 +19,6 @@ class DescriptionField extends StatelessWidget {
         const SizedBox(height: 8),
         CustomTextField(
           controller: controller,
-          hintText: localizations.descriptionHint,
         ),
         const SizedBox(height: 20),
       ],
