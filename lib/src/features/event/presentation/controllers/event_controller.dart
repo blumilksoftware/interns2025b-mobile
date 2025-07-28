@@ -7,6 +7,7 @@ import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_event
 import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/owner_type.dart';
 
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
@@ -92,7 +93,7 @@ class EventsController extends ChangeNotifier {
       status: selectedStatus ?? EventStatus.draft,
       imageUrl: imageUrl,
       ageCategory: selectedAgeCategory?.name,
-      ownerType: 'user',
+      ownerType: OwnerType.user,
       ownerId: 1,
     );
   }

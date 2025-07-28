@@ -60,7 +60,7 @@ class EventDetailsBody extends StatelessWidget {
                   ),
 
                 if (event.owner != null)
-                  EventAuthorTile(owner: event.owner),
+                  EventAuthorTile(owner: event.owner!),
 
                 LabeledText(
                   localizations.information,
@@ -80,7 +80,6 @@ class EventDetailsBody extends StatelessWidget {
 
                 const SizedBox(height: 16),
                 EventLocationMap(event: event),
-
               ],
             ),
           ),

@@ -1,28 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
-import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
 class EventAuthorTile extends StatelessWidget {
-  final dynamic owner;
+  final EventOwner owner;
 
   const EventAuthorTile({super.key, required this.owner});
 
   @override
   Widget build(BuildContext context) {
-    if (owner == null) return const SizedBox.shrink();
-
-    String? name;
-    String? imageUrl;
-
-    if (owner is User) {
-      name = owner.firstName + (owner.lastName != null ? ' ${owner.lastName}' : '');
-      imageUrl = owner.avatarUrl;
-    } else if (owner is Organization) {
-      name = owner.name;
-      imageUrl = owner.avatarUrl;
-    }
-
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
@@ -34,9 +20,9 @@ class EventAuthorTile extends StatelessWidget {
               width: 48,
               height: 48,
               color: AppColors.primary.withValues(alpha: 0.1),
-              child: imageUrl != null && imageUrl.isNotEmpty
+              child: owner.avatarUrl != null && owner.avatarUrl!.isNotEmpty
                   ? Image.network(
-                imageUrl,
+                owner.avatarUrl!,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return _defaultAvatar();
@@ -48,7 +34,7 @@ class EventAuthorTile extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              name ?? '',
+              owner.displayName,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.black,
@@ -60,7 +46,6 @@ class EventAuthorTile extends StatelessWidget {
     );
   }
 
-  Widget _defaultAvatar() {
-    return Icon(Icons.person, size: 24, color: AppColors.primary);
-  }
+  Widget _defaultAvatar() =>
+      Icon(Icons.person, size: 24, color: AppColors.primary);
 }

@@ -6,11 +6,13 @@ import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text
 class LocationSection extends StatelessWidget {
   final TextEditingController location;
   final TextEditingController address;
+  final bool showError;
 
   const LocationSection({
     super.key,
     required this.location,
     required this.address,
+    this.showError = false,
   });
 
   @override
@@ -25,6 +27,9 @@ class LocationSection extends StatelessWidget {
         CustomTextField(
           controller: location,
           hintText: localizations.locationHint,
+          validator: (value) => value == null || value.isEmpty
+              ? localizations.locationRequiredError
+              : null,
         ),
         const SizedBox(height: 20),
 
@@ -33,6 +38,7 @@ class LocationSection extends StatelessWidget {
         CustomTextField(
           controller: address,
           hintText: localizations.addressHint,
+
         ),
         const SizedBox(height: 20),
       ],
