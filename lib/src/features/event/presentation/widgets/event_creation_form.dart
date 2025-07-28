@@ -64,8 +64,8 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
           DatePickerField(
             startController: widget.startTime,
             endController: widget.endTime,
-            onStartPicked: controller.updateStartDate,
-            onEndPicked: controller.updateEndDate,
+            onStartPicked: (date) => controller.updateFormData(start: date),
+            onEndPicked: (date) => controller.updateFormData(end: date),
             startDate: controller.startDate,
             endDate: controller.endDate,
           ),
@@ -76,24 +76,24 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
           ),
           IsPaidCheckbox(
             value: controller.isPaid,
-            onChanged: (bool? val) => controller.updateIsPaid(val ?? false),
+            onChanged: (bool? val) => controller.updateFormData(paid: val ?? false),
           ),
           ImageUrlField(controller: widget.imageUrl),
           StatusDropdown(
             selected: controller.selectedStatus,
-            onChanged: (status) {
-              if (status != null) {
-                controller.updateStatus(status);
-                widget.status.text = status.name;
+              onChanged: (status) {
+                if (status != null) {
+                  controller.updateFormData(status: status);
+                  widget.status.text = status.name;
+                }
               }
-            },
           ),
           AgeCategoryDropdown(
             selected: controller.selectedAgeCategory,
-            onChanged: (category) {
-              controller.updateAgeCategory(category);
-              widget.ageCategory.text = category?.name ?? '';
-            },
+              onChanged: (category) {
+                controller.updateFormData(ageCategory: category);
+                widget.ageCategory.text = category?.name ?? '';
+              }
           ),
           SubmitButtonSection(
             isLoading: controller.isCreating,

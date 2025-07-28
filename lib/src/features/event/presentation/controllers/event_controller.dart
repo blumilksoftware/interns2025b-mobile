@@ -52,28 +52,19 @@ class EventsController extends ChangeNotifier {
   bool isPaid = false;
 
 
-  void updateStartDate(DateTime date) {
-    startDate = date;
-    notifyListeners();
-  }
+  void updateFormData({
+    DateTime? start,
+    DateTime? end,
+    bool? paid,
+    EventStatus? status,
+    AgeCategory? ageCategory,
+  }) {
+    if (start != null) startDate = start;
+    if (end != null) endDate = end;
+    if (paid != null) isPaid = paid;
+    if (status != null) selectedStatus = status;
+    if (ageCategory != null) selectedAgeCategory = ageCategory;
 
-  void updateEndDate(DateTime date) {
-    endDate = date;
-    notifyListeners();
-  }
-
-  void updateIsPaid(bool value) {
-    isPaid = value;
-    notifyListeners();
-  }
-
-  void updateStatus(EventStatus status) {
-    selectedStatus = status;
-    notifyListeners();
-  }
-
-  void updateAgeCategory(AgeCategory? category) {
-    selectedAgeCategory = category;
     notifyListeners();
   }
 
@@ -105,8 +96,6 @@ class EventsController extends ChangeNotifier {
       ownerId: 1,
     );
   }
-
-  // --- Eventy (reszta metody z Twojego kodu) ---
 
   List<Event> get events => _events;
 
