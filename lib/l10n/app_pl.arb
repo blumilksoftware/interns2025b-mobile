@@ -108,5 +108,8 @@
   "eventCreatedSuccess": "Wydarzenie zostało utworzone pomyślnie",
   "isPaidLabel": "Czy wydarzenie jest płatne?",
   "selectPointonMapLabel": "Wybierz lokalizacje na mapie",
-  "locationRequiredError": "Podaj lokalizację"
+  "locationRequiredError": "Podaj lokalizację",
+  "eventsCount": "Wydarzenia",
+  "followersCount": "Obserwujący",
+  "followingCount": "Obserwowani"
 }
