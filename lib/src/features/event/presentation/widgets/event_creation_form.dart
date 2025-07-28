@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/age_category_dropdown.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/coordinates_section.dart';
@@ -126,7 +127,7 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 scaffoldMessenger.showSnackBar(
                   SnackBar(content: Text(successMsg)),
                 );
-                navigator.pop();
+                navigator.pushReplacementNamed(AppRoutes.events);
               } else {
                 scaffoldMessenger.showSnackBar(
                   SnackBar(content: Text(controller.creationError!)),
