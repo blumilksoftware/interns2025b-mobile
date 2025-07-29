@@ -28,7 +28,7 @@ class ProfileStats extends ConsumerWidget {
           label: localizations.followingCount,
           value: user.followingCount,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
       ],
     );
   }
