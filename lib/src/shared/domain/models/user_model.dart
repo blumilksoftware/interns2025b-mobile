@@ -1,3 +1,4 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 
 class User implements EventOwner {
@@ -13,6 +14,7 @@ class User implements EventOwner {
   final int eventsCount;
   final int followersCount;
   final int followingCount;
+  final List<Event> events;
 
   User({
     required this.id,
@@ -26,6 +28,7 @@ class User implements EventOwner {
     required this.eventsCount,
     required this.followersCount,
     required this.followingCount,
+    required this.events,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -47,6 +50,9 @@ class User implements EventOwner {
       eventsCount: json['events_count'] ?? 0,
       followersCount: json['followers_count'] ?? 0,
       followingCount: json['following_count'] ?? 0,
+      events: (json['events'] as List<dynamic>? ?? [])
+          .map((e) => Event.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
   }
 

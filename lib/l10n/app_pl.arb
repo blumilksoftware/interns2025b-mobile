@@ -111,5 +111,6 @@
   "locationRequiredError": "Podaj lokalizację",
   "eventsCount": "Wydarzenia",
   "followersCount": "Obserwujący",
-  "followingCount": "Obserwowani"
+  "followingCount": "Obserwowani",
+  "yourEvents": "Twoje wydarzenia"
 }

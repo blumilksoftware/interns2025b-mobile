@@ -111,5 +111,6 @@
   "locationRequiredError": "Please enter a location",
   "eventsCount": "Events",
   "followersCount": "Followers",
-  "followingCount": "Following"
+  "followingCount": "Following",
+  "yourEvents": "Your events"
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/utils/event_sorter.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_events_section.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_stats.dart';
 
 class ProfileInfoContent extends ConsumerWidget {
@@ -12,6 +14,9 @@ class ProfileInfoContent extends ConsumerWidget {
 
     if (user == null) return const SizedBox();
 
+    final sortedEvents = [...user.events];
+    sortEvents(sortedEvents);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -20,15 +25,14 @@ class ProfileInfoContent extends ConsumerWidget {
           user.lastName?.trim().isNotEmpty == true
               ? '${user.firstName} ${user.lastName}'
               : user.firstName,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 24),
 
         ProfileStats(),
-
+        ProfileEventsSection(events: sortedEvents),
       ],
     );
   }
