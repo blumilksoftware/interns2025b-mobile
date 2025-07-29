@@ -6,4 +6,5 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String addEvent = '/add-event';
   static const String eventDetails = '/event-details';
+  static const String profileDetails = '/profile-details';
 }
