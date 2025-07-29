@@ -9,6 +9,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/unauthorized_exception.d
 import 'package:interns2025b_mobile/src/features/profile/domain/providers/get_user_profile_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/delete_user_request_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_user_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
@@ -18,6 +19,7 @@ class ProfileController extends ChangeNotifier {
   final Ref ref;
   final UpdateProfileUseCase updateProfileUseCase;
   final GetProfileUseCase getProfileUseCase;
+  final GetUserProfileUseCase getUserProfileUseCase;
   final DeleteUserRequestUseCase deleteUserRequestUseCase;
 
   ProfileController(
@@ -25,6 +27,7 @@ class ProfileController extends ChangeNotifier {
     this.updateProfileUseCase,
     this.getProfileUseCase,
     this.deleteUserRequestUseCase,
+    this.getUserProfileUseCase,
   );
 
   bool _isLoading = false;
