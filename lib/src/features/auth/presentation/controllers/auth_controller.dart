@@ -17,6 +17,7 @@ import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usec
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
+import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends AsyncNotifier<User?> {
@@ -160,7 +161,7 @@ class AuthController extends AsyncNotifier<User?> {
 
   void _showError(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: Colors.red),
+      SnackBar(content: Text(message), backgroundColor: AppColors.red),
     );
   }
 

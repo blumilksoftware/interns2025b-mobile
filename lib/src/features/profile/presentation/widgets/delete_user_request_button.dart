@@ -41,7 +41,7 @@ class DeleteUserRequestButton extends ConsumerWidget {
                 },
                 child: Text(
                   localizations.confirm,
-                  style: const TextStyle(color: Colors.red),
+                  style: TextStyle(color: AppColors.red),
                 ),
               ),
             ],
