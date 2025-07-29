@@ -22,13 +22,21 @@ class ProfileInfoContent extends ConsumerWidget {
       children: [
         const SizedBox(height: 24),
         Text(
-          user.lastName?.trim().isNotEmpty == true
-              ? '${user.firstName} ${user.lastName}'
-              : user.firstName,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          user.firstName,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
         ),
+        if ((user.lastName?.trim().isNotEmpty ?? false))
+          Text(
+            user.lastName!,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+
+          ),
         const SizedBox(height: 24),
 
         ProfileStats(),
