@@ -38,5 +38,20 @@ class AppTheme {
         borderRadius: BorderRadius.all(Radius.circular(6)),
       ),
     ),
+
+    timePickerTheme: TimePickerThemeData(
+      hourMinuteColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.greenLightLabelBackground.withValues(alpha: 0.3);
+        }
+        return Colors.transparent;
+      }),
+      hourMinuteTextColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return Colors.green.shade900;
+        }
+        return Colors.grey.shade600;
+      }),
+    ),
   );
 }

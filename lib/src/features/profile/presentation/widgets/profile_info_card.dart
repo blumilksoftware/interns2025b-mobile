@@ -11,22 +11,16 @@ class ProfileInfoCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final topPadding = MediaQuery.of(context).padding.top;
-
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
           width: double.infinity,
-          constraints: BoxConstraints(
-            minHeight: screenHeight - topPadding - 170,
-          ),
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 24),
           decoration: BoxDecoration(
             color: AppColors.backgroundLight,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-            boxShadow: [
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(50)),
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 12,
@@ -34,17 +28,16 @@ class ProfileInfoCard extends ConsumerWidget {
               ),
             ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const ProfileInfoContent(),
-              const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0),
-                child: ProfileEditSection(),
-              ),
-            ],
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: const [
+                ProfileInfoContent(),
+                SizedBox(height: 24),
+                ProfileEditSection(),
+              ],
+            ),
           ),
         ),
         Positioned(
