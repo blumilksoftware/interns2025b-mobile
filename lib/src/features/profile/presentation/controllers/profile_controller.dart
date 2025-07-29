@@ -6,6 +6,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/unauthorized_exception.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/providers/get_user_profile_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/delete_user_request_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
@@ -66,6 +67,29 @@ class ProfileController extends ChangeNotifier {
       _isInitialized = true;
       notifyListeners();
     }
+  }
+
+  Future<User?> fetchUserProfileById({
+    required int userId,
+    BuildContext? context,
+  }) async {
+    try {
+      final user = await ref.read(getUserProfileUseCaseProvider).call(userId);
+      return user;
+    } on UnauthorizedException {
+      if (context != null && context.mounted) {
+        await _handleUnauthorized(context);
+      }
+    } catch (e) {
+      if (context != null && context.mounted) {
+        final messenger = ScaffoldMessenger.of(context);
+        final localizations = AppLocalizations.of(context)!;
+        messenger.showSnackBar(
+          SnackBar(content: Text(localizations.genericError)),
+        );
+      }
+    }
+    return null;
   }
 
   void toggleEdit() {
