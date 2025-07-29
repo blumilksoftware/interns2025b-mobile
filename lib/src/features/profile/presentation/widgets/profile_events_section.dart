@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_event_card.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 
@@ -34,7 +35,16 @@ class ProfileEventsSection extends ConsumerWidget {
             separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final event = events[index];
-              return ProfileEventCard(event: event);
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.eventDetails,
+                    arguments: event.id,
+                  );
+                },
+                child: ProfileEventCard(event: event),
+              );
             },
           ),
         ),
