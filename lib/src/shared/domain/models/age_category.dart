@@ -9,17 +9,21 @@ enum AgeCategory {
 
   String localized(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
-    return {
-      AgeCategory.everyone: localization.ageEveryone,
-      AgeCategory.adults: localization.ageAdults,
-      AgeCategory.youth: localization.ageTeens,
-      AgeCategory.children: localization.ageKids,
-    }[this]!;
+    switch (this) {
+      case AgeCategory.everyone:
+        return localization.ageEveryone;
+      case AgeCategory.adults:
+        return localization.ageAdults;
+      case AgeCategory.youth:
+        return localization.ageTeens;
+      case AgeCategory.children:
+        return localization.ageKids;
+    }
   }
 
   static AgeCategory fromString(String? value) {
     return AgeCategory.values.firstWhere(
-          (e) => e.name.toLowerCase() == value?.toLowerCase(),
+      (e) => e.name.toLowerCase() == value?.toLowerCase(),
       orElse: () => AgeCategory.everyone,
     );
   }
