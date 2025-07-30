@@ -1,6 +1,7 @@
-enum OwnerType { user, organization }
+enum OwnerType {
+  user,
+  organization;
 
-extension OwnerTypeX on OwnerType {
   static OwnerType fromRaw(String? value) {
     switch (value?.toLowerCase()) {
       case 'user':

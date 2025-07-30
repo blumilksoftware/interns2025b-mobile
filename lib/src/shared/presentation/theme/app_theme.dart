@@ -42,7 +42,7 @@ class AppTheme {
     timePickerTheme: TimePickerThemeData(
       hourMinuteColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.selected)) {
-          return Colors.green.withValues(alpha: 0.3);
+          return AppColors.greenLightLabelBackground.withValues(alpha: 0.3);
         }
         return Colors.transparent;
       }),

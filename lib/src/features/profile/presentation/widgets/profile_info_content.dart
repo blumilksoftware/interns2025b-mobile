@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/src/features/profile/domain/utils/event_sorter.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_events_section.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_stats.dart';
 
 class ProfileInfoContent extends ConsumerWidget {
   const ProfileInfoContent({super.key});
@@ -11,18 +14,31 @@ class ProfileInfoContent extends ConsumerWidget {
 
     if (user == null) return const SizedBox();
 
+    final sortedEvents = [...user.events];
+    sortEvents(sortedEvents);
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 24),
         Text(
-          user.lastName?.trim().isNotEmpty == true
-              ? '${user.firstName} ${user.lastName}'
-              : user.firstName,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          user.firstName,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
         ),
+        if ((user.lastName?.trim().isNotEmpty ?? false))
+          Text(
+            user.lastName!,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
         const SizedBox(height: 24),
+        const ProfileStats(),
+        ProfileEventsSection(events: sortedEvents),
       ],
     );
   }

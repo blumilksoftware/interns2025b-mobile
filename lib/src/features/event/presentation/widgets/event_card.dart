@@ -3,6 +3,7 @@ import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_data_time_row.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_price_tag.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 
@@ -61,7 +62,7 @@ class EventCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
-                      event.ageCategory!,
+                      AgeCategory.fromString(event.ageCategory).localized(context),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.shadeGrey700,
                       ),

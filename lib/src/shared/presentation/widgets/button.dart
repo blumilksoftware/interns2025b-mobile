@@ -19,8 +19,8 @@ class Button extends StatelessWidget {
     this.fullWidth = false,
     this.icon,
     this.isLoading = false,
-    this.backgroundColor = Colors.black,
-    this.foregroundColor = Colors.white,
+    this.backgroundColor = AppColors.black,
+    this.foregroundColor = AppColors.backgroundLight,
     this.iconColor,
     this.isOutlined = false,
   });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/navigation_bar.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_creation_form.dart';
 
@@ -43,9 +44,10 @@ class _EventCreationPageState extends ConsumerState<EventCreationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Event'),
+        title:  Text(localizations.createEventButton),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

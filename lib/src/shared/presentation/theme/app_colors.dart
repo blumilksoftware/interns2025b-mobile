@@ -28,4 +28,5 @@ class AppColors {
   static const borderEnable = Color(0x29687182);
   static const borderFill = Color(0xFFF5F5F5);
   static const red = Color(0xFFF44336);
+  static const draftEventBadge = Color(0xFFFFEB3B);
 }

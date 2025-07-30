@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 
-enum NavbarPages { events, addEvent, profile }
+enum NavbarPages {
+  events,
+  addEvent,
+  profile;
 
-extension NavbarPagesExtension on NavbarPages {
   String get routeName {
     switch (this) {
       case NavbarPages.events:
