@@ -18,9 +18,10 @@ extension AgeCategoryX on AgeCategory {
     }
   }
 
-  static AgeCategory? fromLabel(BuildContext context, String label) {
+  static AgeCategory fromString(String? value) {
+    if (value == null) return AgeCategory.everyone;
     return AgeCategory.values.firstWhere(
-      (e) => e.label(context) == label,
+          (e) => e.name == value.toLowerCase(),
       orElse: () => AgeCategory.everyone,
     );
   }
