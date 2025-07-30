@@ -112,5 +112,6 @@
   "eventsCount": "Wydarzenia",
   "followersCount": "Obserwujący",
   "followingCount": "Obserwowani",
-  "yourEvents": "Twoje wydarzenia"
+  "yourEvents": "Twoje wydarzenia",
+  "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika: $e"
 }
