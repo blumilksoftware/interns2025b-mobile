@@ -129,6 +129,10 @@ class ProfileController extends ChangeNotifier {
     }
   }
 
+  Future<void> loadUser(BuildContext context) async {
+    await fetchUserProfile(context: context);
+  }
+
   Future<void> deleteUser({required BuildContext context}) async {
     _setLoading(true);
 

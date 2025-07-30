@@ -17,3 +17,7 @@ final profileControllerProvider = ChangeNotifierProvider<ProfileController>((
     deleteUserRequestUseCase,
   );
 });
+
+final profileInitProvider = FutureProvider<void>((ref) async {
+  await ref.read(profileControllerProvider.notifier).fetchUserProfile();
+});

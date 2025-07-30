@@ -16,6 +16,7 @@ import 'package:interns2025b_mobile/src/features/auth/domain/usecases/forgot_pas
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:interns2025b_mobile/src/features/auth/domain/usecases/register_usecase.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_user_provider.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,6 +50,7 @@ class AuthController extends AsyncNotifier<User?> {
     try {
       await _loginUseCase(email, password);
       final user = await _loadUser();
+      ref.read(profileUserProvider.notifier).state = user;
       state = AsyncData(user);
 
       if (context.mounted) {
@@ -112,6 +114,8 @@ class AuthController extends AsyncNotifier<User?> {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
       await prefs.remove('user');
+      ref.read(profileUserProvider.notifier).state = null;
+
 
       state = const AsyncData(null);
 
