@@ -27,7 +27,7 @@ class AgeCategoryDropdown extends StatelessWidget {
           items: AgeCategory.values.map((category) {
             return DropdownMenuItem(
               value: category,
-              child: Text(category.label(context)),
+              child: Text(category.localized(context)),
             );
           }).toList(),
           onChanged: onChanged,

@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 
-enum AgeCategory { everyone, adults, youth, children }
+enum AgeCategory {
+  everyone,
+  adults,
+  youth,
+  children;
 
-extension AgeCategoryX on AgeCategory {
-  String label(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    switch (this) {
-      case AgeCategory.everyone:
-        return localizations.ageEveryone;
-      case AgeCategory.adults:
-        return localizations.ageAdults;
-      case AgeCategory.youth:
-        return localizations.ageTeens;
-      case AgeCategory.children:
-        return localizations.ageKids;
-    }
+  String localized(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+    return {
+      AgeCategory.everyone: localization.ageEveryone,
+      AgeCategory.adults: localization.ageAdults,
+      AgeCategory.youth: localization.ageTeens,
+      AgeCategory.children: localization.ageKids,
+    }[this]!;
   }
 
   static AgeCategory fromString(String? value) {
-    if (value == null) return AgeCategory.everyone;
     return AgeCategory.values.firstWhere(
-          (e) => e.name == value.toLowerCase(),
+          (e) => e.name.toLowerCase() == value?.toLowerCase(),
       orElse: () => AgeCategory.everyone,
     );
   }

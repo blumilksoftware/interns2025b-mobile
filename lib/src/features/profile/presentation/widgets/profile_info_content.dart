@@ -35,11 +35,9 @@ class ProfileInfoContent extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
-
           ),
         const SizedBox(height: 24),
-
-        ProfileStats(),
+        const ProfileStats(),
         ProfileEventsSection(events: sortedEvents),
       ],
     );

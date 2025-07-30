@@ -62,7 +62,7 @@ class EventCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
-                      AgeCategoryX.fromString(event.ageCategory).label(context),
+                      AgeCategory.fromString(event.ageCategory).localized(context),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.shadeGrey700,
                       ),
