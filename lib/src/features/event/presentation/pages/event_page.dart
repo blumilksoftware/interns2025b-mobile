@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_search_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_view_mode_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_map_view.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_serach_bar.dart';
@@ -14,18 +12,13 @@ class EventPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchController = ref.watch(eventSearchControllerProvider);
-    final eventController = ref.read(eventsControllerProvider.notifier);
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 32.0),
         child: Column(
           children: [
-            EventSearchBar(
-              controller: searchController,
-              onChanged: eventController.updateSearchQuery,
-            ),
+            EventSearchBar(),
+
             const SizedBox(height: 16),
             const ToggleViewModeSwitch(),
             const SizedBox(height: 16),

@@ -26,7 +26,6 @@ class LocationSection extends StatelessWidget {
         const SizedBox(height: 8),
         CustomTextField(
           controller: location,
-          hintText: localizations.locationHint,
           validator: (value) => value == null || value.isEmpty
               ? localizations.locationRequiredError
               : null,
@@ -37,8 +36,6 @@ class LocationSection extends StatelessWidget {
         const SizedBox(height: 8),
         CustomTextField(
           controller: address,
-          hintText: localizations.addressHint,
-
         ),
         const SizedBox(height: 20),
       ],

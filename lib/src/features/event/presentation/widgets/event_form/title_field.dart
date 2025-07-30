@@ -19,7 +19,6 @@ class TitleField extends StatelessWidget {
         const SizedBox(height: 8),
         CustomTextField(
           controller: controller,
-          hintText: localizations.titleHint,
           validator: (value) => value == null || value.isEmpty
               ? localizations.titleRequiredError
               : null,
