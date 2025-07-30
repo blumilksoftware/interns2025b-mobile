@@ -49,7 +49,7 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     final rawOwnerType = json['owner_type'] as String?;
-    final ownerType = OwnerTypeX.fromRaw(rawOwnerType);
+    final ownerType = OwnerType.fromRaw(rawOwnerType);
     final ownerJson = json['owner'];
 
     EventOwner? parsedOwner;
@@ -80,7 +80,7 @@ class Event {
           : null,
       isPaid: json['is_paid'],
       price: json['price'] != null ? (json['price'] as num).toDouble() : null,
-      status: EventStatusX.fromString(json['status']),
+      status: EventStatus.fromString(json['status']),
       imageUrl: json['image_url'],
       ageCategory: json['age_category'],
       ownerType: ownerType,

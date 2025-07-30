@@ -90,7 +90,7 @@
   "latitudeLabel": "Latitude",
   "longitudeLabel": "Longitude",
   "imageUrlLabel": "Image URL",
-  "imageUrlHint": "Enter event image URL",
+  "imageUrlHint": "https://domain.com/image.jpg",
   "statusLabel": "Status",
   "statusHint": "Select event status",
   "ageCategoryLabel": "Age category",

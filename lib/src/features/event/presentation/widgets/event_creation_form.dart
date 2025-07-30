@@ -8,7 +8,7 @@ import 'package:interns2025b_mobile/src/features/event/presentation/widgets/even
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/date_picker_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/descritpion_field.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/image_url_field.dart';
-import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/is_paid_checkbox.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/is_paid_switch.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/location_section.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/status_dropdown.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_form/submit_button_section.dart';
@@ -74,26 +74,27 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
             latitude: widget.latitude!,
             longitude: widget.longitude!,
           ),
-          IsPaidCheckbox(
+          IsPaidSwitch(
             value: controller.isPaid,
-            onChanged: (bool? val) => controller.updateFormData(paid: val ?? false),
+            onChanged: (bool? val) =>
+                controller.updateFormData(paid: val ?? false),
           ),
           ImageUrlField(controller: widget.imageUrl),
           StatusDropdown(
             selected: controller.selectedStatus,
-              onChanged: (status) {
-                if (status != null) {
-                  controller.updateFormData(status: status);
-                  widget.status.text = status.name;
-                }
+            onChanged: (status) {
+              if (status != null) {
+                controller.updateFormData(status: status);
+                widget.status.text = status.name;
               }
+            },
           ),
           AgeCategoryDropdown(
             selected: controller.selectedAgeCategory,
-              onChanged: (category) {
-                controller.updateFormData(ageCategory: category);
-                widget.ageCategory.text = category?.name ?? '';
-              }
+            onChanged: (category) {
+              controller.updateFormData(ageCategory: category);
+              widget.ageCategory.text = category?.name ?? '';
+            },
           ),
           SubmitButtonSection(
             isLoading: controller.isCreating,
@@ -127,6 +128,9 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 scaffoldMessenger.showSnackBar(
                   SnackBar(content: Text(successMsg)),
                 );
+                controller.clearFormData();
+                widget.status.clear();
+                widget.ageCategory.clear();
                 navigator.pushReplacementNamed(AppRoutes.events);
               } else {
                 scaffoldMessenger.showSnackBar(

@@ -32,7 +32,7 @@ class EventStatusBadge extends StatelessWidget {
       ),
       child: Text(
         status.label(context),
-        style: TextStyle(
+        style: const TextStyle(
           color: AppColors.black,
           fontSize: 12,
           fontWeight: FontWeight.w500,

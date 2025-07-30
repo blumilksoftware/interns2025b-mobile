@@ -1,5 +1,6 @@
 {
   "@@locale": "pl",
+
   "registerTitle": "Zarejestruj się",
   "loginTitle": "Zaloguj się",
   "emailLabel": "E-mail",
@@ -89,7 +90,7 @@
   "latitudeLabel": "Szerokość geograficzna",
   "longitudeLabel": "Długość geograficzna",
   "imageUrlLabel": "URL obrazu",
-  "imageUrlHint": "Wprowadź URL obrazu",
+  "imageUrlHint": "https://domain.com/image.jpg",
   "statusLabel": "Status",
   "statusHint": "Wybierz status",
   "ageCategoryLabel": "Kategoria wiekowa",

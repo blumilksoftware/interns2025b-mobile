@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
@@ -42,16 +44,16 @@ class EventsController extends ChangeNotifier {
   bool _hasMore = true;
   bool get hasMore => _hasMore;
 
+  Timer? _debounceTimer;
+
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
-
 
   EventStatus? selectedStatus;
   AgeCategory? selectedAgeCategory;
   DateTime? startDate;
   DateTime? endDate;
   bool isPaid = false;
-
 
   void updateFormData({
     DateTime? start,
@@ -124,6 +126,7 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _reset();
+      _searchQuery = '';
     }
 
     _isLoading = true;
@@ -225,7 +228,40 @@ class EventsController extends ChangeNotifier {
       _creationError = 'Unexpected error: $e';
     } finally {
       _isCreating = false;
+      await loadEvents(refresh: true);
       notifyListeners();
     }
+  }
+
+  void clearFormData() {
+    startDate = null;
+    endDate = null;
+    isPaid = false;
+    selectedStatus = null;
+    selectedAgeCategory = null;
+    notifyListeners();
+  }
+
+  void searchWithDebounce(
+    String query, {
+    Duration delay = const Duration(milliseconds: 400),
+  }) {
+    if (query.trim().length < 2 && query.isNotEmpty) return;
+
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(delay, () async {
+      await _searchAllEvents(query);
+    });
+  }
+
+  Future<void> _searchAllEvents(String query) async {
+    _searchQuery = query;
+    await loadAllEvents();
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    super.dispose();
   }
 }

@@ -4,9 +4,9 @@ import 'package:interns2025b_mobile/src/features/event/presentation/providers/ev
 
 final eventSearchControllerProvider =
     Provider.autoDispose<TextEditingController>((ref) {
-      final controller = TextEditingController();
-      final eventController = ref.read(eventsControllerProvider);
-      controller.text = eventController.searchQuery;
+      final controller = TextEditingController(
+        text: ref.read(eventsControllerProvider).searchQuery,
+      );
 
       ref.onDispose(() {
         controller.dispose();

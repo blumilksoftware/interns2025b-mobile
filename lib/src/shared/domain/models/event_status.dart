@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
 
-enum EventStatus { draft, published, ongoing, ended, canceled }
+enum EventStatus {
+  draft,
+  published,
+  ongoing,
+  ended,
+  canceled;
 
-extension EventStatusX on EventStatus {
   String label(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     switch (this) {
