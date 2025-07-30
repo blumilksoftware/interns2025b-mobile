@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
-import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/stat_tile.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
-class ProfileStats extends ConsumerWidget {
-  const ProfileStats({super.key});
+class ProfileStats extends StatelessWidget {
+  final User user;
+
+  const ProfileStats({super.key, required this.user});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(profileControllerProvider).user;
+  Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-
-    if (user == null) return const SizedBox();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

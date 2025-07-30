@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/profile/domain/utils/event_sorter.dart';
-import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_edit_section.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_events_section.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/widgets/profile_stats.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
 
-class ProfileInfoContent extends ConsumerWidget {
-  const ProfileInfoContent({super.key});
+class ProfileInfoContent extends StatelessWidget {
+  final User user;
+  final bool editable;
+
+  const ProfileInfoContent({
+    super.key,
+    required this.user,
+    this.editable = true,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(profileControllerProvider).user;
-
-    if (user == null) return const SizedBox();
-
+  Widget build(BuildContext context) {
     final sortedEvents = [...user.events];
     sortEvents(sortedEvents);
 
@@ -23,24 +26,26 @@ class ProfileInfoContent extends ConsumerWidget {
         const SizedBox(height: 24),
         Text(
           user.firstName,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         if ((user.lastName?.trim().isNotEmpty ?? false))
           Text(
             user.lastName!,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
-
           ),
         const SizedBox(height: 24),
-
-        ProfileStats(),
+        ProfileStats(user: user),
         ProfileEventsSection(events: sortedEvents),
+        if (editable) ...[
+          const SizedBox(height: 24),
+          const ProfileEditSection(),
+        ],
       ],
     );
   }
