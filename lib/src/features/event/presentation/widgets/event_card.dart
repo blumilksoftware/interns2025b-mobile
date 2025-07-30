@@ -9,7 +9,7 @@ import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dar
 class EventCard extends StatelessWidget {
   final Event event;
 
-  const EventCard({super.key, required this.event,});
+  const EventCard({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,10 @@ class EventCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    EventDateTimeRow(date: event.start),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: EventDateTimeRow(date: event.start),
+                    ),
                     EventPriceTag(
                       isPaid: event.isPaid,
                       paidText: localizations.paid,

@@ -22,11 +22,14 @@ class EventDateTimeRow extends StatelessWidget {
           color: AppColors.grey,
         ),
         const SizedBox(width: 8),
-        Text(
-          dateText,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+        Flexible(
+          child: Text(
+            dateText,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );
