@@ -1,6 +1,5 @@
 {
   "@@locale": "pl",
-
   "registerTitle": "Zarejestruj się",
   "loginTitle": "Zaloguj się",
   "emailLabel": "E-mail",
@@ -113,5 +112,5 @@
   "followersCount": "Obserwujący",
   "followingCount": "Obserwowani",
   "yourEvents": "Twoje wydarzenia",
-  "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika: $e"
+  "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika"
 }

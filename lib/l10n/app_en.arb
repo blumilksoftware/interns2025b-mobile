@@ -113,5 +113,5 @@
   "followersCount": "Followers",
   "followingCount": "Following",
   "yourEvents": "Your events",
-  "failedToLoadUserProfile": "Failed to load user's profile: $e"
+  "failedToLoadUserProfile": "Failed to load user's profile"
 }
