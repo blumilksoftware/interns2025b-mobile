@@ -2,6 +2,7 @@ import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 
 class User implements EventOwner {
+  @override
   final int id;
   final String firstName;
   final String? lastName;
