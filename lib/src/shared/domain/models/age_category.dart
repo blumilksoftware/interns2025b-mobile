@@ -8,16 +8,16 @@ enum AgeCategory {
   children;
 
   String localized(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context)!;
     switch (this) {
       case AgeCategory.everyone:
-        return localization.ageEveryone;
+        return localizations.ageEveryone;
       case AgeCategory.adults:
-        return localization.ageAdults;
+        return localizations.ageAdults;
       case AgeCategory.youth:
-        return localization.ageTeens;
+        return localizations.ageTeens;
       case AgeCategory.children:
-        return localization.ageKids;
+        return localizations.ageKids;
     }
   }
 
