@@ -40,7 +40,7 @@ class ProfileDataSource {
   }
 
   Future<User> getUserProfile(int userId) async {
-    final response = await httpClient.get('/api/users/$userId');
+    final response = await httpClient.get('/api/profile/$userId');
     return User.fromJson(response['data']);
   }
 }

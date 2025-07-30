@@ -3,6 +3,6 @@ import 'package:interns2025b_mobile/src/features/profile/data/providers/profile_
 import 'package:interns2025b_mobile/src/features/profile/domain/usecases/get_user_profile_usecase.dart';
 
 final getUserProfileUseCaseProvider = Provider<GetUserProfileUseCase>((ref) {
-  final repo = ref.watch(profileRepositoryProvider);
-  return GetUserProfileUseCase(repo);
+  final repository = ref.watch(profileRepositoryProvider);
+  return GetUserProfileUseCase(repository);
 });

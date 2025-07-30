@@ -45,7 +45,7 @@ class AppInitializer extends ConsumerWidget {
         AppRoutes.addEvent: (context) => EventCreationPage(),
         AppRoutes.events: (context) => EventPage(),
         AppRoutes.eventDetails: (context) => EventDetails(),
-        AppRoutes.profileDetails: (context) => ProfileDetails(),
+        AppRoutes.profileDetails: (context) => ProfileDetailsPage(),
       },
     );
   }
