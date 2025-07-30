@@ -1,14 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/owner_type.dart';
 
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
+  final CreateEventUseCase createEventUseCase;
 
-  EventsController({required this.getEventsUseCase});
+  EventsController({
+    required this.getEventsUseCase,
+    required this.createEventUseCase,
+  });
 
   final List<Event> _events = [];
   final Set<int> _shownEventIds = {};
@@ -25,11 +35,70 @@ class EventsController extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
+  bool _isCreating = false;
+  bool get isCreating => _isCreating;
+
+  String? _creationError;
+  String? get creationError => _creationError;
+
   bool _hasMore = true;
   bool get hasMore => _hasMore;
 
+  Timer? _debounceTimer;
+
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
+
+  EventStatus? selectedStatus;
+  AgeCategory? selectedAgeCategory;
+  DateTime? startDate;
+  DateTime? endDate;
+  bool isPaid = false;
+
+  void updateFormData({
+    DateTime? start,
+    DateTime? end,
+    bool? paid,
+    EventStatus? status,
+    AgeCategory? ageCategory,
+  }) {
+    if (start != null) startDate = start;
+    if (end != null) endDate = end;
+    if (paid != null) isPaid = paid;
+    if (status != null) selectedStatus = status;
+    if (ageCategory != null) selectedAgeCategory = ageCategory;
+
+    notifyListeners();
+  }
+
+  Event buildEvent({
+    required String title,
+    required String description,
+    required String location,
+    required String? address,
+    required String? latitude,
+    required String? longitude,
+    required String imageUrl,
+  }) {
+    return Event(
+      id: 0,
+      title: title,
+      description: description,
+      start: startDate,
+      end: endDate,
+      location: location,
+      address: address,
+      latitude: double.tryParse(latitude ?? ''),
+      longitude: double.tryParse(longitude ?? ''),
+      isPaid: isPaid,
+      price: null,
+      status: selectedStatus ?? EventStatus.draft,
+      imageUrl: imageUrl,
+      ageCategory: selectedAgeCategory?.name,
+      ownerType: OwnerType.user,
+      ownerId: 1,
+    );
+  }
 
   List<Event> get events => _events;
 
@@ -57,6 +126,7 @@ class EventsController extends ChangeNotifier {
 
     if (refresh) {
       _reset();
+      _searchQuery = '';
     }
 
     _isLoading = true;
@@ -139,5 +209,59 @@ class EventsController extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> createEvent(Event event) async {
+    _isCreating = true;
+    _creationError = null;
+    notifyListeners();
+
+    try {
+      await createEventUseCase(event);
+    } on NoInternetException catch (e) {
+      _creationError = e.message;
+    } on HttpException catch (e) {
+      _creationError = 'Server error: ${e.message} (code ${e.statusCode})';
+    } on AuthException catch (e) {
+      _creationError = 'Authorization error: ${e.message}';
+    } catch (e) {
+      _creationError = 'Unexpected error: $e';
+    } finally {
+      _isCreating = false;
+      await loadEvents(refresh: true);
+      notifyListeners();
+    }
+  }
+
+  void clearFormData() {
+    startDate = null;
+    endDate = null;
+    isPaid = false;
+    selectedStatus = null;
+    selectedAgeCategory = null;
+    notifyListeners();
+  }
+
+  void searchWithDebounce(
+    String query, {
+    Duration delay = const Duration(milliseconds: 400),
+  }) {
+    if (query.trim().length < 2 && query.isNotEmpty) return;
+
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(delay, () async {
+      await _searchAllEvents(query);
+    });
+  }
+
+  Future<void> _searchAllEvents(String query) async {
+    _searchQuery = query;
+    await loadAllEvents();
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    super.dispose();
   }
 }

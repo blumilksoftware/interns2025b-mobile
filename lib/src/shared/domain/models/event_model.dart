@@ -1,18 +1,8 @@
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/organization_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/owner_type.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/user_model.dart';
-
-enum EventStatus { draft, published, ongoing, ended, canceled }
-
-extension EventStatusX on EventStatus {
-  static EventStatus fromString(String? value) {
-    return EventStatus.values.firstWhere(
-      (e) => e.name == value,
-      orElse: () => throw ArgumentError('Unknown event status: $value'),
-    );
-  }
-}
 
 class Event {
   final int id;
@@ -103,5 +93,35 @@ class Event {
           ? DateTime.tryParse(json['updated_at'])
           : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'start': _formatDate(start),
+      'end': _formatDate(end),
+      'location': location,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'is_paid': isPaid,
+      'price': price,
+      'status': status.name,
+      'image_url': imageUrl,
+      'age_category': ageCategory,
+      'owner_type': ownerType.name,
+      'owner_id': ownerId,
+    };
+  }
+
+  String? _formatDate(DateTime? dateTime) {
+    if (dateTime == null) return null;
+    return '${dateTime.year.toString().padLeft(4, '0')}-'
+        '${dateTime.month.toString().padLeft(2, '0')}-'
+        '${dateTime.day.toString().padLeft(2, '0')} '
+        '${dateTime.hour.toString().padLeft(2, '0')}:'
+        '${dateTime.minute.toString().padLeft(2, '0')}:'
+        '${dateTime.second.toString().padLeft(2, '0')}';
   }
 }

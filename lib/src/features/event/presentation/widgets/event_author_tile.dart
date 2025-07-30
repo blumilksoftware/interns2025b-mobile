@@ -22,12 +22,12 @@ class EventAuthorTile extends StatelessWidget {
               color: AppColors.primary.withValues(alpha: 0.1),
               child: owner.avatarUrl != null && owner.avatarUrl!.isNotEmpty
                   ? Image.network(
-                      owner.avatarUrl!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return _defaultAvatar();
-                      },
-                    )
+                owner.avatarUrl!,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return _defaultAvatar();
+                },
+              )
                   : _defaultAvatar(),
             ),
           ),
