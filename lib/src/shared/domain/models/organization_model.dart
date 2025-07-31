@@ -1,6 +1,7 @@
 import 'package:interns2025b_mobile/src/shared/domain/models/event_owner.dart';
 
 class Organization implements EventOwner {
+  @override
   final int id;
   final String name;
   final String? groupUrl;

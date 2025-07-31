@@ -25,5 +25,8 @@ class RemoteProfileRepository implements ProfileRepository {
 
   @override
   Future<void> deleteUserRequest() => dataSource.deleteUserRequest();
+
+  @override
+  Future<User> getUserProfile(int userId) => dataSource.getUserProfile(userId);
 }
 
