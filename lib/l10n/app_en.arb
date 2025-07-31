@@ -115,5 +115,7 @@
   "yourEvents": "Your events",
   "failedToLoadUserProfile": "Failed to load user's profile",
   "participants": "participants",
-    "participant": "participant"
+  "participant": "participant",
+  "leave": "Leave",
+  "join": "Join"
 }

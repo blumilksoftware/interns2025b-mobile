@@ -4,4 +4,5 @@ abstract class EventRepository {
   Future<List<Event>> getEvents({int page = 1});
   Future<Event> getEventById(int id);
   Future<void> createEvent(Event event);
+  Future<Event> toggleParticipation(int id);
 }

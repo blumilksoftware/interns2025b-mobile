@@ -115,5 +115,7 @@
   "yourEvents": "Twoje wydarzenia",
   "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika",
   "participants": "uczestników",
-  "participant": "uczestnik"
+  "participant": "uczestnik",
+  "leave" : "Upuść",
+  "join" : "Weź udział"
 }

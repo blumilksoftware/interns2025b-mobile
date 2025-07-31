@@ -25,6 +25,7 @@ class Event {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int participantCount;
+  final bool isParticipating;
 
   Event({
     required this.id,
@@ -47,6 +48,7 @@ class Event {
     this.createdAt,
     this.updatedAt,
     required this.participantCount,
+    this.isParticipating = false,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -116,6 +118,54 @@ class Event {
       'owner_type': ownerType.name,
       'owner_id': ownerId,
     };
+  }
+
+  Event copyWith({
+    int? id,
+    String? title,
+    String? description,
+    DateTime? start,
+    DateTime? end,
+    String? location,
+    String? address,
+    double? latitude,
+    double? longitude,
+    bool? isPaid,
+    double? price,
+    EventStatus? status,
+    String? imageUrl,
+    String? ageCategory,
+    int? ownerId,
+    OwnerType? ownerType,
+    EventOwner? owner,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? participantCount,
+    bool? isParticipating,
+  }) {
+    return Event(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      start: start ?? this.start,
+      end: end ?? this.end,
+      location: location ?? this.location,
+      address: address ?? this.address,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      isPaid: isPaid ?? this.isPaid,
+      price: price ?? this.price,
+      status: status ?? this.status,
+      imageUrl: imageUrl ?? this.imageUrl,
+      ageCategory: ageCategory ?? this.ageCategory,
+      ownerId: ownerId ?? this.ownerId,
+      ownerType: ownerType ?? this.ownerType,
+      owner: owner ?? this.owner,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      participantCount: participantCount ?? this.participantCount,
+      isParticipating: isParticipating ?? this.isParticipating,
+    );
   }
 
   String? _formatDate(DateTime? dateTime) {

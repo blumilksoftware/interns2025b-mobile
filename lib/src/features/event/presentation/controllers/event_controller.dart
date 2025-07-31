@@ -6,6 +6,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/toggle_participation_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
@@ -14,11 +15,15 @@ import 'package:interns2025b_mobile/src/shared/domain/models/owner_type.dart';
 class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
   final CreateEventUseCase createEventUseCase;
+  final ToggleParticipationUseCase toggleParticipationUseCase;
 
   EventsController({
     required this.getEventsUseCase,
     required this.createEventUseCase,
+    required this.toggleParticipationUseCase,
   });
+
+  final Set<int> _participatingEventIds = {};
 
   final List<Event> _events = [];
   final Set<int> _shownEventIds = {};
@@ -101,7 +106,12 @@ class EventsController extends ChangeNotifier {
     );
   }
 
-  List<Event> get events => _events;
+  List<Event> get events {
+    return _events.map((e) {
+      final participating = _participatingEventIds.contains(e.id);
+      return e.copyWith(isParticipating: participating);
+    }).toList();
+  }
 
   List<Event> get filteredEvents {
     if (_events.isEmpty) return [];
@@ -169,7 +179,12 @@ class EventsController extends ChangeNotifier {
   }
 
   void selectEvent(Event? event) {
-    _selectedEvent = event;
+    if (event == null) {
+      _selectedEvent = null;
+    } else {
+      final isParticipating = _participatingEventIds.contains(event.id);
+      _selectedEvent = event.copyWith(isParticipating: isParticipating);
+    }
     notifyListeners();
   }
 
@@ -264,5 +279,52 @@ class EventsController extends ChangeNotifier {
   void dispose() {
     _debounceTimer?.cancel();
     super.dispose();
+  }
+
+  Future<void> toggleParticipation(int eventId) async {
+    try {
+      await toggleParticipationUseCase(eventId);
+
+      final index = _events.indexWhere((e) => e.id == eventId);
+      if (index == -1) return;
+
+      final currentlyParticipating = _participatingEventIds.contains(eventId);
+
+      if (currentlyParticipating) {
+        _participatingEventIds.remove(eventId);
+      } else {
+        _participatingEventIds.add(eventId);
+      }
+
+      final currentEvent = _events[index];
+
+      final updatedEvent = currentEvent.copyWith(
+        isParticipating: !currentlyParticipating,
+        participantCount: currentlyParticipating
+            ? (currentEvent.participantCount > 0
+                  ? currentEvent.participantCount - 1
+                  : 0)
+            : currentEvent.participantCount + 1,
+      );
+
+      _events[index] = updatedEvent;
+
+      if (_selectedEvent?.id == eventId) {
+        final isNowParticipating = _participatingEventIds.contains(eventId);
+        _selectedEvent = _selectedEvent!.copyWith(
+          isParticipating: isNowParticipating,
+          participantCount: isNowParticipating
+              ? (_selectedEvent!.participantCount + 1)
+              : (_selectedEvent!.participantCount > 0
+              ? _selectedEvent!.participantCount - 1
+              : 0),
+        );
+      }
+
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to toggle participation: $e';
+      notifyListeners();
+    }
   }
 }
