@@ -113,5 +113,7 @@
   "followersCount": "Followers",
   "followingCount": "Following",
   "yourEvents": "Your events",
-  "failedToLoadUserProfile": "Failed to load user's profile"
+  "failedToLoadUserProfile": "Failed to load user's profile",
+  "participants": "participants",
+    "participant": "participant"
 }

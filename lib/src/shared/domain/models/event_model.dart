@@ -24,6 +24,7 @@ class Event {
   final EventOwner? owner;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final int participantCount;
 
   Event({
     required this.id,
@@ -45,6 +46,7 @@ class Event {
     this.owner,
     this.createdAt,
     this.updatedAt,
+    required this.participantCount,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -92,6 +94,7 @@ class Event {
       updatedAt: json['updated_at'] != null
           ? DateTime.tryParse(json['updated_at'])
           : null,
+      participantCount: json['participation_count'] ?? 0,
     );
   }
 

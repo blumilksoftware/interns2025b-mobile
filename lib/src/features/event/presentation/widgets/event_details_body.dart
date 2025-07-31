@@ -42,8 +42,13 @@ class EventDetailsBody extends StatelessWidget {
                     color: AppColors.black,
                   ),
                 ),
-
                 const SizedBox(height: 12),
+                if (event.participantCount > 0)
+                  EventInfoTile(
+                    icon: Icons.people_outline,
+                    title:
+                    '${event.participantCount} ${event.participantCount == 1 ? localizations.participant : localizations.participants}',
+                  ),
                 if (event.start != null)
                   EventInfoTile(
                     icon: Icons.calendar_today_outlined,

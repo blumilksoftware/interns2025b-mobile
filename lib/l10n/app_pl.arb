@@ -113,5 +113,7 @@
   "followersCount": "Obserwujący",
   "followingCount": "Obserwowani",
   "yourEvents": "Twoje wydarzenia",
-  "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika"
+  "failedToLoadUserProfile": "Nie udało się załadować profilu użytkownika",
+  "participants": "uczestników",
+  "participant": "uczestnik"
 }

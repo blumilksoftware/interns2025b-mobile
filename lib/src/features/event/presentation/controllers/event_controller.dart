@@ -97,6 +97,7 @@ class EventsController extends ChangeNotifier {
       ageCategory: selectedAgeCategory?.name,
       ownerType: OwnerType.user,
       ownerId: 1,
+      participantCount: 0,
     );
   }
 
