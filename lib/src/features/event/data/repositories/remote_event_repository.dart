@@ -31,4 +31,9 @@ class RemoteEventRepository implements EventRepository {
   Future<Event> updateEvent(Event event) {
     return dataSource.updateEvent(event);
   }
+
+  @override
+  Future<Event> deleteEvent(int id) {
+    return dataSource.deleteEvent(id);
+  }
 }

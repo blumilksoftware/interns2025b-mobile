@@ -6,4 +6,5 @@ abstract class EventRepository {
   Future<void> createEvent(Event event);
   Future<Event> toggleParticipation(int id);
   Future<Event> updateEvent(Event event);
+  Future<Event> deleteEvent(int id);
 }

@@ -57,7 +57,6 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     final controller = ref.watch(eventsControllerProvider);
-
     return Form(
       key: widget.formKey,
       child: Column(
@@ -103,14 +102,7 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
           SubmitButtonSection(
             isLoading: controller.isCreating,
             onPressed: () async {
-              if (!widget.formKey.currentState!.validate()) {
-                return;
-              }
-
-              final ScaffoldMessengerState scaffoldMessenger =
-                  ScaffoldMessenger.of(context);
-              final NavigatorState navigator = Navigator.of(context);
-              final String successMsg = localizations.eventCreatedSuccess;
+              if (!widget.formKey.currentState!.validate()) return;
 
               final event = controller.buildEvent(
                 title: widget.title.text,
@@ -123,31 +115,76 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 id: widget.isEdit ? widget.eventId : null,
               );
 
+              final messenger = ScaffoldMessenger.of(context);
+              final navigator = Navigator.of(context);
+
               if (widget.isEdit) {
                 await controller.updateEvent(event);
               } else {
                 await controller.createEvent(event);
               }
 
-              if (!mounted) {
-                return;
-              }
+              if (!mounted) return;
 
               if (controller.creationError == null) {
-                scaffoldMessenger.showSnackBar(
-                  SnackBar(content: Text(successMsg)),
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      widget.isEdit
+                          ? localizations.eventUpdatedSuccess
+                          : localizations.eventCreatedSuccess,
+                    ),
+                  ),
                 );
                 controller.clearFormData();
                 widget.status.clear();
                 widget.ageCategory.clear();
                 navigator.pushReplacementNamed(AppRoutes.events);
               } else {
-                scaffoldMessenger.showSnackBar(
+                messenger.showSnackBar(
                   SnackBar(content: Text(controller.creationError!)),
                 );
               }
             },
           ),
+          if (widget.isEdit) ...[
+            const SizedBox(height: 12),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              onPressed: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                final navigator = Navigator.of(context);
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(localizations.delete),
+                    content: Text(localizations.deleteEventConfirmation),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(ctx).pop(false),
+                        child: Text(localizations.cancel),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(ctx).pop(true),
+                        child: Text(localizations.delete),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (confirm == true) {
+                  await controller.deleteEvent(widget.eventId!);
+                  if (!mounted) return;
+                  messenger.showSnackBar(
+                    SnackBar(content: Text(localizations.eventDeleteSuccess)),
+                  );
+
+                  navigator.pushReplacementNamed(AppRoutes.events);
+                }
+              },
+              child: Text(localizations.delete),
+            ),
+          ],
         ],
       ),
     );

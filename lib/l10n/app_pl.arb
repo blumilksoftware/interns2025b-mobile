@@ -118,5 +118,11 @@
   "participant": "uczestnik",
   "leave" : "Upuść",
   "join" : "Weź udział",
-  "edit": "Edytuj"
+  "edit": "Edytuj",
+  "eventUpdatedSuccess": "Wydarzenie zaktualizowane pomyślnie",
+  "eventUpdateError": "Błąd aktualizacji wydarzenia",
+  "delete": "Usuń",
+  "eventDeleteSuccess": "Wydarzenie usunięte pomyślnie",
+  "eventDeleteError": "Błąd usuwania wydarzenia",
+  "deleteEventConfirmation": "Czy na pewno chcesz usunąć to wydarzenie?"
 }

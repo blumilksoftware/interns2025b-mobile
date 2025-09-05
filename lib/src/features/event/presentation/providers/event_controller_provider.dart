@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/providers/create_event_usecase_provider.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/providers/delete_event_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/providers/get_events_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/providers/toggle_participation_usecase_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/providers/update_event_usecase_provider.dart';
@@ -14,11 +15,13 @@ final eventsControllerProvider = ChangeNotifierProvider<EventsController>((
     toggleParticipationUseCaseProvider,
   );
   final updateEventUseCase = ref.watch(updateEventUseCaseProvider);
+  final deleteEventUseCase = ref.watch(deleteEventUseCaseProvider);
 
   return EventsController(
     getEventsUseCase: getEventsUseCase,
     createEventUseCase: createEventUseCase,
     toggleParticipationUseCase: toggleParticipationUseCase,
     updateEventUseCase: updateEventUseCase,
+    deleteEventUseCase: deleteEventUseCase,
   )..loadEvents();
 });

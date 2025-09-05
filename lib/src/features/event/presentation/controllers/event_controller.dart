@@ -5,6 +5,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/auth_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/http_exception.dart';
 import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/delete_event_usesace.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/toggle_participation_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/update_event_usecase.dart';
@@ -18,12 +19,14 @@ class EventsController extends ChangeNotifier {
   final CreateEventUseCase createEventUseCase;
   final ToggleParticipationUseCase toggleParticipationUseCase;
   final UpdateEventUseCase updateEventUseCase;
+  final DeleteEventUseCase deleteEventUseCase;
 
   EventsController({
     required this.getEventsUseCase,
     required this.createEventUseCase,
     required this.toggleParticipationUseCase,
     required this.updateEventUseCase,
+    required this.deleteEventUseCase,
   });
 
   final Set<int> _participatingEventIds = {};
@@ -327,8 +330,8 @@ class EventsController extends ChangeNotifier {
           participantCount: isNowParticipating
               ? (_selectedEvent!.participantCount + 1)
               : (_selectedEvent!.participantCount > 0
-              ? _selectedEvent!.participantCount - 1
-              : 0),
+                    ? _selectedEvent!.participantCount - 1
+                    : 0),
         );
       }
 
@@ -359,4 +362,19 @@ class EventsController extends ChangeNotifier {
     }
   }
 
+  Future<void> deleteEvent(int id) async {
+    try {
+      final deleted = await deleteEventUseCase(id);
+      _events.removeWhere((e) => e.id == id);
+
+      if (_selectedEvent?.id == id) {
+        _selectedEvent = null;
+      }
+
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to delete event: $e';
+      notifyListeners();
+    }
+  }
 }

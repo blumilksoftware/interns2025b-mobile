@@ -31,7 +31,16 @@ class EventDataSource {
 
   Future<Event> updateEvent(Event event) async {
     final body = event.toJson();
-    final response = await httpClient.put('/api/events/${event.id}', body: body,headers: {'Content-Type': 'application/json'});
+    final response = await httpClient.put(
+      '/api/events/${event.id}',
+      body: body,
+      headers: {'Content-Type': 'application/json'},
+    );
+    return Event.fromJson(response['data'] as Map<String, dynamic>);
+  }
+
+  Future<Event> deleteEvent(int id) async {
+    final response = await httpClient.delete('/api/events/$id');
     return Event.fromJson(response['data'] as Map<String, dynamic>);
   }
 }

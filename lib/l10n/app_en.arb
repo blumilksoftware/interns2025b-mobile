@@ -118,5 +118,11 @@
   "participant": "participant",
   "leave": "Leave",
   "join": "Join",
-  "edit": "Edit"
+  "edit": "Edit",
+  "eventUpdatedSuccess": "Event updated successfully",
+  "eventUpdateError": "Error updating event",
+  "delete": "Delete",
+  "eventDeleteSuccess": "Event deleted successfully",
+  "eventDeleteError": "Error deleting event",
+  "deleteEventConfirmation": "Are you sure you want to delete this event?"
 }
