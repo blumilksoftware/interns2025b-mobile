@@ -5,4 +5,5 @@ abstract class EventRepository {
   Future<Event> getEventById(int id);
   Future<void> createEvent(Event event);
   Future<Event> toggleParticipation(int id);
+  Future<Event> updateEvent(Event event);
 }

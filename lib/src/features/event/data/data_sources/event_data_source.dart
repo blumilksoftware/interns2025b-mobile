@@ -28,4 +28,10 @@ class EventDataSource {
     final response = await httpClient.post('/api/events/$id/participate');
     return Event.fromJson(response['data'] as Map<String, dynamic>);
   }
+
+  Future<Event> updateEvent(Event event) async {
+    final body = event.toJson();
+    final response = await httpClient.put('/api/events/${event.id}', body: body,headers: {'Content-Type': 'application/json'});
+    return Event.fromJson(response['data'] as Map<String, dynamic>);
+  }
 }

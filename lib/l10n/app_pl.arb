@@ -117,5 +117,6 @@
   "participants": "uczestników",
   "participant": "uczestnik",
   "leave" : "Upuść",
-  "join" : "Weź udział"
+  "join" : "Weź udział",
+  "edit": "Edytuj"
 }

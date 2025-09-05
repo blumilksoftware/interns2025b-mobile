@@ -26,4 +26,9 @@ class RemoteEventRepository implements EventRepository {
   Future<Event> toggleParticipation(int id) {
     return dataSource.toggleParticipation(id);
   }
+
+  @override
+  Future<Event> updateEvent(Event event) {
+    return dataSource.updateEvent(event);
+  }
 }

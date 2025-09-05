@@ -7,6 +7,7 @@ import 'package:interns2025b_mobile/src/core/exceptions/no_internet_exception.da
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/create_event_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/get_events_usecase.dart';
 import 'package:interns2025b_mobile/src/features/event/domain/usecases/toggle_participation_usecase.dart';
+import 'package:interns2025b_mobile/src/features/event/domain/usecases/update_event_usecase.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/age_category.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_model.dart';
 import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
@@ -16,11 +17,13 @@ class EventsController extends ChangeNotifier {
   final GetEventsUseCase getEventsUseCase;
   final CreateEventUseCase createEventUseCase;
   final ToggleParticipationUseCase toggleParticipationUseCase;
+  final UpdateEventUseCase updateEventUseCase;
 
   EventsController({
     required this.getEventsUseCase,
     required this.createEventUseCase,
     required this.toggleParticipationUseCase,
+    required this.updateEventUseCase,
   });
 
   final Set<int> _participatingEventIds = {};
@@ -61,6 +64,8 @@ class EventsController extends ChangeNotifier {
   bool isPaid = false;
 
   void updateFormData({
+    String? title,
+    String? description,
     DateTime? start,
     DateTime? end,
     bool? paid,
@@ -84,22 +89,28 @@ class EventsController extends ChangeNotifier {
     required String? latitude,
     required String? longitude,
     required String imageUrl,
+    int? id,
+    DateTime? start,
+    DateTime? end,
+    bool? isPaid,
+    EventStatus? status,
+    AgeCategory? ageCategory,
   }) {
     return Event(
-      id: 0,
+      id: id ?? 0,
       title: title,
       description: description,
-      start: startDate,
-      end: endDate,
+      start: start ?? startDate,
+      end: end ?? endDate,
       location: location,
       address: address,
       latitude: double.tryParse(latitude ?? ''),
       longitude: double.tryParse(longitude ?? ''),
-      isPaid: isPaid,
+      isPaid: isPaid ?? this.isPaid,
       price: null,
-      status: selectedStatus ?? EventStatus.draft,
+      status: status ?? selectedStatus ?? EventStatus.draft,
       imageUrl: imageUrl,
-      ageCategory: selectedAgeCategory?.name,
+      ageCategory: ageCategory?.name ?? selectedAgeCategory?.name,
       ownerType: OwnerType.user,
       ownerId: 1,
       participantCount: 0,
@@ -327,4 +338,25 @@ class EventsController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> updateEvent(Event event) async {
+    try {
+      final updated = await updateEventUseCase(event);
+
+      final index = _events.indexWhere((e) => e.id == event.id);
+      if (index != -1) {
+        _events[index] = updated;
+      }
+
+      if (_selectedEvent?.id == event.id) {
+        _selectedEvent = updated;
+      }
+
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Failed to update event: $e';
+      notifyListeners();
+    }
+  }
+
 }

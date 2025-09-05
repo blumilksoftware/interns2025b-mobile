@@ -27,6 +27,8 @@ class EventCreationForm extends ConsumerStatefulWidget {
   final TextEditingController imageUrl;
   final TextEditingController status;
   final TextEditingController ageCategory;
+  final bool isEdit;
+  final int? eventId;
 
   const EventCreationForm({
     super.key,
@@ -42,6 +44,8 @@ class EventCreationForm extends ConsumerStatefulWidget {
     required this.imageUrl,
     required this.status,
     required this.ageCategory,
+    this.isEdit = false,
+    this.eventId,
   });
 
   @override
@@ -116,9 +120,14 @@ class _EventCreationFormState extends ConsumerState<EventCreationForm> {
                 latitude: widget.latitude?.text,
                 longitude: widget.longitude?.text,
                 imageUrl: widget.imageUrl.text,
+                id: widget.isEdit ? widget.eventId : null,
               );
 
-              await controller.createEvent(event);
+              if (widget.isEdit) {
+                await controller.updateEvent(event);
+              } else {
+                await controller.createEvent(event);
+              }
 
               if (!mounted) {
                 return;

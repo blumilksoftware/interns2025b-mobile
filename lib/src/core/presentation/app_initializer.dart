@@ -10,6 +10,7 @@ import 'package:interns2025b_mobile/src/features/auth/presentation/pages/login_p
 import 'package:interns2025b_mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/pages/event_creation_page.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/pages/event_details_page.dart';
+import 'package:interns2025b_mobile/src/features/event/presentation/pages/event_edit_page.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/pages/event_page.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/pages/profile_details_page.dart';
 import 'package:interns2025b_mobile/src/features/profile/presentation/pages/profile_page.dart';
@@ -46,6 +47,7 @@ class AppInitializer extends ConsumerWidget {
         AppRoutes.events: (context) => EventPage(),
         AppRoutes.eventDetails: (context) => EventDetails(),
         AppRoutes.profileDetails: (context) => ProfileDetailsPage(),
+        AppRoutes.eventEdit: (context) => EventEditPage(),
       },
     );
   }

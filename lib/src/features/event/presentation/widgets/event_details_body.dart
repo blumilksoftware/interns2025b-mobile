@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interns2025b_mobile/l10n/generated/app_localizations.dart';
+import 'package:interns2025b_mobile/src/core/routes/app_routes.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_by_id_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/providers/event_controller_provider.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_author_tile.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_image.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_info_tile.dart';
 import 'package:interns2025b_mobile/src/features/event/presentation/widgets/event_localization_map.dart';
+import 'package:interns2025b_mobile/src/features/profile/presentation/providers/profile_controller_provider.dart';
+import 'package:interns2025b_mobile/src/shared/domain/models/event_status.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/theme/app_colors.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/labeled_text.dart';
 import 'package:interns2025b_mobile/src/shared/presentation/widgets/button.dart';
@@ -81,6 +84,35 @@ class EventDetailsBody extends ConsumerWidget {
                 if (event.owner != null) EventAuthorTile(owner: event.owner!),
 
                 const SizedBox(height: 16),
+
+                Consumer(
+                  builder: (context, ref, _) {
+                    final profileUser = ref.watch(profileControllerProvider).user;
+                    final canEdit = profileUser != null &&
+                        event.ownerId == profileUser.id &&
+                        (event.status == EventStatus.draft || event.status == EventStatus.published);
+
+                    if (!canEdit) return const SizedBox.shrink();
+
+                    return Column(
+                      children: [
+                        Button(
+                          label: localizations.edit,
+                          icon: Icons.edit_outlined,
+                          fullWidth: true,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.eventEdit,
+                                arguments: event.id,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  },
+                ),
 
                 Button(
                   label: buttonText,
